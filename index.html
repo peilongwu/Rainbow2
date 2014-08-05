@@ -1,0 +1,34 @@
+<!doctype html>
+<html class="no-js" lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Rainbow</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <script src="js/vendor/modernizr-2.8.0.min.js"></script>
+        <script src="js/vendor/jquery-1.11.0.min.js"></script>
+        <script src="js/vendor/underscore-min.js"></script>
+        <script src="js/vendor/backbone-min.js"></script>
+        <script src="sea-modules/seajs/seajs/2.2.1/sea.js" id="seajsnode"></script>
+    </head>
+    <body>
+    </body>
+    <script>
+		(function(){
+			var rainbow;
+			seajs.config({
+				alias: {
+					'cookie':'arale/cookie/1.0.2/cookie',
+					'json':'gallery/json/1.0.3/json',
+					'ext-action':'js/extend/actions',
+					'ext-view':'js/extend/views'
+				},
+				debug: true
+			});
+			seajs.use("./src/rainbow.js");
+		})();
+    </script>
+</html>

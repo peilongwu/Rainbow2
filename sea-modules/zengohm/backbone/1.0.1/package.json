@@ -1,0 +1,24 @@
+{
+  "family": "zengohm",
+  "name": "backbone",
+  "version": "1.0.1",
+  "description": "Backbone with jQuery for sea.js",
+  "keywords": ["backbone"],
+  "author": "Zeng Ohm <zengohm@gmail.com>",
+  "homepage": "https://github.com/zengohm/backbone",
+  "repository": {
+        "type": "git",
+        "url": "https://github.com/zengohm/backbone.git"
+   },
+   "bugs": {
+        "url": "https://github.com/zengohm/backbone/issues"
+   },
+  "spm": {
+    "source": "src",
+    "alias":{
+        "jquery":"jquery/jquery/1.10.1/jquery",
+        "underscore":"zengohm/underscore/1.0.0/underscore"
+    },
+    "output": ["backbone.js"]
+  }
+}
