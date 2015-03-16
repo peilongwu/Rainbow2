@@ -1,85 +1,104 @@
 {
 	"$schema": "http://json-schema.org/draft-04/schema#",
 	"title": "App View Schema Of Rainbow",
-	"request": {
-		"type": "object",
-		"properties": {
-			
-		}
-	},
+	"request": {},
 	"response": {
 		"type": "object",
 		"properties": {
 			"id": {
+				"title": "视图ID",
 				"type": "string"
 			},
 			"name": {
+				"title": "视图名称",
 				"type": "string"
 			},
 			"icon": {
+				"title": "图标",
 				"type": "string"
 			},
 			"legend": {
+				"title": "视图说明",
 				"type": "string"
 			},
 			"model": {
+				"title":"视图模式",
 				"type": "string",
 				"enum": ["standard","content","count"]
 			},
 			"params": {
+				"title":"视图参数",
 				"type": "object"
 			},
 			"setting": {
+				"title":"视图设置",
 				"type": "object"
 			},
 			"tools": {
+				"title":"工具",
 				"type": "array"
 			},
 			"actions": {
+				"title":"动作",
 				"type": "array",
 				"items": {
+					"type": "object",
 					"properties": {
 						"name": {
+							"title":"名称",
 							"type": "string"
 						},
 						"legend": {
+							"title":"说明",
 							"type": "string"
 						},
 						"icon": {
+							"title":"图标",
 							"type": "string"
 						},
 						"remote": {
+							"title":"远程地址",
 							"type": "boolean"
 						},
 						"selected": {
+							"title":"选择模式",
 							"type": "string",
 							"enum": ["none","single","mulpitle"]
 						},
 						"rule": {
+							"title":"规则",
 							"type": "string"
 						},
 						"group": {
+							"title":"分组",
 							"type": "string"
 						},
 						"action": {
+							"title":"动作",
 							"type": "string"
 						},
 						"model": {
-							"type": "object"
-						},
-						"primary": {
+							"title":"操作模型",
 							"type": "string"
 						},
+						"primary": {
+							"title":"关键操作",
+							"type": "boolean"
+						},
 						"allowMobile": {
+							"title":"手机访问",
 							"type": "boolean"
 						},
 						"controls": {
+							"title":"表单控件",
 							"type": "array"
 						},
 						"params": {
+							"title":"动作参数",
 							"type": "object"
 						},
 						"display": {
+							"title":"视图显示",
 							"type": "string",
 							"enum": ["view","modal","side","open","confirm"]
 						}
@@ -87,175 +106,226 @@
 				}
 			},
 			"schema": {
+				"title":"视图模型",
 				"type": "object",
 				"properties": {
 					"attributes": {
+						"title":"属性列表",
 						"type": "array",
 						"items": {
 							"type": "object",
 							"properties": {
 								"name": {
+									"title":"名称",
 									"type": "string"
 								},
 								"alias": {
+									"title":"别名",
 									"type": "string"
 								},
 								"legend": {
+									"title":"说明",
 									"type": "string"
 								},
 								"type": {
+									"title":"类型",
 									"type": "string"
 								},
 								"dataType": {
+									"title":"数据类型",
 									"type": "string"
 								},
 								"typeObject": {
+									"title":"类型对象",
 									"type": "object"
 								},
 								"required":{
+									"title":"必须",
 									"type": "boolean"
 								},
 								"enum":{
+									"title":"枚举",
 									"type": "array"
 								},
 								"unique":{
+									"title":"唯一",
 									"type": "boolean"
 								},
 								"min": {
+									"title":"最小值",
 									"type": "integer"
 								},
 								"max": {
+									"title":"最大值",
 									"type": "integer"
 								},
 								"minLength": {
+									"title":"最小长度",
 									"type": "integer"
 								},
 								"maxLength": {
+									"title":"最大长度",
 									"type": "integer"
 								},
 								"ignore":{
+									"title":"允许忽略",
 									"type": "boolean"
 								},
 								"hidden":{
+									"title":"隐藏",
 									"type": "string",
 									"enum": ["list","detail","all"]
 								},
 								"display":{
+									"title":"显示模式",
 									"type": "string",
 									"enum": [
 										"title","summary","link","date","time",
 										"thumbnail","phone","email","progress","currency","number"
-									],
+									]
 								},
 								"group": {
+									"title":"分组",
 									"type": "string"
 								},
 								"control": {
+									"title":"表单",
 									"type": "string"
 								},
 								"controlParams": {
+									"title":"表单参数",
 									"type": "object"
 								},
 								"value": {
+									"title":"默认值",
 									"type": "string"
 								},
 								"create": {
+									"title":"允许创建",
 									"type": "boolean"
 								},
 								"update": {
+									"title":"允许更新",
 									"type": "boolean"
 								},
 								"remind": {
+									"title":"提醒",
 									"type": "string"
 								},
 								"system": {
+									"title":"系统属性",
 									"type": "boolean"
 								},
 								"sort": {
+									"title":"界面排序",
 									"type": "boolean"
 								},
 								"events": {
+									"title":"事件",
 									"type": "string"
 								}
 							}
 						}
 					},
 					"filters": {
+						"title":"视图过滤器",
 						"type": "array",
 						"items": {
 							"type": "object",
 							"properties": {
 								"name" : {
+									"title":"名称",
 									"type": "string"
 								},
 								"control": {
+									"title":"表单",
 									"type": "string"
 								},
 								"controlParams": {
+									"title":"表单参数",
 									"type": "object"
 								},
 								"value": {
+									"title":"默认值",
 									"type": "string"
 								},
 								"isNull": {
+									"title":"允许空",
 									"type": "boolean"
 								},
 								"isAid": {
+									"title":"辅助",
 									"type": "boolean"
 								},
 								"isRanage": {
+									"title":"区间过滤",
 									"type": "boolean"
 								}
 							}
 						}
 					},
 					"idName": {
+						"title":"主键名称",
 						"type": "string"
 					},
 					"nodeIdName": {
+						"title":"节点ID名称",
 						"type": "string"
 					},
 					"parentIdName": {
+						"title":"父ID名称",
 						"type": "string"
 					},
 					"async": {
+						"title":"异步加载",
 						"type": "boolean"
 					}
 				}
 			},
 			"data": {
+				"title":"数据",
 				"type": "object",
 				"properties": {
 					"collection": {
+						"title":"集合",
 						"type": "array"
 					},
 					"count": {
+						"title":"统计",
 						"type": "integer"
 					},
 					"pagination": {
+						"title":"分页",
 						"type": "object",
 						"properties": {
 							"current": {
+								"title":"当前页",
 								"type": "integer"
 							},
 							"size": {
+								"title":"每页条数",
 								"type": "integer"
 							},
 							"count": {
+								"title":"总分页数",
 								"type": "integer"
 							}
 						}
 					},
 					"node": {
+						"title":"节点",
 						"type": "object",
 						"properties": {
 							"id": {
+								"title":"节点主键",
 								"type": "string"
 							},
 							"name": {
+								"title":"节点名称",
 								"type": "string"
 							},
 							"parents": {
+								"title":"父节点",
 								"type": "array"
 							}
 						}
@@ -263,30 +333,39 @@
 				}
 			},
 			"handle": {
-				"type": "object"
+				"title":"视图操作",
+				"type": "boolean",
+				"default": true
 			},
 			"layout": {
+				"title":"视图布局",
 				"type": "object",
 				"enum": ["1","2","3"]
 			},
 			"template": {
+				"title":"视图模板",
 				"type": "object",
 				"properties": {
 					"list": {
+						"title":"列表",
 						"type": "string"
 					},
 					"detail": {
+						"title":"详细",
 						"type": "string"
 					},
 					"form": {
+						"title":"表单",
 						"type": "string"
 					},
 					"row": {
+						"title":"行",
 						"type": "string"
 					}
 				}
 			},
 			"extend": {
+				"title":"视图扩展",
 				"type": "string"
 			}
 		},
