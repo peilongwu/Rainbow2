@@ -1,34 +1,37 @@
 <!doctype html>
 <html class="no-js" lang="zh-cn">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Rainbow</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="css/main.css">
-        <script src="js/vendor/modernizr-2.8.0.min.js"></script>
-        <script src="js/vendor/jquery-1.11.0.min.js"></script>
-        <script src="js/vendor/underscore-min.js"></script>
-        <script src="js/vendor/backbone-min.js"></script>
-        <script src="sea-modules/seajs/seajs/2.2.1/sea.js" id="seajsnode"></script>
-    </head>
-    <body>
-    </body>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Rainbow</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/vendor/modernizr-2.8.0.min.js"></script>
+    <script src="js/vendor/jquery-1.11.0.min.js"></script>
+    <script src="js/vendor/underscore-min.js"></script>
+    <script src="js/vendor/backbone-min.js"></script>
+  </head>
+  <body>
+    <div id="container"></div>
+    <script src="js/vendor/require.js"></script>
     <script>
-		(function(){
-			var rainbow;
-			seajs.config({
-				alias: {
-					'cookie':'arale/cookie/1.0.2/cookie',
-					'json':'gallery/json/1.0.3/json',
-					'ext-action':'js/extend/actions',
-					'ext-view':'js/extend/views'
-				},
-				debug: true
-			});
-			seajs.use("./src/rainbow.js");
-		})();
+    (function(){
+      var rainbow;            
+      require.config({
+        urlArgs: 'bust=' + (new Date()).getTime(),
+        paths: {
+          underscore: 'lib/underscore-min',
+          backbone: 'lib/backbone-min',
+          jquery: 'lib/jquery.min'
+        },
+        config:{
+          
+        }
+      });
+      require(['./src/rainbow'],function(app){});
+    })();
     </script>
+  </body>
 </html>
