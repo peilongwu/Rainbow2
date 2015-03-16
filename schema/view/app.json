@@ -1,0 +1,295 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"title": "App View Schema Of Rainbow",
+	"request": {
+		"type": "object",
+		"properties": {
+			
+		}
+	},
+	"response": {
+		"type": "object",
+		"properties": {
+			"id": {
+				"type": "string"
+			},
+			"name": {
+				"type": "string"
+			},
+			"icon": {
+				"type": "string"
+			},
+			"legend": {
+				"type": "string"
+			},
+			"model": {
+				"type": "string",
+				"enum": ["standard","content","count"]
+			},
+			"params": {
+				"type": "object"
+			},
+			"setting": {
+				"type": "object"
+			},
+			"tools": {
+				"type": "array"
+			},
+			"actions": {
+				"type": "array",
+				"items": {
+					"properties": {
+						"name": {
+							"type": "string"
+						},
+						"legend": {
+							"type": "string"
+						},
+						"icon": {
+							"type": "string"
+						},
+						"remote": {
+							"type": "boolean"
+						},
+						"selected": {
+							"type": "string",
+							"enum": ["none","single","mulpitle"]
+						},
+						"rule": {
+							"type": "string"
+						},
+						"group": {
+							"type": "string"
+						},
+						"action": {
+							"type": "string"
+						},
+						"model": {
+							"type": "object"
+						},
+						"primary": {
+							"type": "string"
+						},
+						"allowMobile": {
+							"type": "boolean"
+						},
+						"controls": {
+							"type": "array"
+						},
+						"params": {
+							"type": "object"
+						},
+						"display": {
+							"type": "string",
+							"enum": ["view","modal","side","open","confirm"]
+						}
+					}
+				}
+			},
+			"schema": {
+				"type": "object",
+				"properties": {
+					"attributes": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"name": {
+									"type": "string"
+								},
+								"alias": {
+									"type": "string"
+								},
+								"legend": {
+									"type": "string"
+								},
+								"type": {
+									"type": "string"
+								},
+								"dataType": {
+									"type": "string"
+								},
+								"typeObject": {
+									"type": "object"
+								},
+								"required":{
+									"type": "boolean"
+								},
+								"enum":{
+									"type": "array"
+								},
+								"unique":{
+									"type": "boolean"
+								},
+								"min": {
+									"type": "integer"
+								},
+								"max": {
+									"type": "integer"
+								},
+								"minLength": {
+									"type": "integer"
+								},
+								"maxLength": {
+									"type": "integer"
+								},
+								"ignore":{
+									"type": "boolean"
+								},
+								"hidden":{
+									"type": "string",
+									"enum": ["list","detail","all"]
+								},
+								"display":{
+									"type": "string",
+									"enum": [
+										"title","summary","link","date","time",
+										"thumbnail","phone","email","progress","currency","number"
+									],
+								},
+								"group": {
+									"type": "string"
+								},
+								"control": {
+									"type": "string"
+								},
+								"controlParams": {
+									"type": "object"
+								},
+								"value": {
+									"type": "string"
+								},
+								"create": {
+									"type": "boolean"
+								},
+								"update": {
+									"type": "boolean"
+								},
+								"remind": {
+									"type": "string"
+								},
+								"system": {
+									"type": "boolean"
+								},
+								"sort": {
+									"type": "boolean"
+								},
+								"events": {
+									"type": "string"
+								}
+							}
+						}
+					},
+					"filters": {
+						"type": "array",
+						"items": {
+							"type": "object",
+							"properties": {
+								"name" : {
+									"type": "string"
+								},
+								"control": {
+									"type": "string"
+								},
+								"controlParams": {
+									"type": "object"
+								},
+								"value": {
+									"type": "string"
+								},
+								"isNull": {
+									"type": "boolean"
+								},
+								"isAid": {
+									"type": "boolean"
+								},
+								"isRanage": {
+									"type": "boolean"
+								}
+							}
+						}
+					},
+					"idName": {
+						"type": "string"
+					},
+					"nodeIdName": {
+						"type": "string"
+					},
+					"parentIdName": {
+						"type": "string"
+					},
+					"async": {
+						"type": "boolean"
+					}
+				}
+			},
+			"data": {
+				"type": "object",
+				"properties": {
+					"collection": {
+						"type": "array"
+					},
+					"count": {
+						"type": "integer"
+					},
+					"pagination": {
+						"type": "object",
+						"properties": {
+							"current": {
+								"type": "integer"
+							},
+							"size": {
+								"type": "integer"
+							},
+							"count": {
+								"type": "integer"
+							}
+						}
+					},
+					"node": {
+						"type": "object",
+						"properties": {
+							"id": {
+								"type": "string"
+							},
+							"name": {
+								"type": "string"
+							},
+							"parents": {
+								"type": "array"
+							}
+						}
+					}
+				}
+			},
+			"handle": {
+				"type": "object"
+			},
+			"layout": {
+				"type": "object",
+				"enum": ["1","2","3"]
+			},
+			"template": {
+				"type": "object",
+				"properties": {
+					"list": {
+						"type": "string"
+					},
+					"detail": {
+						"type": "string"
+					},
+					"form": {
+						"type": "string"
+					},
+					"row": {
+						"type": "string"
+					}
+				}
+			},
+			"extend": {
+				"type": "string"
+			}
+		},
+		"required": ["id", "name"]
+	}
+}
