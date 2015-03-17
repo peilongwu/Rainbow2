@@ -1,0 +1,82 @@
+{
+	"meta":{
+		"$schema": "http://json-schema.org/draft-04/schema#",
+		"title": "Resources Schema Of Rainbow",
+		"type": "object",
+		"method": "GET"
+	},
+	"request": {
+		"$schema": "http://json-schema.org/draft-04/schema#",
+		"title": "请求内容",
+		"type": "object"
+	},
+	"response": {
+		"$schema": "http://json-schema.org/draft-04/schema#",
+		"title": "响应内容",
+		"type": "object",
+		"required": ["res"],
+		"properties": {
+			"res": {
+				"title": "资源",
+				"type": "array",
+				"required" : ["id", "name", "code"],
+				"items": {
+					"id": {
+						"title": "资源ID",
+						"type": "string"
+					},
+					"name": {
+						"title": "资源名称",
+						"type": "string"
+					},
+					"legend": {
+						"title": "资源说明",
+						"type": "string"
+					},
+					"code": {
+						"title": "资源编码",
+						"type": "string"
+					},
+					"icon": {
+						"title": "图标",
+						"type": "string"
+					},
+					"type": {
+						"title": "资源类型",
+						"type": "string",
+						"enum": ["catalog", "view", "link", "iframe", "subview"]
+					},
+					"url": {
+						"title": "URL",
+						"type": "string"
+					},
+					"action": {
+						"title": "动作",
+						"type": "string"
+					},
+					"remind": {
+						"title": "提醒",
+						"type": "boolean"
+					},
+					"allowMobile": {
+						"title": "移动访问",
+						"type": "boolean"
+					},
+					"childs": {
+						"title": "子资源",
+						"type": "array",
+						"items": {
+
+						}
+					}
+				}
+			},
+			"apps": {
+				"type": "array"
+			},
+			"user": {
+				"type": "object"
+			}
+		}
+	}
+}

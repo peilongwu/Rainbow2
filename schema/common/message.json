@@ -1,0 +1,58 @@
+{
+	"meta":{
+		"$schema": "http://json-schema.org/draft-04/schema#",
+		"title": "Resources Schema Of Rainbow",
+		"type": "object",
+		"method": "GET|POST|PUT|DELETE"
+	},
+	"request": {
+		"$schema": "http://json-schema.org/draft-04/schema#",
+		"title": "请求内容",
+		"type": "object"
+	},
+	"response": {
+		"$schema": "http://json-schema.org/draft-04/schema#",
+		"title": "响应内容",
+		"type": "object",
+		"required": ["status"],
+		"properties": {
+			"error": {
+				"type": "string"
+			},
+			"code": {
+				"title": "编码",
+				"type": "string"
+			},
+			"type": {
+				"title": "错误类型",
+				"type": "string",
+				"enum": ["failed", "confirm", "unauthorized", "unsignin"]
+			},
+			"status": {
+				"title": "状态",
+				"type": "integer",
+				"enum": [200, 300, 400, 500]
+			},
+			"summary": {
+				"title": "消息概要",
+				"type": "object"
+			},
+			"data": {
+				"title": "数据",
+				"type": "object"
+			},
+			"redirect": {
+				"title": "重定向",
+				"type": "object",
+				"properties": {
+					"url": {
+						"type": "string"
+					},
+					"title": {
+						"type": "integer"
+					}
+				}
+			}
+		}
+	}
+}
