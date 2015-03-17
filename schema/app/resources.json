@@ -48,7 +48,8 @@
 					},
 					"url": {
 						"title": "URL",
-						"type": "string"
+						"type": "string",
+						"format": "uri"
 					},
 					"action": {
 						"title": "动作",

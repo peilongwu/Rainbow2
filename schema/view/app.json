@@ -14,7 +14,7 @@
 		"$schema": "http://json-schema.org/draft-04/schema#",
 		"title": "响应内容",
 		"type": "object",
-		"required": ["id", "name"],
+		"required": ["id", "name", "type"],
 		"properties": {
 			"id": {
 				"title": "视图ID",
@@ -32,18 +32,22 @@
 				"title": "视图说明",
 				"type": "string"
 			},
-			"model": {
+			"mode": {
 				"title": "视图模式",
 				"type": "string",
-				"enum": ["standard","content","count"]
+				"enum": ["standard","content", "data", "count"]
 			},
 			"params": {
-				"title": "视图参数",
+				"title": "参数",
 				"type": "object"
 			},
 			"setting": {
 				"title": "视图设置",
 				"type": "array"
+			},
+			"type":{
+				"type": "string",
+				"enum": ["list", "grid", "table", "sheet", "tree", "disk"]
 			},
 			"tools": {
 				"title": "工具选项",
@@ -103,7 +107,7 @@
 							"type": "array"
 						},
 						"params": {
-							"title": "动作参数",
+							"title": "参数",
 							"type": "object"
 						},
 						"display": {
@@ -133,14 +137,16 @@
 							"title": "图标",
 							"type": "string"
 						},
-						"remote": {
-							"title": "远程地址",
-							"type": "string"
+						"url": {
+							"title": "URL",
+							"type": "string",
+							"format": "uri"
 						},
 						"method": {
 							"title": "HTTP 方法",
 							"type": "string",
-							"enum": ["GET", "POST", "PUT", "DELETE"]
+							"enum": ["GET", "POST", "PUT", "DELETE"],
+							"default": "POST"
 						},
 						"selected": {
 							"title": "选择模式",
@@ -176,7 +182,7 @@
 							"type": "array"
 						},
 						"params": {
-							"title": "动作参数",
+							"title": "参数",
 							"type": "object"
 						},
 						"display": {
@@ -425,9 +431,10 @@
 				}
 			},
 			"handle": {
-				"title": "视图操作",
-				"type": "boolean",
-				"default": true
+				"title": "操作类型",
+				"type": "string",
+				"enum": ["single", "mulpitle"],
+				"default": "mulpitle"
 			},
 			"layout": {
 				"title": "视图布局",
