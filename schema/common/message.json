@@ -3,7 +3,7 @@
 		"$schema": "http://json-schema.org/draft-04/schema#",
 		"title": "Resources Schema Of Rainbow",
 		"type": "object",
-		"method": "GET|POST|PUT|DELETE"
+		"method": ["GET", "POST", "PUT", "DELETE"]
 	},
 	"request": {
 		"$schema": "http://json-schema.org/draft-04/schema#",
@@ -35,7 +35,7 @@
 			},
 			"content": {
 				"title": "消息内容",
-				"type": "object"
+				"type": "string"
 			},
 			"data": {
 				"title": "数据",
@@ -50,7 +50,7 @@
 						"type": "string",
 						"format": "uri"
 					},
-					"title": {
+					"time": {
 						"type": "integer"
 					}
 				}

@@ -405,7 +405,7 @@
 								"type": "integer"
 							},
 							"count": {
-								"title": "总分页数",
+								"title": "分页总数",
 								"type": "integer"
 							}
 						}
