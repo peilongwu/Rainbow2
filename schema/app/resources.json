@@ -17,6 +17,7 @@
 		"required": ["res"],
 		"properties": {
 			"res": {
+				"id": "#resource",
 				"title": "资源",
 				"type": "array",
 				"items": {
@@ -69,7 +70,7 @@
 							"title": "子资源",
 							"type": "array",
 							"items": {
-
+								"$ref": "#resource"
 							}
 						}
 					}
