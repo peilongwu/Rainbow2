@@ -30,11 +30,49 @@
 
 ### Paginationbar
 
-### Preview
-
 ### Message
 
 ### Progressbar
+
+### Loader
+
+## Control
+
+### Input
+
+- text
+- password
+- checkbox
+- radio
+- file
+- date
+- datetime
+- time
+- hidden
+
+### ColorPicker
+
+### Switch
+
+### TreeFilter
+
+### Select
+
+### Select2
+
+### SelectBox
+
+### Button
+
+### Textarea
+
+### Html Editor
+
+### JSON Editor
+
+### Chart
+
+### Javascript Editor
 
 ## Nav
 
@@ -66,6 +104,8 @@
 
 #### Upload
 
+#### Step
+
 #### Wizard
 
 ## View
@@ -80,9 +120,13 @@
 
 ### App
 
+### Disk
+
 ### Dashboard
 
 ## Module
+
+### LoginBox
 
 ### Editor
 
@@ -91,4 +135,8 @@
 ### Calendar
 
 ### File Manager
+
+### Preview
+
+### DiskPreview
 
