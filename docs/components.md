@@ -86,27 +86,27 @@
 
 #### Detail
 
-### Collection
+## Collection
 
-#### List
+### List
 
-#### Table
+### Table
 
-#### Grid
+### Grid
 
-#### Tree
+### Tree
 
-### Form
+## Form
 
-#### Base
+### Base
 
-#### Detail
+### Detail
 
-#### Upload
+### Upload
 
-#### Step
+### Step
 
-#### Wizard
+### Wizard
 
 ## View
 
@@ -128,7 +128,7 @@
 
 ### LoginBox
 
-### Editor
+### Designer
 
 ### Sheet
 

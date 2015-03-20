@@ -296,7 +296,7 @@
 									"title": "显示模式",
 									"type": "string",
 									"enum": [
-										"title","summary","link","date","time",
+										"title","user","summary","link","date","time",
 										"thumbnail","phone","email","progress","currency","number"
 									]
 								},

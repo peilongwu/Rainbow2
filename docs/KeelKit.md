@@ -2,6 +2,16 @@
 
 ### Var
 
+#### Colors Term
+
+- body-bg;
+- text-color;
+- link-color;
+- link-hover-color;
+- gray-base;
+- gray-dark;
+- gray-
+
 #### Status Term
 
 - `success` 成功/好;
