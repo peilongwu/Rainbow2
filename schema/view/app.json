@@ -242,7 +242,7 @@
 									"title": "属性类型",
 									"type": "string"
 								},
-								"metatype": {
+								"metaType": {
 									"title": "元类型",
 									"type": "string",
 									"enum": ["string", "number", "boolean", "object" , "array", "subobject"]
@@ -374,7 +374,7 @@
 									"title": "辅助",
 									"type": "boolean"
 								},
-								"isRanage": {
+								"isRange": {
 									"title": "区间过滤",
 									"type": "boolean"
 								}
