@@ -259,8 +259,8 @@
 									"title": "必须",
 									"type": "boolean"
 								},
-								"enum":{
-									"title": "枚举",
+								"list":{
+									"title": "序列",
 									"type": "array"
 								},
 								"unique":{
