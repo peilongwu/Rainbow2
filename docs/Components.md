@@ -22,12 +22,30 @@
 
 ## Widget
 
-### Buttonbar
-
+### Button
+```
+<button class="rb-btn">Button</button>
+<a class="rb-btn">Button</a>
+<div class="rb-btn">Button</div>
+```
+```
+<button class="rb-btn-ok">确定</button>
+<button class="rb-btn-concle">取消</button>
+```
 ### Modal
 
 #### Panel
-
+<div class="rb-panel">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Panel title</h3>
+    </div>
+    <div class="panel-body">
+      Panel content
+    </div>
+    <div class="panel-footer">Panel footer</div>
+  </div>
+</div>
 #### Alert
 
 #### Confirm
