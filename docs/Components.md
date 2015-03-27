@@ -30,11 +30,12 @@
 ```
 ```
 <button class="rb-btn-ok">确定</button>
-<button class="rb-btn-concle">取消</button>
+<button class="rb-btn-cancel">取消</button>
 ```
 ### Modal
 
 #### Panel
+```
 <div class="rb-panel">
   <div class="panel panel-default">
     <div class="panel-heading">
@@ -46,6 +47,7 @@
     <div class="panel-footer">Panel footer</div>
   </div>
 </div>
+```
 #### Alert
 
 #### Confirm
@@ -72,7 +74,12 @@
 ### Loader
 
 ## Control
-
+```
+<div class="rb-control-item">
+  <label></label>
+  <input type="text" class="rb-control">
+</div>
+```
 ### Input
 
 - text
