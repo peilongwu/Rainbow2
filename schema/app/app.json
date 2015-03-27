@@ -35,7 +35,7 @@
 			"app_type": {
 				"title": "应用类型",
 				"type": "string",
-				"enum": ["general", "desktop", "mobile", "API", "wechat", "public", "link", "wiki"]
+				"enum": ["general", "desktop", "mobile", "API", "wechat", "portal", "link", "wiki"]
 			},
 			"session_type": {
 				"title": "会话类型",

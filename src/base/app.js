@@ -1,9 +1,8 @@
 define(function(require){
-	var template = require('/assets/Rainbow/templates/site/desktop.html');
-	$('body').after(template);
 	var app = {};
 	rainbow = app;
-	app.cookie = require('cookie');
+	require('jquery+/cookie');
+	app.cookie = $.cookie;
 	app.nav = require('./nav');
 	app.mobile = false;
 	app.html5 = false;
@@ -30,16 +29,19 @@ define(function(require){
 	app.sign = require('../common/sign');
 	var Router = Backbone.Router.extend({
 		routes: {
-			"!signin": "signin"
+			"signin": "signin",
+			"signout": "signout"
 		},
 		signin:function(){
 			app.sign.login();
+		},
+		signout:function(){
+			app.sign.logout();
 		}
 	});
 	
 	app.router = new Router();
 	app.route = function(name, options){
-		name = name ? '!' + name : '';
 		return app.router.navigate(name,options);
 	};
 	
@@ -50,9 +52,6 @@ define(function(require){
 	
 	//视图容器
 	app.views = new Backbone.Collection;
-	app.coms = {
-		
-	};
 		
 	//当前视图对象
 	app.current;

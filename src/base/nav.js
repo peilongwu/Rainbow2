@@ -6,7 +6,7 @@ define(function(require){
 	});
 	
 	var Collection = Backbone.Collection.extend({
-		url:'/admin/res',
+		url:'http://www.glosea.com/admin/res',
 		model:Model
 	});
 	
@@ -19,7 +19,8 @@ define(function(require){
 			'click' : 'onClick'
 		},
 		initialize:function(options){
-			this.path = options.path + '/' + this.model.get('code');
+			this.path = options.path ? options.path + '/' : '';
+			this.path += this.model.get('code');
 			this.tplId = options.tplId ? options.tplId : this.tplId;
 			this.parent = options.parent;
 			this.level = options.level;
@@ -31,12 +32,14 @@ define(function(require){
 			},this);
 		},
 		route:function(){
-			var name = '!' + this.path;
+			var name = this.path;
 			var res = this;
-			rainbow.router.route(name + '*path',function(path){
-				console.log(res.path + ': OK -------' + path);
-				res.onActive(path);
-			});
+			if('signout' !== name){
+				rainbow.router.route(name + '*path',function(path){
+					console.log(res.path + ': OK -------' + path);
+					res.onActive(path);
+				});
+			}
 			return '#' + name;
 		},
 		render:function(){

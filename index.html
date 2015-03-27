@@ -6,15 +6,13 @@
     <title>Rainbow</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/main.css">
     <script src="js/vendor/modernizr-2.8.0.min.js"></script>
-    <script src="js/vendor/jquery-1.11.0.min.js"></script>
-    <script src="js/vendor/underscore-min.js"></script>
-    <script src="js/vendor/backbone-min.js"></script>
+    
+    <!-- LESS -->
+    <link data-dump-line-numbers="all" data-global-vars='{ myvar: "#ddffee", mystr: "\"quoted\"" }' rel="stylesheet/less" type="text/css" href="less/index.less">
+    <script src="js/vendor/less-1.7.0.min.js" data-poll="1000" data-relative-urls="false"></script>
   </head>
   <body>
-    <div id="container"></div>
     <script type="template" id="tpl">
 
     </script>
@@ -25,9 +23,12 @@
       require.config({
         urlArgs: 'bust=' + (new Date()).getTime(),
         paths: {
-          underscore: 'lib/underscore-min',
-          backbone: 'lib/backbone-min',
-          jquery: 'lib/jquery.min'
+          'underscore': 'js/vendor/underscore-min',
+          'backbone': 'js/vendor/backbone-min',
+          'jquery': 'js/vendor/jquery-1.11.0.min',
+          'jquery+': "js/vendor/jquery",
+          'template': 'templates/site',
+          'text': 'js/vendor/requirejs/text'
         },
         config:{
           
