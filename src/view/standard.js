@@ -1,10 +1,10 @@
 define(function(require){
 	var Base = require('./base');
 	var kits = {
-		Action:require('./../kit/action')
+		Action:require('../component/kit/action')
 	};
 	
-	var General = Base.extend({
+	var Standard = Base.extend({
 		tplId:'tpl-view-general',
 		initialize:function(options){
 			Base.prototype.initialize.apply(this, arguments);
@@ -65,5 +65,5 @@ define(function(require){
 		}
 	});
 	
-	return General;
+	return Standard;
 });

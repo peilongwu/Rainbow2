@@ -4,10 +4,11 @@ define(function(require){
 		idAttribute:'id',
 		initialize:function(options){
 			this.res = null;
+			this.view = null;
 		},
 		request:function(res){
 			this.res = res;
-			var that = this;
+			var _this = this;
 			this.fetch({
 				success:function(model, response, options){
 					model.display();
@@ -16,17 +17,22 @@ define(function(require){
 					rainbow.alert('访问服务器失败');
 				}
 			});
+			return this;
 		},
 		display:function(){
 			var type = this.get('type');
-			type = type ? type.substring(0, 1).toUpperCase() + type.substring(1).toLowerCase() : 'General';
+			type = type 
+				? type.substring(0, 1).toUpperCase() + type.substring(1).toLowerCase() 
+					: 'Standard';
 			var v = new view[type]({
 				model:this,
 				res:this.res,
 				coms:view
 			});
-			rainbow.layout.$('.main-body').empty().append(v.el);
+			rainbow.layout.$('.rb-body').empty().append(v.el);
 			rainbow.current = v;
+			this.view = v;
+			return this;
 		}
 	});
 	return Model;

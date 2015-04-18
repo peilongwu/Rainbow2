@@ -35,7 +35,7 @@
 			"mode": {
 				"title": "视图模式",
 				"type": "string",
-				"enum": ["standard","content", "data", "count"]
+				"enum": ["standard","content", "data", "count", "schema", "exists"]
 			},
 			"params": {
 				"title": "视图参数",
@@ -48,7 +48,7 @@
 			"type":{
 				"title": "视图类型",
 				"type": "string",
-				"enum": ["list", "grid", "table", "sheet", "tree", "disk"]
+				"enum": ["list", "table", "tree", "grid", "sheet", "disk"]
 			},
 			"tools": {
 				"title": "工具选项",

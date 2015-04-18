@@ -1,6 +1,6 @@
 define(function(require){
 	var nav = {};
-	var ViewModel = require('../component/view/model');
+	var ViewModel = require('../view/model');
 	var Model = Backbone.Model.extend({
 		idAttribute:'id'
 	});
@@ -57,7 +57,7 @@ define(function(require){
 				level:this.level + 1
 			});
 			
-			$('.J-nav-child').append(v.render().el);
+			$('.rb-nav-child').append(v.render().el);
 			v.$('a').attr('href',v.$el.attr('href'));
 			this.first = this.first ? this.first : v;
 			if(this.childPath === v.model.get('code')){
@@ -69,7 +69,7 @@ define(function(require){
 			this.parent.model.set('_active',this.model.id);
 			this.$el.addClass('active');
 			if(1 === this.level){
-				$('.J-nav-child').empty();
+				$('.rb-nav-child').empty();
 			}
 			
 			if(this.collection.length > 0){
@@ -99,8 +99,8 @@ define(function(require){
 			this.model = new Backbone.Model;
 		},
 		render:function(){
-			$('.side').empty();
-			this.$el.appendTo('.side');
+			$('.rb-nav').empty();
+			this.$el.appendTo('.rb-nav');
 			this.collection.each(this.renderItem,this);
 			return this;
 		},

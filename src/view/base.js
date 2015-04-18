@@ -1,9 +1,9 @@
 define(function(require){
 	var kits = {
-		Action:require('../kit/action'),
-		Breadcrum:require('../kit/breadcrum'),
-		Filters:require('../kit/filter'),
-		Content:require('../kit/content')
+		Action:require('../component/kit/action'),
+		Breadcrum:require('../component/kit/breadcrum'),
+		Filters:require('../component/kit/filter'),
+		Content:require('../component/kit/content')
 	};
 	
 	var Base = Backbone.View.extend({

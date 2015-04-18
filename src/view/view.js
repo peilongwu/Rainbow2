@@ -2,7 +2,7 @@ define(function(require){
 	var view = {
 		Base:require('./base'),
 		Simple:require('./simple'),
-		General:require('./general'),
+		Standard:require('./standard'),
 		Aid:require('./aid'),
 		Modal:require('./modal'),
 		Preview:require('./preview'),
