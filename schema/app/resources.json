@@ -16,8 +16,8 @@
 		"type": "object",
 		"required": ["res"],
 		"properties": {
-			"res": {
-				"id": "#resource",
+			"resources": {
+				"id": "#resources",
 				"title": "资源",
 				"type": "array",
 				"items": {
@@ -70,7 +70,7 @@
 							"title": "子资源",
 							"type": "array",
 							"items": {
-								"$ref": "#resource"
+								"$ref": "#resources"
 							}
 						}
 					}

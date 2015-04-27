@@ -23,7 +23,7 @@ define(function(require){
 		},
 		initialize:function(options){
 			this.path = options.path ? options.path + '/' : '';
-			this.path += this.model.get('key') ? this.model.get('key') : this.model.get('id');
+			this.path += this.model.get('key');
 			this.tplId = options.tplId ? options.tplId : this.tplId;
 			this.parent = options.parent;
 			this.level = options.level;
@@ -38,16 +38,15 @@ define(function(require){
 		route:function(){
 			var name = this.path;
 			var res = this;
-			if('signout' !== name){
-				rainbow.router.route(name + '*path',function(path){
-					console.log(res.path + ': OK -------' + path);
-					res.onActive(path);
-				});
-			}
+			rainbow.router.route(name + '*path',function(path){
+				console.log(res.path + ': OK -------' + path);
+				res.onActive(path);
+			});
 			return '#' + name;
 		},
 		render:function(){
-			this.$el.attr('href',this.route());
+			//this.$el.attr('href',this.route());
+			this.route();
 			this.$el.html(_.template(
 				$('#' + this.tplId).html(),
 				this.model.toJSON()
@@ -64,15 +63,19 @@ define(function(require){
 			this.$childs.append(v.render().el);
 			v.$('a').attr('href',v.$el.attr('href'));
 			this.first = this.first ? this.first : v;
-			var key = v.model.get('key') ? v.model.get('key') : v.model.get('id');
-			if(this.childPath === key){
-				v.onActive();
+			if(this.currentSubPath === v.model.get('key')){
+				console.log(this.childPath);
+				var childPath = this.childPath ? '/' + this.childPath.slice(2).join('/') : null;
+				v.onActive(childPath);
 			}
 		},
 		onActive:function(childPath){
-			this.childPath = childPath ? childPath.split('/')[1] : childPath;
+			this.childPath = childPath ? childPath.split('/') : null;
+			this.currentSubPath = this.childPath ? this.childPath[1] : null;
+			console.log(this.path,'On Active Path:',childPath,this.currentSubPath);
 			this.parent.model.set('_active',this.model.id);
 			this.$el.addClass('active');
+
 			if(0 === this.level){
 				$('.rb-nav-1').empty();
 			}
@@ -90,8 +93,7 @@ define(function(require){
 			}else if(this.model.get('action')){
 				this.loadView();
 			}
-			
-			this.childPath = null;
+			this.currentSubPath = null;
 		},
 		loadView:function(){
 			var view = new ViewModel;
@@ -100,7 +102,8 @@ define(function(require){
 		},
 		onClick:function(e){
 			rainbow.route(this.path, {trigger: true});
-			event.preventDefault();
+			e.preventDefault();
+			e.stopPropagation();
 		}
 	});
 	
