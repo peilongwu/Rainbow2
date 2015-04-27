@@ -26,12 +26,15 @@ define(function(require){
 			this.path += this.model.get('key');
 			this.tplId = options.tplId ? options.tplId : this.tplId;
 			this.parent = options.parent;
+			this.view = options.view;
 			this.level = options.level;
 			this.collection = new Backbone.Collection(this.model.get('childs'));
 			this.$childs = null;
-			this.parent.model.on('change:_active',function(){
-				if(this.parent.model.get('_active') !== this.model.id ){
-					this.$el.removeClass('active') ;
+			this.view.model.on('change:_current',function(e){
+				if(this.view.model.get('_current').indexOf(this.path) === 0){
+					this.$el.addClass('active');
+				}else{
+					this.$el.removeClass('active');
 				}
 			},this);
 		},
@@ -39,7 +42,8 @@ define(function(require){
 			var name = this.path;
 			var res = this;
 			rainbow.router.route(name + '*path',function(path){
-				console.log(res.path + ': OK -------' + path);
+				console.log('Route:', res.path, '- Paths:', path);
+				path = path ? path.split('/').slice(1) : path;
 				res.onActive(path);
 			});
 			return '#' + name;
@@ -55,7 +59,7 @@ define(function(require){
 		},
 		renderChild:function(model,i){
 			var v = new Item({
-				model:model, path:this.path, parent:this,
+				model:model, path:this.path, view:this.view, parent:this,
 				tplId:'tpl-nav-child-item',tagName:'li',className:'',
 				level:this.level + 1
 			});
@@ -63,19 +67,15 @@ define(function(require){
 			this.$childs.append(v.render().el);
 			v.$('a').attr('href',v.$el.attr('href'));
 			this.first = this.first ? this.first : v;
-			if(this.currentSubPath === v.model.get('key')){
-				console.log(this.childPath);
-				var childPath = this.childPath ? '/' + this.childPath.slice(2).join('/') : null;
+			if(this.childPath && this.childPath[0] === v.model.get('key')){
+				var childPath = this.childPath ? this.childPath.slice(1) : null;
 				v.onActive(childPath);
 			}
 		},
 		onActive:function(childPath){
-			this.childPath = childPath ? childPath.split('/') : null;
-			this.currentSubPath = this.childPath ? this.childPath[1] : null;
-			console.log(this.path,'On Active Path:',childPath,this.currentSubPath);
-			this.parent.model.set('_active',this.model.id);
-			this.$el.addClass('active');
-
+			console.log('Active:', this.path,'- Childs Path:', childPath);
+			this.childPath = childPath;
+			this.view.model.set('_current', this.path);
 			if(0 === this.level){
 				$('.rb-nav-1').empty();
 			}
@@ -90,14 +90,13 @@ define(function(require){
 				this.$childs.empty();
 				this.collection.each(this.renderChild,this);
 				childPath || rainbow.route(this.first.path, {trigger: true});
-			}else if(this.model.get('action')){
+			}else if(this.model.get('type') === 'view'){
 				this.loadView();
 			}
-			this.currentSubPath = null;
 		},
 		loadView:function(){
 			var view = new ViewModel;
-			view.url = this.model.get('action');
+			view.url = 'http://dev.xiyouqi.cn:8080/develop/' + this.path.replace(/\//g, '-');
 			view.request(this);
 		},
 		onClick:function(e){
@@ -120,7 +119,7 @@ define(function(require){
 			return this;
 		},
 		renderItem:function(model,i){
-			var v = new Item({model:model, path:'', parent:this, level:0});
+			var v = new Item({model:model, path:'', view:this, parent:this, level:0});
 			this.$el.append(v.render().el);
 			this.first = this.first ? this.first : v;
 		}
@@ -135,7 +134,6 @@ define(function(require){
 				rainbow.start();
 			},
 			error:function(collection, response, options){
-				console.log(arguments);
 				alert(response.responseJSON.content);
 				rainbow.route('signin', {trigger: true});
 			}

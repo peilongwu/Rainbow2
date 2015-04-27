@@ -240,12 +240,13 @@
 								},
 								"type": {
 									"title": "属性类型",
-									"type": "string"
+									"type": "string",
+									"enum": ["value", "virtual", "dick", "model", "collection"]
 								},
 								"metaType": {
 									"title": "元类型",
 									"type": "string",
-									"enum": ["string", "number", "boolean", "object" , "array", "subobject"]
+									"enum": ["string", "integer", "number", "boolean", "object" , "array", "model"]
 								},
 								"dataType": {
 									"title": "数据类型",
