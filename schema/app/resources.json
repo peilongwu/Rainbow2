@@ -77,7 +77,79 @@
 				}
 			},
 			"apps": {
+				"title": "应用",
 				"type": "array"
+				"items": {
+					"type": "object",
+					"required": ["id", "name", "key", "type"],
+					"properties": {
+						"app_id": {
+							"title": "应用ID",
+							"type": "string"
+						},
+						"app_name": {
+							"title": "应用名称",
+							"type": "string"
+						},
+						"app_alias": {
+							"title": "应用别名",
+							"type": "string"
+						},
+						"legend": {
+							"title": "应用说明",
+							"type": "string"
+						},
+						"app_type": {
+							"title": "应用类型",
+							"type": "string",
+							"enum": ["general", "desktop", "mobile", "API", "wechat", "portal", "link", "wiki"]
+						},
+						"session_type": {
+							"title": "会话类型",
+							"type": "string",
+							"enum": ["session", "guest"]
+						},
+						"app_url": {
+							"title": "URL",
+							"type": "string"
+						},
+						"language": {
+							"title": "语言",
+							"type": "string",
+							"enum": ["zh", "en"]
+						},
+						"icon": {
+							"title": "图标",
+							"type": "string",
+							"format": "uri"
+						},
+						"logo": {
+							"title": "Logo",
+							"type": "string",
+							"format": "uri"
+						},
+						"theme": {
+							"title": "主题模板",
+							"type": "string"
+						},
+						"style": {
+							"title": "风格",
+							"type": "string"
+						},
+						"app_navigation": {
+							"title": "应用导航",
+							"type": "boolean"
+						},
+						"user_profile": {
+							"title": "用户资料",
+							"type": "boolean"
+						},
+						"remind": {
+							"title": "应用提醒",
+							"type": "string"
+						}
+					}
+				}
 			},
 			"user": {
 				"type": "object"
