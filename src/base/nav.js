@@ -6,8 +6,11 @@ define(function(require){
 	});
 	
 	var Collection = Backbone.Collection.extend({
-		url:'http://www.glosea.com/admin/res',
-		model:Model
+		url:'http://dev.xiyouqi.cn:8080/develop/res',
+		model:Model,
+		parse: function(response) {
+	    return response.resources;
+	  }
 	});
 	
 	var Item = Backbone.View.extend({
@@ -20,11 +23,12 @@ define(function(require){
 		},
 		initialize:function(options){
 			this.path = options.path ? options.path + '/' : '';
-			this.path += this.model.get('code');
+			this.path += this.model.get('key') ? this.model.get('key') : this.model.get('id');
 			this.tplId = options.tplId ? options.tplId : this.tplId;
 			this.parent = options.parent;
 			this.level = options.level;
 			this.collection = new Backbone.Collection(this.model.get('childs'));
+			this.$childs = null;
 			this.parent.model.on('change:_active',function(){
 				if(this.parent.model.get('_active') !== this.model.id ){
 					this.$el.removeClass('active') ;
@@ -57,10 +61,11 @@ define(function(require){
 				level:this.level + 1
 			});
 			
-			$('.rb-nav-child').append(v.render().el);
+			this.$childs.append(v.render().el);
 			v.$('a').attr('href',v.$el.attr('href'));
 			this.first = this.first ? this.first : v;
-			if(this.childPath === v.model.get('code')){
+			var key = v.model.get('key') ? v.model.get('key') : v.model.get('id');
+			if(this.childPath === key){
 				v.onActive();
 			}
 		},
@@ -68,11 +73,18 @@ define(function(require){
 			this.childPath = childPath ? childPath.split('/')[1] : childPath;
 			this.parent.model.set('_active',this.model.id);
 			this.$el.addClass('active');
-			if(1 === this.level){
-				$('.rb-nav-child').empty();
+			if(0 === this.level){
+				$('.rb-nav-1').empty();
 			}
 			
 			if(this.collection.length > 0){
+				if(!this.$childs){
+					this.$childs = $('.rb-nav-' + (this.level + 1));
+					if(!this.$childs.size()){
+						this.$childs = $('<ul class="sub"></ul>').appendTo(this.$el);
+					}
+				}
+				this.$childs.empty();
 				this.collection.each(this.renderChild,this);
 				childPath || rainbow.route(this.first.path, {trigger: true});
 			}else if(this.model.get('action')){
@@ -99,13 +111,13 @@ define(function(require){
 			this.model = new Backbone.Model;
 		},
 		render:function(){
-			$('.rb-nav').empty();
-			this.$el.appendTo('.rb-nav');
+			$('.rb-nav-0').empty();
+			this.$el.appendTo('.rb-nav-0');
 			this.collection.each(this.renderItem,this);
 			return this;
 		},
 		renderItem:function(model,i){
-			var v = new Item({model:model, path:'', parent:this, level:1});
+			var v = new Item({model:model, path:'', parent:this, level:0});
 			this.$el.append(v.render().el);
 			this.first = this.first ? this.first : v;
 		}
@@ -119,8 +131,10 @@ define(function(require){
 				view.render();
 				rainbow.start();
 			},
-			error:function(){
-				
+			error:function(collection, response, options){
+				console.log(arguments);
+				alert(response.responseJSON.content);
+				rainbow.route('signin', {trigger: true});
 			}
 		});
 	};

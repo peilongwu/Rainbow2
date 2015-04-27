@@ -56,7 +56,9 @@ define(function(require){
 	//当前视图对象
 	app.current;
 	
+	//扩展Backboe Events
 	_.extend(app, Backbone.Events);
+
 	//应用窗口对象
 	app.window = {};
 	$(window).on('resize',function(){
@@ -64,5 +66,16 @@ define(function(require){
 		app.window.width = $(window).innerWidth();
 		app.trigger('resize');
 	});
+
+	//$.Ajax 跨域选项配置
+	$.ajaxPrefilter(function(options, originalOptions, jqXHR) {
+    options.crossDomain = {
+        crossDomain: true
+    };
+    options.xhrFields = {
+        withCredentials: true
+    };
+	});
+	
 	return app;
 });

@@ -36,7 +36,7 @@
 							"title": "资源说明",
 							"type": "string"
 						},
-						"code": {
+						"key": {
 							"title": "资源编码",
 							"type": "string"
 						},

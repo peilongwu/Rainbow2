@@ -11,13 +11,13 @@
           <div class="form-group">
             <label for="inputEmail3" class="col-sm-2 control-label">账号</label>
             <div class="col-sm-9">
-              <input type="email" class="form-control" placeholder="账号/邮件">
+              <input type="text" name="userId" class="form-control" placeholder="账号/邮件">
             </div>
           </div>
           <div class="form-group">
             <label for="inputPassword3" class="col-sm-2 control-label">密码</label>
             <div class="col-sm-9">
-              <input type="password" class="form-control" placeholder="登录密码">
+              <input type="password" name="password" class="form-control" placeholder="登录密码">
             </div>
           </div>
           <div class="form-group">
@@ -44,27 +44,27 @@
 </script>
 <script type="text/template" id="tpl-layout">
   <div class="container" id="container">
-    <div class="side rb-nav"></div>
+    <div class="side rb-nav-0"></div>
       <div class="main">
         <div class="main-header">
-              <h4 class="hidden">
-                  <span class="glyphicon glyphicon-file"></span> 内容管理 <small>文章、分类、页面、文件、标签管理</small>
-              </h4>
-              <div class="block-margin clearfix">
-                  <ul class="nav nav-pills pull-left rb-nav-child"></ul>
-                  <div class="pull-right" style="width:25%;">
-                      <div class="input-group">
-                        <input type="text" class="form-control">
-                        <span class="input-group-btn">
-                          <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
-                          <button class="btn btn-primary" type="button"><span class="glyphicon glyphicon-filter"></span></button>
-                        </span>
-                      </div>
-                  </div>
+          <h4 class="hidden">
+            <span class="glyphicon glyphicon-file"></span> 内容管理 <small>文章、分类、页面、文件、标签管理</small>
+          </h4>
+          <div class="block-margin clearfix">
+            <ul class="nav nav-pills pull-left rb-nav-1"></ul>
+            <div class="pull-right" style="width:25%;">
+              <div class="input-group">
+                <input type="text" class="form-control">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                  <button class="btn btn-primary" type="button"><span class="glyphicon glyphicon-filter"></span></button>
+                </span>
               </div>
+            </div>
           </div>
-          <div class="rb-body">
-          </div>
+        </div>
+        <div class="rb-body">
+        </div>
       </div>
       <aside class="view hidden">
       </aside>
