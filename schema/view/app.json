@@ -48,7 +48,7 @@
 			"type":{
 				"title": "视图类型",
 				"type": "string",
-				"enum": ["list", "table", "tree", "grid", "sheet", "disk"]
+				"enum": ["list", "table", "tree", "grid", "sheet", "dist"]
 			},
 			"tools": {
 				"title": "工具选项",
@@ -241,7 +241,7 @@
 								"type": {
 									"title": "属性类型",
 									"type": "string",
-									"enum": ["value", "virtual", "dick", "model", "collection"]
+									"enum": ["value", "virtual", "dict", "model", "collection"]
 								},
 								"metaType": {
 									"title": "元类型",
