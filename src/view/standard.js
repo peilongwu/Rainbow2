@@ -8,16 +8,16 @@ define(function(require){
 		tplId:'tpl-view-general',
 		initialize:function(options){
 			Base.prototype.initialize.apply(this, arguments);
-			this.idName = this.model.get('scheme').idName;
+			this.idName = this.model.get('schema').idName;
 			this.collection =  new Backbone.Collection;
 			this.filter = new Backbone.Collection;
 			this.model.get('handle') && this.handle();
 			this.kits = {
 				breadcrum:'breadcrum',
 				action:this.model.actions,
-				filter:this.model.get('scheme').filters,
-				pagination:this.model.get('content').page,
-				content:this.model.get('content').body
+				filter:this.model.get('schema').filters,
+				pagination:this.model.get('data').pagination,
+				collection:this.model.get('data').collection
 			};
 		},
 		events:{
@@ -49,13 +49,31 @@ define(function(require){
 		},
 		setCollection:function(){
 			this.collection.reset();
-			this.collection.set(this.model.get('content').body);
+			this.collection.set(this.model.get('data').collection);
 		},
 		selectedRow:function(){
 			
 		},
 		selectedAllRows:function(){
 			
+		},
+		getSelectedState:function(type){
+			var length = this.selecteds.size();
+			var status = true;
+			switch(type){
+				case 'none':
+					length > 0 && (status = false);
+					break;
+				case 'somewhat':
+					length < 1 && (status = false);
+					break;
+				case 'single':
+					length !== 1 && (status = false);
+					break;
+				case 'mulpitle':
+					length < 2 && (status = false);
+			}
+			return status;
 		},
 		update:function(){
 			

@@ -13,19 +13,18 @@ define(function(require){
 			async: false
 		})
 		.error(function(){
-			alert('用户名密码错误');
+			rainbow.alert('用户名密码错误');
 		})
 		.success(function(){
 			rainbow.cookie('status',1);
 			$box.fadeOut();
-			rainbow.nav.request();
-			rainbow.route('');
+			rainbow.nav.request(rainbow.back);
 		});
 		return false;
 	});
 	
 	var sign = {
-		'login':function(){
+		'login':function(e){
 			$box.fadeIn();
 		},
 		'logout':function(){

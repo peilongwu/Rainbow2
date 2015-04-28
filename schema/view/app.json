@@ -156,7 +156,7 @@
 						"selected": {
 							"title": "选择模式",
 							"type": "string",
-							"enum": ["none", "single", "mulpitle"]
+							"enum": ["none", "somewhat", "single", "mulpitle"]
 						},
 						"rule": {
 							"title": "规则",

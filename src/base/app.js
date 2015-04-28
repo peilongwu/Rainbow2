@@ -42,7 +42,8 @@ define(function(require){
 	
 	app.router = new Router();
 	app.route = function(name, options){
-		return app.router.navigate(name,options);
+		app.back = window.location.hash.slice(1);
+		return app.router.navigate(name, options);
 	};
 	
 	app.start = function(){

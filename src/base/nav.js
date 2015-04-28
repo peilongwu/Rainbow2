@@ -30,8 +30,8 @@ define(function(require){
 			this.level = options.level;
 			this.collection = new Backbone.Collection(this.model.get('childs'));
 			this.$childs = null;
-			this.view.model.on('change:_current',function(e){
-				if(this.view.model.get('_current').indexOf(this.path) === 0){
+			this.view.model.on('change:_active',function(e){
+				if(this.view.model.get('_active').indexOf(this.path) === 0){
 					this.$el.addClass('active');
 				}else{
 					this.$el.removeClass('active');
@@ -75,27 +75,26 @@ define(function(require){
 		onActive:function(childPath){
 			console.log('Active:', this.path,'- Childs Path:', childPath);
 			this.childPath = childPath;
-			this.view.model.set('_current', this.path);
-			if(0 === this.level){
-				$('.rb-nav-1').empty();
-			}
+			this.view.model.set('_active', this.path);
+			$('.rb-nav-'  + (this.level + 1)).empty();
 			
 			if(this.collection.length > 0){
 				if(!this.$childs){
 					this.$childs = $('.rb-nav-' + (this.level + 1));
 					if(!this.$childs.size()){
-						this.$childs = $('<ul class="sub"></ul>').appendTo(this.$el);
+						this.$childs = $('<ul></ul>').appendTo(this.$el);
 					}
 				}
 				this.$childs.empty();
 				this.collection.each(this.renderChild,this);
 				childPath || rainbow.route(this.first.path, {trigger: true});
 			}else if(this.model.get('type') === 'view'){
-				this.loadView();
+				this.loadView(childPath);
 			}
 		},
-		loadView:function(){
+		loadView:function(params){
 			var view = new ViewModel;
+			view.params = params;
 			view.url = 'http://dev.xiyouqi.cn:8080/develop/' + this.path.replace(/\//g, '-');
 			view.request(this);
 		},
@@ -111,6 +110,7 @@ define(function(require){
 		className:'list-group',
 		initialize:function(options){
 			this.model = new Backbone.Model;
+			this.path = options.path;
 		},
 		render:function(){
 			$('.rb-nav-0').empty();
@@ -122,19 +122,30 @@ define(function(require){
 			var v = new Item({model:model, path:'', view:this, parent:this, level:0});
 			this.$el.append(v.render().el);
 			this.first = this.first ? this.first : v;
+		},
+		start:function(){
+			this.path && rainbow.route(this.path, {trigger: true});
+			if(!this.model.get('_active')){
+				rainbow.route(this.first.path, {trigger: true});
+			}
 		}
 	});
 	
-	nav.request = function(){
+	nav.request = function(path){
 		var res = new Collection;
 		res.fetch({
 			success:function(collection, response, options){
-				var view = new NavView({collection:collection});
+				var view = new NavView({
+					collection:collection,
+					path:path
+				});
 				view.render();
 				rainbow.start();
+				view.start();
 			},
 			error:function(collection, response, options){
 				alert(response.responseJSON.content);
+				rainbow.start();
 				rainbow.route('signin', {trigger: true});
 			}
 		});

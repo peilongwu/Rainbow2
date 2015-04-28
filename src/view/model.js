@@ -20,7 +20,7 @@ define(function(require){
 			return this;
 		},
 		display:function(){
-			var type = this.get('type');
+			var type = this.get('type') ? null : null;
 			type = type 
 				? type.substring(0, 1).toUpperCase() + type.substring(1).toLowerCase() 
 					: 'Standard';
