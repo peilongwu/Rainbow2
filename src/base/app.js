@@ -52,7 +52,7 @@ define(function(require){
 	};
 	
 	//视图容器
-	app.views = new Backbone.Collection;
+	app.views = {};
 		
 	//当前视图对象
 	app.current;

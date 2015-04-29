@@ -2,6 +2,7 @@ define(function(require){
 	require(['text!template/desktop.html', 'jquery'], function(template){
 		require('underscore');
 		require('backbone');
+		require('es5');
 		$('body').append(template);
 		require(['./base/app'], function(app){
 			if(!app.sign.isIn()){

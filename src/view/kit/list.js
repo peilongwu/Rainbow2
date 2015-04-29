@@ -1,11 +1,13 @@
 define(function(require){
 	var Item = Backbone.View.extend({
-
+		initialize:function(options){
+			this.view = options.view;
+		}
 	});
-
+	
 	var List = Backbone.View.extend({
 		initialize:function(options){
-			this.view = this.options.view;
+			this.view = options.view;
 		},
 		renderItem:function(model, i){
 			var item = new Item({

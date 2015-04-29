@@ -45,21 +45,17 @@
 <script type="text/template" id="tpl-layout">
   <div class="container" id="container">
     <div class="side rb-nav-0"></div>
-      <div class="main">
-        <div class="main-header">
-          <h4 class="hidden">
-            <span class="glyphicon glyphicon-file"></span> 内容管理 <small>文章、分类、页面、文件、标签管理</small>
-          </h4>
-          <div class="block-margin clearfix">
-            <ul class="nav nav-pills pull-left rb-nav-1"></ul>
-          </div>
-          <ul class="nav nav-pills rb-nav-2"></ul>
+    <div class="main">
+      <div class="main-header">
+        <div class="block-margin clearfix">
+          <ul class="nav nav-pills pull-left rb-nav-1"></ul>
         </div>
-        <div class="rb-body">
-        </div>
+        <ul class="nav nav-pills rb-nav-2"></ul>
       </div>
-      <aside class="view hidden">
-      </aside>
+      <div class="rb-body"></div>
+    </div>
+    <aside class="view hidden">
+    </aside>
   </div>
 </script>
 <script type="text/template" id="tpl-nav-item">
@@ -68,28 +64,25 @@
 <script type="text/template" id="tpl-nav-child-item">
   <a href="#"><%=name%></a>
 </script>
-<script type="text/template" id="tpl-view-general">
-  <div class="main-header">
-    <h4></h4>
+<script type="text/template" id="tpl-view-standard">
+  <div class="rb-view-header">
+    <h4><%=name%></h4>
     <div class="block-margin clearfix">
-      <div class="pull-right hidden" style="width:25%;"></div>
-      <div class="pull-right js-view-hidden"></div>
+      <div class="rb-action pull-left block-margin"></div>
+      <div class="rb-filter pull-left block-margin">
+      </div>
     </div>
   </div>
-  <div class="main-body">
-    <div class="panel panel-default">
-      <div class="panel-heading">过滤器</div>
-      <div class="panel-body"></div>
+  <div class="rb-view-content">
+    <div class="rb-content-header block-margin">Header</div>
+    <div class="rb-content-body block-margin">Body</div>
+    <div class="rb-content-side block-margin">Side</div>
+  </div>
+  <div class="rb-view-footer clearfix">
+    <div class="rb-status pull-left">
+     当前 1-10 条，选中 0 条，共 100 条
     </div>
-    <div class="panel panel-default">
-      <div class="panel-body clearfix">
-        <div class="pull-left"></div>
-        <div class="pull-right"></div>
-        <div class="pull-right"></div>
-      </div>
-      <div></div>
-      <div class="panel-footer"></div>
-    </div>
+    <div class="rb-pagination pull-right"></div>
   </div>
 </script>
 <script type="text/template" id="tpl-view-aid">

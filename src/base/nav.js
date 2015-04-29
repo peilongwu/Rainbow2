@@ -49,12 +49,16 @@ define(function(require){
 			return '#' + name;
 		},
 		render:function(){
-			//this.$el.attr('href',this.route());
 			this.route();
 			this.$el.html(_.template(
 				$('#' + this.tplId).html(),
 				this.model.toJSON()
 			));
+			if(this.$el.is('a')){
+				this.$el.attr('href',this.route());
+			}else{
+				this.$('a').attr('href',this.route());
+			}
 			return this;
 		},
 		renderChild:function(model,i){

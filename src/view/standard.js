@@ -1,50 +1,54 @@
 define(function(require){
 	var Base = require('./base');
-	var kits = {
-		Action:require('../component/kit/action')
+	var Kit = {
+		Action:require('./kit/action'),
+		Filter:require('./kit/filter'),
 	};
+	var Pagination = require('./kit/pagination')
 	
 	var Standard = Base.extend({
-		tplId:'tpl-view-general',
+		tplId:'tpl-view-standard',
 		initialize:function(options){
 			Base.prototype.initialize.apply(this, arguments);
 			this.idName = this.model.get('schema').idName;
 			this.collection =  new Backbone.Collection;
-			this.filter = new Backbone.Collection;
 			this.model.get('handle') && this.handle();
 			this.kits = {
-				breadcrum:'breadcrum',
-				action:this.model.actions,
-				filter:this.model.get('schema').filters,
-				pagination:this.model.get('data').pagination,
-				collection:this.model.get('data').collection
+				//breadcrum:'breadcrum',
+				Action:this.model.get('actions'),
+				Filter:this.model.get('schema').filters
 			};
 		},
 		events:{
 			
 		},
 		handle:function(){
-			this.isHandle = true;
+			//this.isHandle = true;
 			this.selecteds = new Backbone.Collection;
-			this.creates = new Backbone.Collection;
-			this.updates = new Backbone.Collection;
-			this.removes = new Backbone.Collection;
 		},
 		render:function(){
 			Base.prototype.render.apply(this, arguments);
 			this.renderKit();
+			this.update();
 			return this;
 		},
 		renderKit:function(){
 			for(var i in this.kits){
-				this.kits[i] && this.renderKit(i, this.kits[i]);
+				this.kits[i] && this.renderKitItem(i, this.kits[i]);
 			}
 			return this;
 		},
-		renderKitItem:function(kit, model){
-			var Kit = kit.substring(0, 1).toUpperCase() + kit.substring(1).toLowerCase();
-			model = new Backbone.Model(model);
-			var kit = new Kit({model:model,view:this});
+		renderKitItem:function(name, data){
+			var options = {view:this};
+			options.collection = new Backbone.Collection(data);
+			var kit = new Kit[name](options).render();
+			return this;
+		},
+		pagination: function(){
+			this.model.get('data').pagination && new Pagination({
+				model: new Backbone.Model(this.model.get('data').pagination),
+				view: this
+			}).render();
 			return this;
 		},
 		setCollection:function(){
@@ -58,7 +62,7 @@ define(function(require){
 			
 		},
 		getSelectedState:function(type){
-			var length = this.selecteds.size();
+			var length = 0; //this.selecteds.length;
 			var status = true;
 			switch(type){
 				case 'none':
@@ -76,7 +80,8 @@ define(function(require){
 			return status;
 		},
 		update:function(){
-			
+			this.setCollection();
+			this.pagination();
 		},
 		error:function(){
 			

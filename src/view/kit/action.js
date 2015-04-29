@@ -2,6 +2,7 @@ define(function(require){
 	var Base = require('./list');
 	var Item = Base.Item.extend({
 		tagName:'button',
+		className:'btn btn-default',
 		events:{
 			'click':'onClick'
 		},
@@ -9,14 +10,15 @@ define(function(require){
 			Base.Item.prototype.initialize.apply(this, arguments);
 		},
 		render:function(){
-			this.$el.appendTo('.rb-view-actions');
+			var tpl = '<span class="glyphicon <%=icon%>" aria-hidden="true"></span> <%=name%>';
+			this.$el.html(_.template(tpl, this.model.toJSON()))
 			return this;
 		},
 		form:function(){
-
+			
 		},
 		modal:function(){
-
+			
 		},
 		subView:function(){
 
@@ -53,17 +55,19 @@ define(function(require){
 		},
 		render:function(){
 			this.collection.each(this.renderItem, this);
+			this.view.$('.rb-action').append(this.el);
 			return this;
 		},
 		renderItem:function(model, i){
 			if(!this.view.getSelectedState(model.get('selected'))){
 				return;
 			}
+			model.get('group') && this.$el.append('<div class="btn-group" style="margin-right:10px;"></div>');
 			var item = new Item({
 				model: model,
 				view: this.view
 			});
-			this.$el.append(item.render().el);
+			this.$('.btn-group').last().append(item.render().el);
 		}
 	});
 
