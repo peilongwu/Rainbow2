@@ -32,8 +32,8 @@
 				"title": "视图说明",
 				"type": "string"
 			},
-			"mode": {
-				"title": "视图模式",
+			"access_mode": {
+				"title": "访问模式",
 				"type": "string",
 				"enum": ["standard","content", "data", "count", "schema", "exists"]
 			},
@@ -48,7 +48,12 @@
 			"type":{
 				"title": "视图类型",
 				"type": "string",
-				"enum": ["list", "table", "tree", "grid", "sheet", "dist"]
+				"enum": ["standard", "report", "dashboard", "calendar"]
+			},
+			"mode": {
+				"title": "视图模式",
+				"type": "string",
+				"enum": ["list", "table", "tree", "grid", "sheet", "disk"]
 			},
 			"tools": {
 				"title": "工具选项",

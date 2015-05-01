@@ -5,13 +5,17 @@ define(function(require){
 		Filter:require('./kit/filter'),
 	};
 	var Pagination = require('./kit/pagination')
-	
+	var Table = require('./widget/webkit/table');
+	var filter = require('../utility/filter');
 	var Standard = Base.extend({
 		tplId:'tpl-view-standard',
 		initialize:function(options){
 			Base.prototype.initialize.apply(this, arguments);
 			this.idName = this.model.get('schema').idName;
-			this.collection =  new Backbone.Collection;
+			var Model = Backbone.Model.extend({
+				id: this.idName
+			});
+			this.collection =  new Backbone.Collection([],{model:Model});
 			this.model.get('handle') && this.handle();
 			this.kits = {
 				//breadcrum:'breadcrum',
@@ -20,7 +24,7 @@ define(function(require){
 			};
 		},
 		events:{
-			
+			'click .rb-title':'details'
 		},
 		handle:function(){
 			//this.isHandle = true;
@@ -50,6 +54,43 @@ define(function(require){
 				view: this
 			}).render();
 			return this;
+		},
+		content:function(){
+
+			var schemas = _.map(this.model.get('schema').attributes, function(o){
+				if(o.typeObject && o.typeObject.list){
+					o.format = filter['enum'];
+				}else if(o.metaType === 'wordbook'){
+					o.format = filter['wordbook'];
+				}else if(o.metaType === 'time'){
+					o.format = filter['time'];
+				}else if(o.name === this.idName){
+					o.format = filter['id'];
+				}else if(o.display === 'title'){
+					o.format = filter['title'];
+				}
+				return o;
+			}, this);
+
+			schemas = _.reject(schemas, function(o){
+				return this.idName === o.name 
+				|| (o.hidden && ['list','all'].indexOf(o.hidden) >= 0);
+			}, this);
+
+			var model = new Backbone.Model({
+				series:schemas,
+				data:this.model.get('data').collection
+			});
+
+			var content = new Table({
+				model:model,
+				view:this
+			});
+
+			content.render().$el.appendTo(this.$('.rb-content-body'));
+		},
+		details:function(e){
+
 		},
 		setCollection:function(){
 			this.collection.reset();
@@ -82,6 +123,7 @@ define(function(require){
 		update:function(){
 			this.setCollection();
 			this.pagination();
+			this.content();
 		},
 		error:function(){
 			

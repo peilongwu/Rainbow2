@@ -3,6 +3,7 @@ define(function(require){
 		require('underscore');
 		require('backbone');
 		require('es5');
+		require('store');
 		$('body').append(template);
 		require(['./base/app'], function(app){
 			if(!app.sign.isIn()){

@@ -4,7 +4,6 @@ define(function(require){
 		Simple:require('./simple'),
 		Standard:require('./standard'),
 		Aid:require('./aid'),
-		Modal:require('./modal'),
 		Preview:require('./preview'),
 	};
 	

@@ -9,7 +9,7 @@ define(function(require){
 			Base.Item.prototype.initialize.apply(this, arguments);
 		},
 		render:function(){
-			var tpl = '<a href="javascript:void(0);"><%=name%></a>'
+			var tpl = '<a href="javascript:void(0);"><%=name%></a>';
 			this.$el.html(_.template(tpl, this.model.toJSON()));
 			return this;
 		},

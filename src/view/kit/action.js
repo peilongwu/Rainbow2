@@ -15,34 +15,34 @@ define(function(require){
 			return this;
 		},
 		form:function(){
-			
+			return this;
 		},
 		modal:function(){
-			
+			return this;
 		},
 		subView:function(){
-
+			return this;
 		},
 		side:function(){
-
+			return this;
 		},
 		openWindow:function(){
-
+			return this;
 		},
 		commit:function(){
-
+			return this;
 		},
 		request:function(){
-
+			return this;
 		},
 		cancel:function(){
-
+			return this;
 		},
 		refresh:function(){
 			this.view.model.request();
 		},
 		getUrl:function(){
-
+			
 		},
 		onClick:function(e){
 
@@ -58,11 +58,15 @@ define(function(require){
 			this.view.$('.rb-action').append(this.el);
 			return this;
 		},
+		addGroup:function(){
+			this.$el.append('<div class="btn-group" style="margin-right:10px;"></div>');
+			return this;
+		},
 		renderItem:function(model, i){
+			model.get('group') && this.addGroup();
 			if(!this.view.getSelectedState(model.get('selected'))){
 				return;
 			}
-			model.get('group') && this.$el.append('<div class="btn-group" style="margin-right:10px;"></div>');
 			var item = new Item({
 				model: model,
 				view: this.view

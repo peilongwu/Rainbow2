@@ -43,9 +43,12 @@ define(function(require){
 			var v = new view[type]({
 				model:this,
 				res:this.res,
-				coms:view
+				coms:view,
+				attributes:{
+					id: 'view-' + this.id
+				}
 			});
-			rainbow.layout.$('.rb-body').empty().append(v.el);
+			rainbow.layout.$('.rb-views').empty().append(v.el);
 			rainbow.current = v;
 			this.view = v;
 			return this;
