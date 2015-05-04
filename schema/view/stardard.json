@@ -48,12 +48,12 @@
 			"type":{
 				"title": "视图类型",
 				"type": "string",
-				"enum": ["standard", "report", "dashboard", "calendar"]
+				"enum": ["standard", "report", "dashboard"]
 			},
 			"mode": {
 				"title": "视图模式",
 				"type": "string",
-				"enum": ["list", "table", "tree", "grid", "sheet", "disk"]
+				"enum": ["table", "list", "tree", "grid", "sheet", "disk", "calendar"]
 			},
 			"tools": {
 				"title": "工具选项",

@@ -1,5 +1,5 @@
 define(function(require, exports){
-	
+
 	exports.enum =  function(value){
 		var model = this.model.get('typeObject');
 		var item = _.findWhere(model.list, {value:value});
@@ -51,7 +51,7 @@ define(function(require, exports){
 		return '<a class="rb-title" href="javascript:void(0);">' + value + '</a>';
 	};
 
-	export.byte = function(value){
+	exports.byte = function(value){
 		var str = '-';
 		var size = parseInt(value);
 		if(size){
@@ -65,7 +65,6 @@ define(function(require, exports){
 		}else{
 			str = value;
 		}
-		
 		return str;
 	};
 

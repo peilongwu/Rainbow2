@@ -7,6 +7,7 @@ define(function(require){
 	var Pagination = require('./kit/pagination')
 	var Table = require('./widget/webkit/table');
 	var filter = require('../utility/filter');
+
 	var Standard = Base.extend({
 		tplId:'tpl-view-standard',
 		initialize:function(options){
@@ -16,19 +17,20 @@ define(function(require){
 				id: this.idName
 			});
 			this.collection =  new Backbone.Collection([],{model:Model});
+			this.selecteds = new Backbone.Collection;
 			this.model.get('handle') && this.handle();
 			this.kits = {
 				//breadcrum:'breadcrum',
 				Action:this.model.get('actions'),
 				Filter:this.model.get('schema').filters
 			};
+			this.handle();
 		},
 		events:{
 			'click .rb-title':'details'
 		},
 		handle:function(){
-			//this.isHandle = true;
-			this.selecteds = new Backbone.Collection;
+			this.isHandle = true;
 		},
 		render:function(){
 			Base.prototype.render.apply(this, arguments);
@@ -97,13 +99,13 @@ define(function(require){
 			this.collection.set(this.model.get('data').collection);
 		},
 		selectedRow:function(){
-			
+			this.selecteds.add();
 		},
 		selectedAllRows:function(){
 			
 		},
 		getSelectedState:function(type){
-			var length = 0; //this.selecteds.length;
+			var length = this.selecteds.length;
 			var status = true;
 			switch(type){
 				case 'none':
@@ -129,6 +131,5 @@ define(function(require){
 			
 		}
 	});
-	
 	return Standard;
 });

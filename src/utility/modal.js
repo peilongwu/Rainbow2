@@ -2,7 +2,7 @@ define(function(require){
 	var Backbone = require('backbone');
 	var Modal = Backbone.View.extend({
 		className:'modal fade',
-		//template:_.template($('#tpl-modal').html()),
+		template:_.template($('#tpl-modal').html()),
 		attributes:{
 			tabindex:'-1',
 			role:'dialog',

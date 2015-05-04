@@ -78,7 +78,7 @@
 			},
 			"apps": {
 				"title": "应用",
-				"type": "array"
+				"type": "array",
 				"items": {
 					"type": "object",
 					"required": ["id", "name", "key", "type"],

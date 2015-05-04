@@ -15,17 +15,18 @@
 body{
 	background-color:@bgColor;
 	font:Verdana, Geneva, sans-serif @fontSize;
+	padding-top: 50px;
 }
 
 /*html,body{ height:100%; overflow:hidden;}*/
 
 .signin-container{
-	width: 100%;
-	height: 100%;
-	padding: 15px;
-	position: absolute;
+	position: fixed;
 	background-color: #fff;
 	top: 0;
+	right:0;
+	bottom:0;
+	left:0;
 	z-index: 9999;
 	background-image: url(../assets/img/Ocean-Sunsets.jpg);
 	background-size: cover;
@@ -60,11 +61,12 @@ body{
 .signin-container .panel {
 	position: absolute;
 	top: 50%;
-	left: 50%;
-	width: 400px;
-	height: 320px;
+	left: 0;
+	right: 0;
+	max-width: 450px;
+	width: 90%;
+	min-height: 300px;
 	margin-top: -150px;
-	margin-left: -200px;
 	box-shadow:#666 0 0 20px;
 	opacity:.85;
 }

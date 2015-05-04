@@ -1,5 +1,7 @@
 define(function(require){
 	var Base = require('./list');
+	var Modal = require('../../utility/modal');
+	var Form = require('../../elements/form/general');
 	var Item = Base.Item.extend({
 		tagName:'button',
 		className:'btn btn-default',
@@ -15,12 +17,20 @@ define(function(require){
 			return this;
 		},
 		form:function(){
+			var form = new Form();
 			return this;
 		},
-		modal:function(){
+		modal:function(content){
+			var modal = new Modal({
+				model: new Backbone.Model({
+					title: this.model.get('name')
+				}),
+				content:content
+			});
+			modal.render();
 			return this;
 		},
-		subView:function(){
+		subview:function(){
 			return this;
 		},
 		side:function(){
@@ -45,7 +55,10 @@ define(function(require){
 			
 		},
 		onClick:function(e){
+			if('POST' === this.model.get('method')){
 
+			}
+			this.modal();
 		}
 	});
 
@@ -59,7 +72,7 @@ define(function(require){
 			return this;
 		},
 		addGroup:function(){
-			this.$el.append('<div class="btn-group" style="margin-right:10px;"></div>');
+			this.$el.append('<div class="btn-group"></div>');
 			return this;
 		},
 		renderItem:function(model, i){
@@ -74,7 +87,6 @@ define(function(require){
 			this.$('.btn-group').last().append(item.render().el);
 		}
 	});
-
 	return List;
 
 });

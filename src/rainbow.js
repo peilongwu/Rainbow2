@@ -4,6 +4,7 @@ define(function(require){
 		require('backbone');
 		require('es5');
 		require('store');
+		require('bootstrap');
 		$('body').append(template);
 		require(['./base/app'], function(app){
 			if(!app.sign.isIn()){

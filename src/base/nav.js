@@ -17,7 +17,7 @@ define(function(require){
 		tplId:'tpl-nav-item',
 		template:_.template,
 		tagName:'a',
-		className:'list-group-item',
+		//className:'list-group-item',
 		events:{
 			'click' : 'onClick'
 		},
@@ -64,7 +64,7 @@ define(function(require){
 		renderChild:function(model,i){
 			var v = new Item({
 				model:model, path:this.path, view:this.view, parent:this,
-				tplId:'tpl-nav-child-item',tagName:'li',className:'',
+				tplId:'tpl-nav-child-item',tagName:'li',className:'list-group-item',
 				level:this.level + 1
 			});
 			
@@ -110,8 +110,8 @@ define(function(require){
 	});
 	
 	var NavView = Backbone.View.extend({
-		tagName:'div',
-		className:'list-group',
+		tagName:'ul',
+		className:'nav navbar-nav',
 		initialize:function(options){
 			this.model = new Backbone.Model;
 			this.path = options.path;
@@ -123,7 +123,15 @@ define(function(require){
 			return this;
 		},
 		renderItem:function(model,i){
-			var v = new Item({model:model, path:'', view:this, parent:this, level:0});
+			var v = new Item({
+				model:model, 
+				path:'', 
+				view:this, 
+				parent:this, 
+				level:0, 
+				tagName:'li',
+				tplId:'tpl-nav-child-item'
+			});
 			this.$el.append(v.render().el);
 			this.first = this.first ? this.first : v;
 		},
