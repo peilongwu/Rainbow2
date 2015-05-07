@@ -4,7 +4,7 @@ define(function(require){
 	$box.on('click','.btn-success',function(){
 		$.ajax({
 			method:'POST',
-			url:'http://dev.xiyouqi.cn:8080/ead/signin',
+			url:'http://dev.xiyouqi.cn:8080/develop/signin',
 			data:{
 				appId:'develop',
 				userId:$box.find('input[name=userId]').val(),
