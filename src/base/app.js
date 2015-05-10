@@ -69,6 +69,9 @@ define(function(require){
 		app.trigger('resize');
 	});
 
+	//Backbone.emulateJSON = true;
+	//Backbone.emulateHTTP = true;
+
 	//$.Ajax 跨域选项配置
 	$.ajaxPrefilter(function(options, originalOptions, jqXHR) {
     options.crossDomain = {

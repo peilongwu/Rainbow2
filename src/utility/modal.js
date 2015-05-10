@@ -2,7 +2,7 @@ define(function(require){
 	var Backbone = require('backbone');
 	var Modal = Backbone.View.extend({
 		className:'modal fade',
-		template:_.template($('#tpl-modal').html()),
+		tpl:'#tpl-modal',
 		attributes:{
 			tabindex:'-1',
 			role:'dialog',
@@ -10,10 +10,11 @@ define(function(require){
 			'aria-hidden':'true'
 		},
 		initialize:function(options){
+			this.tpl = options.tpl ? options.tpl : this.tpl;
 			this.content = options.content;
 		},
 		render:function(){
-			this.$el.html(this.template(this.model.toJSON()));
+			this.$el.html(_.template($(this.tpl).html(), this.model.toJSON()));
 			var size = this.model.get('size');
 			size && this.$('.modal-dialog').addClass(size);
 			this.$('.modal-body').html(this.content);

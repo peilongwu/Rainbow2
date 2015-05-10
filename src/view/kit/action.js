@@ -2,6 +2,7 @@ define(function(require){
 	var Base = require('./list');
 	var Modal = require('../../utility/modal');
 	var Form = require('../../elements/form/general');
+	var Action = require('./action/action');
 	var Item = Base.Item.extend({
 		tagName:'button',
 		className:'btn btn-default',
@@ -16,16 +17,22 @@ define(function(require){
 			this.$el.html(_.template(tpl, this.model.toJSON()))
 			return this;
 		},
-		form:function(){
-			var form = new Form();
+		form:function(collection, model){
+			var form = new Form({
+				collection:collection,
+				model:model
+			}).render();
+			form.model.url = this.view.model.url;
+			this.modal(form.el);
 			return this;
 		},
 		modal:function(content){
 			var modal = new Modal({
 				model: new Backbone.Model({
-					title: this.model.get('name')
+					title: this.model.get('legend') ? this.model.get('legend') : this.model.get('name')
 				}),
-				content:content
+				content:content,
+				tpl:'#tpl-modal-form'
 			});
 			modal.render();
 			return this;
@@ -56,9 +63,19 @@ define(function(require){
 		},
 		onClick:function(e){
 			if('POST' === this.model.get('method')){
-
+				this.form(
+					new Backbone.Collection(
+						_.where(this.view.model.get('schema').attributes, {create: true, system: false})
+					),
+					new this.view.Model
+				);
+			}else if('PUT' === this.model.get('method')){
+				this.form(
+					new Backbone.Collection(
+						_.where(this.view.model.get('schema').attributes, {update: true, system: false})
+					)
+				);
 			}
-			this.modal();
 		}
 	});
 

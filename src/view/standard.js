@@ -13,10 +13,10 @@ define(function(require){
 		initialize:function(options){
 			Base.prototype.initialize.apply(this, arguments);
 			this.idName = this.model.get('schema').idName;
-			var Model = Backbone.Model.extend({
+			this.Model = Backbone.Model.extend({
 				id: this.idName
 			});
-			this.collection =  new Backbone.Collection([],{model:Model});
+			this.collection =  new Backbone.Collection([],{model:this.Model});
 			this.selecteds = new Backbone.Collection;
 			this.model.get('handle') && this.handle();
 			this.kits = {
@@ -62,9 +62,9 @@ define(function(require){
 			var schemas = _.map(this.model.get('schema').attributes, function(o){
 				if(o.typeObject && o.typeObject.list){
 					o.format = filter['enum'];
-				}else if(o.metaType === 'wordbook'){
+				}else if(o.dataType === 'wordbook'){
 					o.format = filter['wordbook'];
-				}else if(o.metaType === 'time'){
+				}else if(o.metaType === 'Time'){
 					o.format = filter['time'];
 				}else if(o.name === this.idName){
 					o.format = filter['id'];

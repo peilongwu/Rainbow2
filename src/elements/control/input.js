@@ -1,5 +1,6 @@
 define(function(require){
-	var Input = Backbone.View.extend({
+	var Base = require('./base');
+	var Input = Base.extend({
 		tagName:'input',
 		initialize:function(options){
 			this.form = options.form;
@@ -10,11 +11,15 @@ define(function(require){
 			this.attributes = {
 				type: this.type,
 				name: this.model.get('name'),
-				placeholder: this.model.get('legend') ? this.model.get('legend') : this.title
+				placeholder: this.model.get('legend') ? this.model.get('legend') : this.title,
+				value: this.model.get('value')
 			};
 		},
 		render:function(){
+			this.$el.attr(this.attributes);
 			return this;
 		}
 	});
+
+	return Input;
 });

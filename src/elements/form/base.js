@@ -9,7 +9,7 @@ define(function(require){
 			'click .rb-submit:not(.disabled)':'onSubmit'
 		},
 		initialize:function(options){
-			this.model = options.model ? options.model : new Backbone.Model; 
+			this.model = this.model ? this.model : new Backbone.Model; 
 		},
 		renderItem:function(model, i){
 
@@ -26,7 +26,8 @@ define(function(require){
 			return this;
 		},
 		commit:function(){
-
+			console.log(this.data());
+			this.model.save();
 		},
 		cancel:function(){
 
@@ -34,12 +35,12 @@ define(function(require){
 		data:function(){
 			return this.model.toJSON();
 		},
-		onSubmit:function(){
+		onSubmit:function(e){
+			console.log('On Submit');
 			e.preventDefault();
 			this.verify();
-			var data = this.model.toJSON();
 			if(this.callBack){
-				this.callBack(data,this);
+				this.callBack(this.data(), this);
 				return;
 			}
 			this.commit();
