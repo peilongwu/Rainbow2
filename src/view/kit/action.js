@@ -83,11 +83,9 @@ define(function(require){
 			});
 		},
 		onClick:function(e){
-
 			if(this.model.get('extend')){
 				return this.extend(this.model.get('extend'));
 			}
-			
 			var method = this.model.get('method').toUpperCase();
 			switch(method){
 				case 'PUT':
