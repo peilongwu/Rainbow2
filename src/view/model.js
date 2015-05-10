@@ -1,5 +1,5 @@
 define(function(require){
-	var view = require('./view');
+	var View = require('./view');
 	var Model = Backbone.Model.extend({
 		idAttribute:'id',
 		initialize:function(options){
@@ -31,19 +31,29 @@ define(function(require){
 			return this;
 		},
 		display:function(){
-			!this.view && this.createView();
-			this.view.render();
+			if(this.get('extend')){
+				this.extend(this.get('extend'));
+			}else{
+				!this.view && this.createView();
+				this.view.render();
+			}
 			return this;
 		},
+		extend:function(view){
+			var _this = this;
+			require(['../../js/view/' + view], function(view){
+				view.apply(_this);
+			});
+		},
 		createView:function(){
-			var type = this.get('type') ? null : null;
+			var type = this.get('type');
 			type = type 
 				? type.substring(0, 1).toUpperCase() + type.substring(1).toLowerCase() 
 					: 'Standard';
-			var v = new view[type]({
-				model:this,
-				res:this.res,
-				coms:view,
+			var v = new View[type]({
+				model: this,
+				res: this.res,
+				coms: View,
 				attributes:{
 					id: 'view-' + this.id
 				}

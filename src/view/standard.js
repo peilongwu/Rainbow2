@@ -19,6 +19,9 @@ define(function(require){
 			this.collection =  new Backbone.Collection([],{model:this.Model});
 			this.selecteds = new Backbone.Collection;
 			this.model.get('handle') && this.handle();
+			this.activeModel = null;
+			this.createSchema = _.where(this.model.get('schema').attributes, {create: true, system: false});
+			this.updateSchema = _.where(this.model.get('schema').attributes, {update: true, system: false});
 			this.kits = {
 				//breadcrum:'breadcrum',
 				Action:this.model.get('actions'),
@@ -121,6 +124,12 @@ define(function(require){
 					length < 2 && (status = false);
 			}
 			return status;
+		},
+		getActiveModel:function(){
+			
+		},
+		getSelecteds:function(){
+			
 		},
 		update:function(){
 			this.setCollection();

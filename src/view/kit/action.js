@@ -61,20 +61,44 @@ define(function(require){
 		getUrl:function(){
 			
 		},
+		post:function(){
+			this.form(
+				new Backbone.Collection(this.view.createSchema),
+				new this.view.Model
+			);
+		},
+		put:function(){
+			this.form(
+				new Backbone.Collection(this.view.updateSchema),
+				this.view.getActiveModel
+			);
+		},
+		"delete":function(){
+			this.view.getActiveModel.destroy();
+		},
+		extend:function(action){
+			var _this = this;
+			require(['../../js/action/' + action], function(action){
+				action.apply(_this);
+			});
+		},
 		onClick:function(e){
-			if('POST' === this.model.get('method')){
-				this.form(
-					new Backbone.Collection(
-						_.where(this.view.model.get('schema').attributes, {create: true, system: false})
-					),
-					new this.view.Model
-				);
-			}else if('PUT' === this.model.get('method')){
-				this.form(
-					new Backbone.Collection(
-						_.where(this.view.model.get('schema').attributes, {update: true, system: false})
-					)
-				);
+
+			if(this.model.get('extend')){
+				return this.extend(this.model.get('extend'));
+			}
+			
+			var method = this.model.get('method').toUpperCase();
+			switch(method){
+				case 'PUT':
+					this.put();
+					break;
+				case 'DELETE':
+					this['delete']();
+					break;
+				default:
+					this.post();
+					break;
 			}
 		}
 	});
