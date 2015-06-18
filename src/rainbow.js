@@ -7,12 +7,14 @@ define(function(require){
 		require('bootstrap');
 		$('body').append(template);
 		require(['./base/app'], function(app){
-			if(!app.sign.isIn()){
-				app.start();
-				app.route('signin', {trigger: true});
-			}else{
-				app.nav.request();
-			}
+			require(['./base/nav'], function(nav){
+				if(!app.sign.isIn()){
+					app.start();
+					app.route('signin', {trigger: true});
+				}else{
+					nav.request();
+				}
+			});
 		});
 	});
 });

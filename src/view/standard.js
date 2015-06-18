@@ -14,7 +14,7 @@ define(function(require){
 			Base.prototype.initialize.apply(this, arguments);
 			this.idName = this.model.get('schema').idName;
 			this.Model = Backbone.Model.extend({
-				id: this.idName
+				idAttribute: this.idName
 			});
 			this.collection =  new Backbone.Collection([],{model:this.Model});
 			this.selecteds = new Backbone.Collection;

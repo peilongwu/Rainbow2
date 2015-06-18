@@ -1,10 +1,11 @@
 define(function(require){
 	var $box = $($('#tpl-login').html()).appendTo('body').hide();
 
-	$box.on('click','.btn-success',function(){
+	$box.on('submit','form',function(e){
+		e.preventDefault();
 		$.ajax({
 			method:'POST',
-			url:'http://dev.xiyouqi.cn:8080/develop/signin',
+			url: rainbow.baseUrl + '/signin',
 			data:{
 				appId:'develop',
 				userId:$box.find('input[name=userId]').val(),
@@ -20,7 +21,6 @@ define(function(require){
 			$box.fadeOut();
 			rainbow.nav.request(rainbow.back);
 		});
-		return false;
 	});
 	
 	var sign = {

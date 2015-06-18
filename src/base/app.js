@@ -3,9 +3,9 @@ define(function(require){
 	rainbow = app;
 	require('jquery+/cookie');
 	app.cookie = $.cookie;
-	app.nav = require('./nav');
 	app.mobile = false;
 	app.html5 = false;
+	app.baseUrl = 'http://dev.xiyouqi.cn:8080/develop';
 	
 	var Layout = Backbone.View.extend({
 		tagName:'div',
@@ -81,6 +81,6 @@ define(function(require){
         withCredentials: true
     };
 	});
-	
+
 	return app;
 });

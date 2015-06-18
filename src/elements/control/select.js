@@ -7,7 +7,7 @@ define(function(){
 		},
 		render:function(){
 			if(this.model.get('isNull')){
-				
+				this.addEmptyOption();
 			}
 			return this;
 		},

@@ -6,7 +6,7 @@ define(function(require){
 	});
 	
 	var Collection = Backbone.Collection.extend({
-		url:'http://dev.xiyouqi.cn:8080/develop/res',
+		url: rainbow.baseUrl + '/res',
 		model:Model,
 		parse: function(response) {
 	    return response.resources;
@@ -99,7 +99,7 @@ define(function(require){
 		loadView:function(params){
 			var view = new ViewModel;
 			view.params = params;
-			view.url = 'http://dev.xiyouqi.cn:8080/develop/' + this.path.replace(/\//g, '-');
+			view.url = rainbow.baseUrl + '/' + this.path.replace(/\//g, '-');
 			view.request(this);
 		},
 		onClick:function(e){
