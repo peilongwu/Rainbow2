@@ -1,0 +1,106 @@
+{
+	"meta":{
+		"$schema": "http://json-schema.org/draft-04/schema#",
+		"title": "App View Schema Of Rainbow",
+		"type": "object",
+		"method": "GET"
+	},
+	"request": {
+		"$schema": "http://json-schema.org/draft-04/schema#",
+		"title": "请求内容",
+		"type": "object"
+	},
+	"response": {
+		"$schema": "http://json-schema.org/draft-04/schema#",
+		"title": "响应内容",
+		"type": "object",
+		"required": ["id", "name", "type"],
+		"properties": {
+			"id": {
+				"title": "视图ID",
+				"type": "string"
+			},
+			"name": {
+				"title": "视图名称",
+				"type": "string"
+			},
+			"icon": {
+				"title": "图标",
+				"type": "string"
+			},
+			"legend": {
+				"title": "视图说明",
+				"type": "string"
+			},
+			"params": {
+				"title": "视图参数",
+				"type": "object"
+			},
+			"setting": {
+				"title": "视图设置",
+				"type": "array"
+			},
+			"type":{
+				"title": "视图类型",
+				"type": "string",
+				"enum": ["dashboard"]
+			},
+			"mode": {
+				"title": "视图模式",
+				"type": "string",
+				"enum": ["grid", "canvas", "custom"]
+			},
+			"views": {
+				"title": "视图",
+				"type": "array",
+				"items": {
+					"type": "object",
+					"required": ["title", "action"],
+					"properties": {
+						"name": {
+							"title": "视图名称",
+							"type": "string"
+						},
+						"type": {
+							"title": "类型",
+							"type": "string",
+							"enum": ["report", "standard", "form", "custom"]
+						},
+						"view": {
+							"title": "视图定义",
+							"type": "string"
+						},
+						"column": {
+							"title": "栏位",
+							"type": "integer"
+						},
+						"height": {
+							"title": "高度",
+							"type": "integer"
+						},
+						"params": {
+							"title": "参数",
+							"type": "object"
+						},
+						"note": {
+							"title": "视图说明",
+							"type": "string"
+						},
+						"url": {
+							"title": "URL",
+							"type": "string"
+						}
+					}
+				}
+			},
+			"template":{
+				"title": "模板",
+				"type": "string"
+			},
+			"extend": {
+				"title": "视图扩展",
+				"type": "string"
+			}
+		}
+	}
+}

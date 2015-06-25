@@ -1,55 +1,63 @@
 define(function(require){
 	return {
 		text:{
-			tag:'input',
+			base:'input',
 			type:'text'
 		},
 		password:{
-			tag:'input',
+			base:'input',
 			type:'password'
 		},
 		email:{
-			tag:'input',
+			base:'input',
 			type:'email'
 		},
+		email:{
+			base:'input',
+			type:'number'
+		},
 		url:{
-			tag:'input',
+			base:'input',
 			type:'url'
 		},
 		date:{
-			tag:'input',
+			base:'input',
 			type:'date',
 			display:function(){
 
 			}
 		},
 		datetime:{
-			tag:'input',
-			type:'date',
+			base:'input',
+			type:'datetime',
 			display:function(){
 
 			}
 		},
 		select:{
-			tag:'select'
+			base:'select'
 		},
 		checkbox:{
-
+			base:'input',
+			type:'checkbox'
 		},
 		radio:{
-
+			base:'input',
+			type:'radio'
 		},
 		file:{
-
+			base:'input',
+			type:'file'
 		},
 		hidden:{
-
+			base:'input',
+			type:'hidden'
 		},
 		textarea:{
-
+			ase:'textarea'
 		},
 		choose:{
-			tag:'select',
+			base:'select',
 			display:function(){
 
 			}

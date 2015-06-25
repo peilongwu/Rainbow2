@@ -1,7 +1,7 @@
 define(function(require){
 	var app = {};
 	rainbow = app;
-	require('jquery+/cookie');
+	require('jquery-plus/cookie');
 	app.cookie = $.cookie;
 	app.mobile = false;
 	app.html5 = false;
@@ -15,9 +15,11 @@ define(function(require){
 		}
 	});
 	
+	//初始化应用布局
 	app.layout = new Layout;
 	$('body').append(app.layout.render().el);
 	
+	//Alert & Confirm Proxy
 	app.alert = function(msg, callback, context){
 		alert(msg);
 	};
@@ -47,6 +49,7 @@ define(function(require){
 		return app.router.navigate(name, options);
 	};
 	
+	//Hash Router
 	app.start = function(){
 		app.history || Backbone.history.start();
 		app.history = true;

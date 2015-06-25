@@ -41,6 +41,14 @@
 				"title": "视图参数",
 				"type": "object"
 			},
+			"treeParams":{
+				"title": "树形参数",
+				"type": "object"
+			},
+			"calendarParams":{
+				"title": "日历参数",
+				"type": "object"
+			},
 			"setting": {
 				"title": "视图设置",
 				"type": "array"
