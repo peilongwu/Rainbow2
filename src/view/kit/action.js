@@ -23,7 +23,15 @@ define(function(require){
 				model:model
 			}).render();
 			form.model.url = this.view.model.url;
-			this.modal(form.el);
+			var modal = this.modal(form.el);
+			modal.$('.rb-submit:not(.disabled)').on('click', function(e){
+				form.onSubmit(e);
+			});
+
+			form.on('success',function(){
+				this.view.collection.add([form.model]);
+				modal.close();
+			}, this)
 			return this;
 		},
 		modal:function(content){
@@ -35,7 +43,7 @@ define(function(require){
 				tpl:'#tpl-modal-form'
 			});
 			modal.render();
-			return this;
+			return modal;
 		},
 		subview:function(){
 			return this;

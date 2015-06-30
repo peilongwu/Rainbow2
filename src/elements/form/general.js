@@ -9,7 +9,6 @@ define(function(require){
 		},
 		render:function(){
 			this.collection.each(this.renderItem, this);
-			this.$el.append('<button type="button" class="btn btn-success rb-submit">提交</button>');
 			return this;
 		},
 		renderItem: function(model, i){

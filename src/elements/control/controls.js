@@ -54,7 +54,7 @@ define(function(require){
 			type:'hidden'
 		},
 		textarea:{
-			ase:'textarea'
+			base:'textarea'
 		},
 		choose:{
 			base:'select',

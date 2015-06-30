@@ -32,6 +32,9 @@ define(function(require){
 		hide:function(){
 			this.$el.modal('hide')
 			return this;
+		},
+		close:function(){
+			return this.hide();
 		}
 	});
 	return Modal;

@@ -14,9 +14,15 @@ define(function(require){
 			Base.prototype.initialize.apply(this, arguments);
 			this.idName = this.model.get('schema').idName;
 			this.Model = Backbone.Model.extend({
-				idAttribute: this.idName
+				idAttribute: this.idName,
+				parse:function(response){
+					return response.data;
+				}
 			});
 			this.collection =  new Backbone.Collection([],{model:this.Model});
+			this.collection.on('add',function(){
+				this.update();
+			}, this);
 			this.selecteds = new Backbone.Collection;
 			this.model.get('handle') && this.handle();
 			this.activeModel = null;
@@ -38,6 +44,7 @@ define(function(require){
 		render:function(){
 			Base.prototype.render.apply(this, arguments);
 			this.renderKit();
+			this.setCollection();
 			this.update();
 			return this;
 		},
@@ -84,7 +91,7 @@ define(function(require){
 
 			var model = new Backbone.Model({
 				series:schemas,
-				data:this.model.get('data').collection
+				data:this.collection.toJSON()
 			});
 
 			var content = new Table({
@@ -92,14 +99,13 @@ define(function(require){
 				view:this
 			});
 
-			content.render().$el.appendTo(this.$('.rb-content-body'));
+			content.render().$el.appendTo(this.$('.rb-content-body').empty());
 		},
 		details:function(e){
 
 		},
 		setCollection:function(){
-			this.collection.reset();
-			this.collection.set(this.model.get('data').collection);
+			this.collection.reset(this.model.get('data').collection);
 		},
 		selectedRow:function(){
 			this.selecteds.add();
@@ -132,7 +138,6 @@ define(function(require){
 			
 		},
 		update:function(){
-			this.setCollection();
 			this.pagination();
 			this.content();
 		},

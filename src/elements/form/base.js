@@ -27,7 +27,18 @@ define(function(require){
 		},
 		commit:function(){
 			console.log(this.data());
-			this.model.save();
+			this.disableSubmit();
+			var _this = this;
+			this.model.save(null, {
+				success:function(model, response, options){
+					model.set(response.data);
+					_this.trigger('success');
+				},
+				error:function(model, response, options){
+					alert(response.responseJSON.content);
+					_this.trigger('error');
+				}
+			});
 		},
 		cancel:function(){
 
