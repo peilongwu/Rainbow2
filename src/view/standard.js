@@ -5,7 +5,7 @@ define(function(require){
 		Filter:require('./kit/filter'),
 	};
 	var Pagination = require('./kit/pagination')
-	var Table = require('./widget/webkit/table');
+	var Table = require('../components/list/table');
 	var filter = require('../utility/filter');
 
 	var Standard = Base.extend({
@@ -23,9 +23,12 @@ define(function(require){
 			this.collection.on('add',function(){
 				this.update();
 			}, this);
+			this.collection.on('change:_selected', function(model, value){
+				value && this.selected(model);
+				value || this.unselected(model);
+			}, this);
 			this.selecteds = new Backbone.Collection;
 			this.model.get('handle') && this.handle();
-			this.activeModel = null;
 			this.createSchema = _.where(this.model.get('schema').attributes, {create: true, system: false});
 			this.updateSchema = _.where(this.model.get('schema').attributes, {update: true, system: false});
 			this.kits = {
@@ -33,7 +36,6 @@ define(function(require){
 				Action:this.model.get('actions'),
 				Filter:this.model.get('schema').filters
 			};
-			this.handle();
 		},
 		events:{
 			'click .rb-title':'details'
@@ -67,7 +69,7 @@ define(function(require){
 			}).render();
 			return this;
 		},
-		content:function(){
+		widget:function(){
 
 			var schemas = _.map(this.model.get('schema').attributes, function(o){
 				if(o.typeObject && o.typeObject.list){
@@ -91,26 +93,33 @@ define(function(require){
 
 			var model = new Backbone.Model({
 				series:schemas,
-				data:this.collection.toJSON()
+				data:this.collection
 			});
 
-			var content = new Table({
+			var widget = new Table({
 				model:model,
-				view:this
+				view:this,
+				isHandle:this.isHandle
 			});
 
-			content.render().$el.appendTo(this.$('.rb-content-body').empty());
+			widget.render().$el.appendTo(this.$('.rb-content-body').empty());
 		},
 		details:function(e){
 
 		},
 		setCollection:function(){
+			this.selecteds.reset();
 			this.collection.reset(this.model.get('data').collection);
 		},
-		selectedRow:function(){
-			this.selecteds.add();
+		selected:function(model){
+			this.selecteds.add(model);
+			this.renderKitItem('Action', this.kits.Action);
 		},
-		selectedAllRows:function(){
+		unselected:function(model){
+			this.selecteds.remove(model);
+			this.renderKitItem('Action', this.kits.Action);
+		},
+		selectedAll:function(){
 			
 		},
 		getSelectedState:function(type){
@@ -132,14 +141,14 @@ define(function(require){
 			return status;
 		},
 		getActiveModel:function(){
-			
+			return this.selecteds.findWhere({_selected:true});
 		},
 		getSelecteds:function(){
 			
 		},
 		update:function(){
 			this.pagination();
-			this.content();
+			this.widget();
 		},
 		error:function(){
 			

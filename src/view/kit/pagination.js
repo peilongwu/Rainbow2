@@ -14,7 +14,10 @@ define(function(require){
 			return this;
 		},
 		onClick:function(){
-			this.$el.addClass('active').siblings().removeClass('active');
+			this.$el
+				.addClass('active')
+				.siblings()
+				.removeClass('active');
 			this.view.model.filter.set({_page:this.model.get('num')});
 		}
 	});

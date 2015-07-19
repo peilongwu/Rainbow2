@@ -1,7 +1,7 @@
 define(function(require){
-	var Dataset = require('../dashboard/dataset');
+	var Dataset = require('../page/dataset');
 	var drilldown = require('../../utility/drilldown');
-	var View = require('../dashboard/view');
+	var View = require('../page/view');
 	var Widget = Backbone.View.extend({
 		initialize:function(options){
 			this.view = options.view;
@@ -13,9 +13,6 @@ define(function(require){
 			this.view.on('remove',function(){
 				this.destory();
 			},this);
-			//this.dashboard.on('remove',function(){
-			//	this.destory();
-			//},this);
 			this.model.get('refreshTime') && this.setRefresh();
 		},
 		setParams:function(){

@@ -76,9 +76,10 @@ define(function(require){
 			);
 		},
 		put:function(){
+			console.log(this.view.getActiveModel());
 			this.form(
 				new Backbone.Collection(this.view.updateSchema),
-				this.view.getActiveModel
+				this.view.getActiveModel()
 			);
 		},
 		"delete":function(){
@@ -115,7 +116,7 @@ define(function(require){
 		},
 		render:function(){
 			this.collection.each(this.renderItem, this);
-			this.view.$('.rb-action').append(this.el);
+			this.view.$('.rb-action').empty().append(this.el);
 			return this;
 		},
 		addGroup:function(){
