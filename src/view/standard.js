@@ -22,9 +22,9 @@ define(function(require){
 			this.collection =  new Backbone.Collection([],{model:this.Model});
 			this.collection.on('add',function(){
 				this.update();
-				this.updateAction();
 			}, this);
 			this.collection.on('remove',function(){
+				this.selecteds.reset();
 				this.update();
 				this.updateAction();
 			}, this);

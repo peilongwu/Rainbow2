@@ -1,5 +1,6 @@
 define(function(require){
-	var Control = require('../control/input');
+	var Control = require('../control/control');
+	var config = require('../control/config');
 	var Item = Backbone.View.extend({
 		className:'form-group',
 		initialize:function(options){
@@ -21,11 +22,29 @@ define(function(require){
 		renderControl:function(type){
 			var value = this.form.model.get(this.model.get('name'));
 			value && this.model.set('value', value);
-			this.control = new Control({
-				model:this.model,
-				className:'form-control'
-			});
+			var control = config[this.model.get('control')];
+			control = control ? control : {base:'input',type:'text'};
+			control.model = this.model;
+			control.className = 'form-control';
+			this.control = new Control[control.base](control);
 			this.control.render().$el.appendTo(this.$('div'));
+		},
+		list:function(){
+			var title,value;
+			var model = this.model.get('typeObject');
+			var list
+			if(model && this.model.get('dataType') === 'wordbook'){
+				value = model.schema.idName;
+				title = _.findWhere(model.schema.attributes, {display:'title'});
+				title = title ? title.name : value;
+				this.model.list = _.map(model.data.collection, function(item){
+					return {title:item[title], value:item[value]};
+				});
+			}else if(model && model.list){
+				this.model.list = list;
+			}
+
+			return this;
 		},
 		verify:function(){
 			
