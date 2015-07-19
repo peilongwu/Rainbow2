@@ -22,7 +22,7 @@ define(function(require){
 				collection:collection,
 				model:model
 			}).render();
-			form.model.url = this.view.model.url;
+			form.model.urlRoot = this.view.model.url;
 			var modal = this.modal(form.el);
 			modal.$('.rb-submit:not(.disabled)').on('click', function(e){
 				form.onSubmit(e);
@@ -76,14 +76,23 @@ define(function(require){
 			);
 		},
 		put:function(){
-			console.log(this.view.getActiveModel());
+			var model = this.view.getActiveModel();
 			this.form(
 				new Backbone.Collection(this.view.updateSchema),
-				this.view.getActiveModel()
+				model
 			);
 		},
 		"delete":function(){
-			this.view.getActiveModel.destroy();
+			var model = this.view.getActiveModel();
+			model.urlRoot = this.view.model.url;
+			model.destroy({
+				success:function(model, response, options){
+					alert(response.content);
+				},
+				error:function(model, response, options){
+					alert(response.responseJSON.content);
+				}
+			});
 		},
 		extend:function(action){
 			var _this = this;

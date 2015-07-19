@@ -8,6 +8,13 @@ define(function(require){
 			this.selectedClass = options.selectedClass ? options.selectedClass : 'selected';
 			this.disbaleClass = options.disbaleClass ? options.disbaleClass : 'disbale';
 			this.isHandle = options.isHandle;
+			if(this.isHandle){
+				this.model.on('change',function(model){
+					if(!model.changed._selected){
+						this.render();
+					}
+				}, this);
+			}
 		},
 		events:{
 			'click':'toggle'

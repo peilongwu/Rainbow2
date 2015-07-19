@@ -22,6 +22,11 @@ define(function(require){
 			this.collection =  new Backbone.Collection([],{model:this.Model});
 			this.collection.on('add',function(){
 				this.update();
+				this.updateAction();
+			}, this);
+			this.collection.on('remove',function(){
+				this.update();
+				this.updateAction();
 			}, this);
 			this.collection.on('change:_selected', function(model, value){
 				value && this.selected(model);
@@ -113,11 +118,11 @@ define(function(require){
 		},
 		selected:function(model){
 			this.selecteds.add(model);
-			this.renderKitItem('Action', this.kits.Action);
+			this.updateAction();
 		},
 		unselected:function(model){
 			this.selecteds.remove(model);
-			this.renderKitItem('Action', this.kits.Action);
+			this.updateAction();
 		},
 		selectedAll:function(){
 			
@@ -149,6 +154,11 @@ define(function(require){
 		update:function(){
 			this.pagination();
 			this.widget();
+			return this;
+		},
+		updateAction:function(){
+			this.renderKitItem('Action', this.kits.Action);
+			return this;
 		},
 		error:function(){
 			

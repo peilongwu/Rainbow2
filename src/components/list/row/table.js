@@ -11,7 +11,7 @@ define(function(require){
 			this.isHead = options.isHead;
 		},
 		render:function(){
-
+			this.$el.empty();
 			_.each(this.columns, function(item){
 				//var name = this.table.getName(item.data);
 				var name = item.name;

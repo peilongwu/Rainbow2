@@ -38,7 +38,9 @@ define(function(require){
 		},
 		onChange:function(e){
 			this.verify();
-			this.form.model.set(this.model.get('name'), this.control.$el.val());
+			var attrs = {};
+			attrs[this.model.get('name')] = this.control.$el.val();
+			this.form.model.set(attrs,{silent:true});
 		},
 		onFileChange:function(e){
 			this.verify();

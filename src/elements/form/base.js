@@ -26,7 +26,6 @@ define(function(require){
 			return this;
 		},
 		commit:function(){
-			console.log(this.data());
 			this.disableSubmit();
 			var _this = this;
 			this.model.save(null, {
