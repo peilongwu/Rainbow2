@@ -20,6 +20,7 @@ define(function(require){
 			return this;
 		},
 		renderControl:function(type){
+			this.list();
 			var value = this.form.model.get(this.model.get('name'));
 			value && this.model.set('value', value);
 			var control = config[this.model.get('control')];
