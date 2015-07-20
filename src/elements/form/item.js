@@ -38,13 +38,17 @@ define(function(require){
 				value = model.schema.idName;
 				title = _.findWhere(model.schema.attributes, {display:'title'});
 				title = title ? title.name : value;
-				this.model.list = _.map(model.data.collection, function(item){
+				list = _.map(model.data.collection, function(item){
 					return {title:item[title], value:item[value]};
 				});
-			}else if(model && model.list){
-				this.model.list = list;
+			}else if(this.model.get('list') && 'string' === typeof this.model.get('list')){
+				list = this.model.get('list').split(',');
+				list = _.map(list, function(item){
+					var s = item.split(':');
+					return {title:s[1] ? s[1] : s[0], value:s[0]};
+				});
 			}
-
+			this.model.set('list',list);
 			return this;
 		},
 		verify:function(){

@@ -13,8 +13,13 @@ define(function(require){
 			Base.Item.prototype.initialize.apply(this, arguments);
 		},
 		render:function(){
-			var tpl = '<span class="glyphicon <%=icon%>" aria-hidden="true"></span> <%=name%>';
+			var tpl = '<span class="glyphicon" aria-hidden="true"></span> <%=name%>';
 			this.$el.html(_.template(tpl, this.model.toJSON()))
+			this.icon();
+			return this;
+		},
+		icon:function(){
+			this.model.get('icon') && this.$('.glyphicon').addClass(this.model.get('icon'));
 			return this;
 		},
 		form:function(collection, model){

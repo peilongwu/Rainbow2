@@ -9,7 +9,7 @@ define(function(require){
 			this.attributes = {
 				type: this.type,
 				name: this.model.get('name'),
-				placeholder: this.model.get('legend') ? this.model.get('legend') : this.title,
+				//placeholder: this.model.get('legend') ? this.model.get('legend') : this.title,
 				value: this.model.get('value')
 			};
 			this.format = options.format;

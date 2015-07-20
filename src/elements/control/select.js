@@ -10,7 +10,7 @@ define(function(require){
 		render:function(){
 			this.$el.attr(this.attributes);
 			this.before();
-			_.each(this.model.list, this.renderOption, this)
+			_.each(this.model.get('list'), this.renderOption, this)
 			this.after();
 			return this;
 		},
