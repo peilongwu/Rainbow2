@@ -4,7 +4,7 @@ define(function(require){
 		className:'modal fade',
 		tpl:'#tpl-modal',
 		attributes:{
-			tabindex:'-1',
+			//tabindex:'-1',
 			role:'dialog',
 			'aria-labelledby':'myModalLabel',
 			'aria-hidden':'true'
