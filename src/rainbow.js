@@ -5,6 +5,7 @@ define(function(require){
 		//require('store');
 		require('bootstrap');
 		require('backbone');
+		require('select2');
 		$('body').append(template);
 		Rainbow = Backbone;
 		require(['./base/app'], function(app){

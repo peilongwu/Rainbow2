@@ -6,6 +6,7 @@ define(function(require){
 		initialize:function(options){
 			Base.prototype.initialize.apply(this, arguments);
 			delete this.attributes.value;
+			delete this.attributes.type;
 		},
 		render:function(){
 			this.$el.attr(this.attributes);
@@ -16,16 +17,19 @@ define(function(require){
 		},
 		before:function(){
 			this.model.get('isNull') && this.addEmptyOption();
+			!this.model.get('required')
+			 && this.model.get('isNull') !== false
+			 && this.addEmptyOption();
 			this.model.format && this.model.format.apply(this);
 			return this;
 		},
 		after:function(){
 			this.selected(this.model.get('value'));
-			this.model.display && this.model.display.apply(this);
+			this.display && this.display.apply(this);
 			return this;
 		},
 		addEmptyOption:function(){
-			this.model.list.unshift({title:'(NULL)', value:''});
+			this.model.get('list').unshift({title:'(Null)', value:''});
 			return this;
 		},
 		addGroup:function(){

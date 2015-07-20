@@ -33,7 +33,7 @@ define(function(require){
 		list:function(){
 			var title,value;
 			var model = this.model.get('typeObject');
-			var list
+			var list = [];
 			if(model && this.model.get('dataType') === 'wordbook'){
 				value = model.schema.idName;
 				title = _.findWhere(model.schema.attributes, {display:'title'});

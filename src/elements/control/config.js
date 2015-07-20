@@ -56,10 +56,15 @@ define(function(require){
 		textarea:{
 			base:'input'
 		},
-		choose:{
+		chosen:{
 			base:'select',
 			display:function(){
-
+				var _this = this;
+				setTimeout(function(){
+					_this.$el.css('width','100%').select2({
+					  theme: "classic"
+					});
+				}, 200)
 			}
 		}
 	};
