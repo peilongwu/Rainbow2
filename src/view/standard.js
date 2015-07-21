@@ -52,7 +52,6 @@ define(function(require){
 		render:function(){
 			Base.prototype.render.apply(this, arguments);
 			this.renderKit();
-			this.setCollection();
 			this.update();
 			return this;
 		},
@@ -70,19 +69,15 @@ define(function(require){
 		},
 		pagination: function(){
 
-			if(!this.model.get('data').pagination) {
-				return this;
-			}
-
-			new Pagination({
+			this.model.get('data').pagination && new Pagination({
 				model: new Backbone.Model(this.model.get('data').pagination),
 				view: this
 			}).render();
 			var page = this.model.get('data').pagination;
 			var stateTpl = '当前 <%=first%>-<%=end%> 项，选中 <span class="rb-status-selected"><%=selected%></span> 项，共 <%=count%> 项';
-			var first = page.size * (page.current-1) + 1;
-			var end = first + page.size - 1;
+			var first = page ? page.size * (page.current-1) + 1 : 1;
 			var count = this.model.get('data').count;
+			var end = page ? first + page.size - 1 : count;
 			end = end > count ? count : end;
 			var status = {
 				first:first,
@@ -171,6 +166,8 @@ define(function(require){
 			
 		},
 		update:function(){
+			this.setCollection();
+			this.updateAction();
 			this.pagination();
 			this.widget();
 			return this;

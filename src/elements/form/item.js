@@ -69,8 +69,15 @@ define(function(require){
 		onChange:function(e){
 			this.verify();
 			var attrs = {};
-			attrs[this.model.get('name')] = this.control.$el.val();
-			this.form.model.set(attrs,{silent:this.type === 'filter' ? false : true});
+			var value = this.control.$el.val();
+			var name = this.model.get('name');
+			attrs[name] = value;
+			if(this.type === 'filter'){
+				!value && value !== false && this.form.model.unset(name);
+				value && this.form.model.set(attrs);
+			}else{
+				this.form.model.set(attrs,{silent:true});
+			}
 		},
 		onFileChange:function(e){
 			this.verify();

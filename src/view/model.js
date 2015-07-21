@@ -35,7 +35,7 @@ define(function(require){
 				this.extend(this.get('extend'));
 			}else{
 				!this.view && this.createView();
-				this.view.render();
+				this.view && this.view.update();
 			}
 			return this;
 		},
@@ -61,6 +61,7 @@ define(function(require){
 			rainbow.layout.$('.rb-views').empty().append(v.el);
 			rainbow.current = v;
 			this.view = v;
+			this.view.render();
 			return this;
 		}
 	});
