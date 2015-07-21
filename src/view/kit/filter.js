@@ -1,23 +1,12 @@
 define(function(require){
 	var Base = require('./list');
-	var Item = Base.Item.extend({
-		tagName:'label',
-		className:'',
-		events:{
-			'click':'onClick'
-		},
-		initialize:function(options){
-			Base.Item.prototype.initialize.apply(this, arguments);
-		},
-		render:function(){
-			this.$el.text(this.model.get('name'));
-			return this;
-		}
-	});
+	var Item = require('../../elements/form/item');
 
 	var List = Base.List.extend({
+		className:'form-inline',
 		initialize:function(options){
 			Base.List.prototype.initialize.apply(this, arguments);
+			this.model = this.view.model.filter;
 		},
 		render:function(){
 			this.collection.each(this.renderItem, this);
@@ -25,9 +14,11 @@ define(function(require){
 			return this;
 		},
 		renderItem:function(model, i){
+			model.set(_.findWhere(this.view.model.get('schema').attributes, {name: model.get('name')}));
 			var item = new Item({
 				model: model,
-				view: this.view
+				form: this,
+				type:'filter'
 			});
 			this.$el.append(item.render().el);
 		}

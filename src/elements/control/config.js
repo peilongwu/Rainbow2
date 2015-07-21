@@ -64,7 +64,7 @@ define(function(require){
 					_this.$el.css('width','300').select2({
 					  theme: "classic"
 					});
-				}, 200)
+				}, 50)
 			}
 		},
 		multiple:{
@@ -76,7 +76,7 @@ define(function(require){
 					_this.$el.css('width','300').select2({
 					  theme: "classic"
 					});
-				}, 200)
+				}, 50)
 			}
 		}
 	};

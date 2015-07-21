@@ -6,6 +6,8 @@ define(function(require){
 		initialize:function(options){
 			this.form = options.form;
 			this.control = null;
+			this.type = options.type;
+			this.type = this.type ? this.type : 'general';
 		},
 		events:{
 			'change input,textarea,select':'onChange',
@@ -13,10 +15,13 @@ define(function(require){
 			'blur input,textarea,select':'onChange'
 		},
 		render:function(){
-			var tpl = '<label class="col-sm-2 control-label"><%=alias?alias:name%></label><div class="col-sm-10"></div>';
-			this.$el.html(_.template(tpl, this.model.toJSON()));
+			var tpl = {
+				general:'<label class="col-sm-2 control-label"><%=alias?alias:name%></label><div class="col-sm-10"></div>',
+				filter:'<label><%=alias?alias:name%></label> '
+			};
+			this.$el.html(_.template(tpl[this.type], this.model.toJSON()));
 			this.renderControl();
-			this.model.get('required') && this.$('label').append('<em> * </em>');
+			this.model.get('required') && this.$('label').append('<em class=""> * </em>');
 			return this;
 		},
 		renderControl:function(type){
@@ -28,7 +33,7 @@ define(function(require){
 			control.model = this.model;
 			control.className = 'form-control';
 			this.control = new Control[control.base](control);
-			this.control.render().$el.appendTo(this.$('div'));
+			this.control.render().$el.appendTo(this.$el);
 		},
 		list:function(){
 			var title,value;
@@ -64,7 +69,7 @@ define(function(require){
 			this.verify();
 			var attrs = {};
 			attrs[this.model.get('name')] = this.control.$el.val();
-			this.form.model.set(attrs,{silent:true});
+			this.form.model.set(attrs,{silent:this.type === 'filter' ? false : true});
 		},
 		onFileChange:function(e){
 			this.verify();
