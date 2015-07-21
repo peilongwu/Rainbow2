@@ -33,7 +33,8 @@ define(function(require){
 			control.model = this.model;
 			control.className = 'form-control';
 			this.control = new Control[control.base](control);
-			this.control.render().$el.appendTo(this.$el);
+			var $div = this.$('div').size() ? this.$('div') : this.$el;
+			this.control.render().$el.appendTo($div);
 		},
 		list:function(){
 			var title,value;
