@@ -31,6 +31,7 @@ define(function(require){
 			this.collection.on('change:_selected', function(model, value){
 				value && this.selected(model);
 				value || this.unselected(model);
+				this.$('.rb-status-selected').text(this.selecteds.length);
 			}, this);
 			this.selecteds = new Backbone.Collection;
 			this.model.get('handle') && this.handle();
@@ -68,10 +69,28 @@ define(function(require){
 			return this;
 		},
 		pagination: function(){
-			this.model.get('data').pagination && new Pagination({
+
+			if(!this.model.get('data').pagination) {
+				return this;
+			}
+
+			new Pagination({
 				model: new Backbone.Model(this.model.get('data').pagination),
 				view: this
 			}).render();
+			var page = this.model.get('data').pagination;
+			var stateTpl = '当前 <%=first%>-<%=end%> 项，选中 <span class="rb-status-selected"><%=selected%></span> 项，共 <%=count%> 项';
+			var first = page.size * (page.current-1) + 1;
+			var end = first + page.size - 1;
+			var count = this.model.get('data').count;
+			end = end > count ? count : end;
+			var status = {
+				first:first,
+				end:end,
+				selected:this.selecteds.length,
+				count:count
+			}
+			this.$('.rb-status').html(_.template(stateTpl, status));
 			return this;
 		},
 		widget:function(){
