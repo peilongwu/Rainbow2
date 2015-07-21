@@ -12,7 +12,7 @@ define(function(require){
 			base:'input',
 			type:'email'
 		},
-		email:{
+		number:{
 			base:'input',
 			type:'number'
 		},
@@ -54,10 +54,22 @@ define(function(require){
 			type:'hidden'
 		},
 		textarea:{
-			base:'input'
+			base:'textarea'
 		},
 		chosen:{
 			base:'select',
+			display:function(){
+				var _this = this;
+				setTimeout(function(){
+					_this.$el.css('width','300').select2({
+					  theme: "classic"
+					});
+				}, 200)
+			}
+		},
+		multiple:{
+			base:'select',
+			multiple:'multiple',
 			display:function(){
 				var _this = this;
 				setTimeout(function(){

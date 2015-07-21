@@ -1,6 +1,7 @@
 define(function(require){
 	return {
 		input:require('./input'),
-		select:require('./select')
+		select:require('./select'),
+		textarea:require('./textarea')
 	}
 });
