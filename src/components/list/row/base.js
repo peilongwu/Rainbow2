@@ -24,7 +24,11 @@ define(function(require){
 		},
 		toggle:function(e){
 			if(this.isHandle){
-				this.active(e, !this.model.get('_selected'));
+				if($(e.target).hasClass('rb-title')){
+					this.model.set({_details:true});
+				}else{
+					this.active(e, !this.model.get('_selected'));
+				}
 			}
 			return this;
 		},

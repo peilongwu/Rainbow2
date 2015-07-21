@@ -7,6 +7,7 @@ define(function(require){
 	var Pagination = require('./kit/pagination')
 	var Table = require('../components/list/table');
 	var filter = require('../utility/filter');
+	var Nested = require('./nested');
 
 	var Standard = Base.extend({
 		tplId:'tpl-view-standard',
@@ -33,6 +34,10 @@ define(function(require){
 				value || this.unselected(model);
 				this.$('.rb-status-selected').text(this.selecteds.length);
 			}, this);
+			this.collection.on('change:_details', function(model, value){
+				model.unset('_details', {silent:true});
+				this.details(model);
+			}, this);
 			this.selecteds = new Backbone.Collection;
 			this.model.get('handle') && this.handle();
 			this.createSchema = _.where(this.model.get('schema').attributes, {create: true, system: false});
@@ -43,15 +48,13 @@ define(function(require){
 				Filter:this.model.get('schema').filters
 			};
 		},
-		events:{
-			'click .rb-title':'details'
-		},
 		handle:function(){
 			this.isHandle = true;
 		},
 		render:function(){
 			Base.prototype.render.apply(this, arguments);
 			this.renderKit();
+			this.setCollection();
 			this.update();
 			return this;
 		},
@@ -90,7 +93,14 @@ define(function(require){
 		},
 		widget:function(){
 
-			var schemas = _.map(this.model.get('schema').attributes, function(o){
+			var schema = _.reject(this.model.get('schema').attributes, function(o){
+				return this.idName === o.name 
+				|| (o.hidden && ['list','all'].indexOf(o.hidden) >= 0)
+				|| o.type === 'collection'
+				|| o.type === 'model';
+			}, this);
+
+			schema = _.map(schema, function(o){
 				if(o.typeObject && o.typeObject.list){
 					o.format = filter['enum'];
 				}else if(o.dataType === 'wordbook'){
@@ -105,13 +115,8 @@ define(function(require){
 				return o;
 			}, this);
 
-			schemas = _.reject(schemas, function(o){
-				return this.idName === o.name 
-				|| (o.hidden && ['list','all'].indexOf(o.hidden) >= 0);
-			}, this);
-
 			var model = new Backbone.Model({
-				series:schemas,
+				series:schema,
 				data:this.collection
 			});
 
@@ -123,12 +128,19 @@ define(function(require){
 
 			widget.render().$el.appendTo(this.$('.rb-content-body').empty());
 		},
-		details:function(e){
-
+		details:function(model){
+			var details = new Nested({
+				coms: this.coms,
+				parent:this,
+				model:model
+			});
+			details.render();
+			this.$el.after(details.el);
 		},
 		setCollection:function(){
 			this.selecteds.reset();
 			this.collection.reset(this.model.get('data').collection);
+			return this;
 		},
 		selected:function(model){
 			this.selecteds.add(model);
@@ -166,7 +178,6 @@ define(function(require){
 			
 		},
 		update:function(){
-			this.setCollection();
 			this.updateAction();
 			this.pagination();
 			this.widget();

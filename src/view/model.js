@@ -9,7 +9,7 @@ define(function(require){
 			this.filter.on('change', this.request, this);
 		},
 		request:function(res){
-			this.res = res ? res : this.res;
+			//this.res = res ? res : this.res;
 			var _this = this;
 			this.fetch({
 				success:function(model, response, options){
@@ -35,7 +35,7 @@ define(function(require){
 				this.extend(this.get('extend'));
 			}else{
 				!this.view && this.createView();
-				this.view && this.view.update();
+				this.view && this.view.setCollection() && this.view.update();
 			}
 			return this;
 		},
@@ -47,6 +47,7 @@ define(function(require){
 		},
 		createView:function(){
 			var type = this.get('type');
+			this.$body = this.$body ? this.$body : rainbow.layout.$('.rb-views');
 			type = type 
 				? type.substring(0, 1).toUpperCase() + type.substring(1).toLowerCase() 
 					: 'Standard';
@@ -58,7 +59,7 @@ define(function(require){
 					id: 'view-' + this.id
 				}
 			});
-			rainbow.layout.$('.rb-views').empty().append(v.el);
+			this.$body.empty().append(v.el);
 			rainbow.current = v;
 			this.view = v;
 			this.view.render();

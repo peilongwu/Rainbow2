@@ -4,6 +4,7 @@ define(function(require){
 	var Model = Backbone.Model.extend({
 		idAttribute:'id'
 	});
+	rainbow.ViewModel = ViewModel;
 
 	var Collection = Backbone.Collection.extend({
 		url: rainbow.baseUrl + '/res',
