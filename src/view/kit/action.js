@@ -16,6 +16,11 @@ define(function(require){
 			var tpl = '<span class="glyphicon" aria-hidden="true"></span> <%=name%>';
 			this.$el.html(_.template(tpl, this.model.toJSON()))
 			this.icon();
+			this.model.get('primary') && this.primary();
+			return this;
+		},
+		primary:function(){
+			this.$el.addClass('btn-success');
 			return this;
 		},
 		icon:function(){
