@@ -40,8 +40,12 @@ define(function(require){
 			}, this);
 			this.selecteds = new Backbone.Collection;
 			this.model.get('handle') && this.handle();
-			this.createSchema = _.where(this.model.get('schema').attributes, {create: true, system: false});
-			this.updateSchema = _.where(this.model.get('schema').attributes, {update: true, system: false});
+			this.createSchema = _.filter(this.model.get('schema').attributes, function(o){
+				return (o.access == 'write' || o.access == 'createonly') && o.system === 'none';
+			}, this);
+			this.updateSchema = _.filter(this.model.get('schema').attributes, function(o){
+				return (o.access == 'write' || o.access == 'updateonly') && o.system === 'none';
+			}, this);
 			this.kits = {
 				//breadcrum:'breadcrum',
 				Action:this.model.get('actions'),
