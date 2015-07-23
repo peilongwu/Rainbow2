@@ -93,6 +93,9 @@ define(function(require){
 			);
 		},
 		"delete":function(){
+			if(!confirm('确认要删除选定【' + this.view.selects.length + '】的项数据？')){
+				return;
+			}
 			var model = this.view.getActiveModel();
 			model.urlRoot = this.view.model.url;
 			model.destroy({
