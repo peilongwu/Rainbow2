@@ -93,7 +93,7 @@ define(function(require){
 			);
 		},
 		"delete":function(){
-			if(!confirm('确认要删除选定的【' + this.view.selecteds.length + '】项数据？')){
+			if(!confirm('确认要【' + this.model.get('name') + '】选定的' + this.view.selecteds.length + '项数据？')){
 				return;
 			}
 			var model = this.view.getActiveModel();
