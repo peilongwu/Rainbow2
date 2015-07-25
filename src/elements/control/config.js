@@ -39,7 +39,14 @@ define(function(require){
 		},
 		checkbox:{
 			base:'input',
-			type:'checkbox'
+			type:'checkbox',
+			display: function(){
+				var metaType = this.model.get('metaType');
+				if(metaType && metaType === 'Boolean'){
+					this.$el.val(1);
+					this.model.get('value') && this.$el.attr('checked', true);
+				}
+			}
 		},
 		radio:{
 			base:'input',

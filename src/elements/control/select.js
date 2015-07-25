@@ -9,8 +9,8 @@ define(function(require){
 			delete this.attributes.type;
 		},
 		render:function(){
-			this.$el.attr(this.attributes);
 			this.before();
+			this.$el.attr(this.attributes);
 			_.each(this.model.get('list'), this.renderOption, this)
 			this.after();
 			return this;

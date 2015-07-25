@@ -74,9 +74,10 @@ define(function(require){
 				|| o.type === 'collection'
 				|| o.type === 'model';
 			}, this);
+			schema = this.parent.schemaFilter(schema);
 			var details = new Details({
 				model:this.model,
-				schema:schema
+				collection:new Backbone.Collection(schema)
 			}).render();
 			this.$('.rb-subview').html(details.el);
 		},

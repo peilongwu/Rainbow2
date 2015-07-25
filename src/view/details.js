@@ -7,9 +7,11 @@ define(function(require){
 		},
 		render:function(){
 			this.$el.append('<tbody></tbody>');
-			_.each(this.schema, function(item){
-				var title = item.alias ? item.alias : item.name;
-				var value = this.model.get(item.name) ? this.model.get(item.name) : '';
+			this.collection.each(function(model){
+				var title = model.get('alias') ? model.get('alias') : model.get('name');
+				var value = this.model.get(model.get('name')) ? this.model.get(model.get('name')) : '';
+				var cell = {model:model};
+				model.get('format') && (value = model.get('format').apply(cell, [value]));
 				this.$('tbody')
 				.append(
 					'<tr><th width="160" style="background-color: #f9f9f9;">' 

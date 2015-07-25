@@ -95,17 +95,9 @@ define(function(require){
 			this.$('.rb-status').html(_.template(stateTpl, status));
 			return this;
 		},
-		widget:function(){
-
-			var schema = _.reject(this.model.get('schema').attributes, function(o){
-				return this.idName === o.name 
-				|| (o.hidden && ['list','all'].indexOf(o.hidden) >= 0)
-				|| o.type === 'collection'
-				|| o.type === 'model';
-			}, this);
-
+		schemaFilter:function(schema){
 			schema = _.map(schema, function(o){
-				if(o.typeObject && o.typeObject.list){
+				if(o.list){
 					o.format = filter['enum'];
 				}else if(o.dataType === 'wordbook'){
 					o.format = filter['wordbook'];
@@ -118,6 +110,18 @@ define(function(require){
 				}
 				return o;
 			}, this);
+			return schema;
+		},
+		widget:function(){
+
+			var schema = _.reject(this.model.get('schema').attributes, function(o){
+				return this.idName === o.name 
+				|| (o.hidden && ['list','all'].indexOf(o.hidden) >= 0)
+				|| o.type === 'collection'
+				|| o.type === 'model';
+			}, this);
+
+			schema = this.schemaFilter(schema);
 
 			var model = new Backbone.Model({
 				series:schema,

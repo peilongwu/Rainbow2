@@ -15,11 +15,19 @@ define(function(require){
 			this.format = options.format;
 			this.display = options.display;
 		},
+		before:function(){
+			this.model.format && this.model.format.apply(this);
+			return this;
+		},
+		after:function(){
+			this.display && this.display.apply(this);
+			return this;
+		},
 		setValue:function(){
 
 		},
 		getValue:function(){
-			
+			return this.$el.val();
 		}
 	});
 	return Base;

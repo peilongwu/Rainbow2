@@ -69,7 +69,8 @@ define(function(require){
 		onChange:function(e){
 			this.verify();
 			var attrs = {};
-			var value = this.control.$el.val();
+			var value = this.control.getValue();
+			console.log(value);
 			var name = this.model.get('name');
 			attrs[name] = value;
 			if(this.type === 'filter'){

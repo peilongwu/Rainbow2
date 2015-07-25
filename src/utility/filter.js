@@ -1,8 +1,13 @@
 define(function(require, exports){
 
 	exports.enum =  function(value){
-		var model = this.model.get('typeObject');
-		var item = _.findWhere(model.list, {value:value});
+		//var model = this.model.get('typeObject');
+		list = this.model.get('list').split(',');
+		list = _.map(list, function(item){
+			var s = item.split(':');
+			return {title:s[1] ? s[1] : s[0], value:s[0]};
+		});
+		var item = _.findWhere(list, {value:value});
 		return item ? item.title : '';
 	};
 
@@ -44,7 +49,7 @@ define(function(require, exports){
 	}
 
 	exports.id = function(value){
-		return '<input type="checkbox">';
+		return value;
 	};
 
 	exports.title = function(value){
