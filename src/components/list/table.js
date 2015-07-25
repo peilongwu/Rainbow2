@@ -17,7 +17,7 @@ define(function(require){
 		header:function(){
 			var columns = this.model.get('series');
 			var row = {};
-			this.renderRow(new Backbone.Model(row), 0, true);
+			this.renderItem(new Backbone.Model(row), 0, true);
 		},
 		body:function(item, index){
 			var collection = this.model.get('data');
@@ -29,7 +29,7 @@ define(function(require){
 				if(this.model.get('maxLength') && index + 1 > this.model.get('maxLength')){
 					return;
 				}
-				this.renderRow(model, index);		
+				this.renderItem(model, index);		
 			}, this);
 		},
 		empty:function(){
@@ -44,7 +44,7 @@ define(function(require){
 			//this.display();
 			return this;
 		},
-		renderRow:function(model, index, isHead){
+		renderItem:function(model, index, isHead){
 			var columns = this.model.get('series');
 			var $container = this.$(isHead ? 'thead' : 'tbody');
 			model.set('_index',index);

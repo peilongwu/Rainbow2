@@ -47,7 +47,6 @@ define(function(require){
 		},
 		createView:function(){
 			var type = this.get('type');
-			this.$body = this.$body ? this.$body : rainbow.layout.$('.rb-views');
 			type = type 
 				? type.substring(0, 1).toUpperCase() + type.substring(1).toLowerCase() 
 					: 'Standard';
@@ -59,7 +58,10 @@ define(function(require){
 					id: 'view-' + this.id
 				}
 			});
-			this.$body.empty().append(v.el);
+			this.$body
+				.removeClass('loading')
+				.empty()
+				.append(v.el);
 			rainbow.current = v;
 			this.view = v;
 			this.view.render();

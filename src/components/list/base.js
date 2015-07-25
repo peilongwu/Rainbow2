@@ -7,6 +7,12 @@ define(function(require){
 			this.$el.html(_.template($(this.tpl).html()));
 			return this;
 		},
+		renderItem:function(){
+			
+		},
+		renderChildList:function(){
+
+		},
 		update:function(){
 			this.header();
 			this.body();

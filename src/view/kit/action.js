@@ -107,6 +107,9 @@ define(function(require){
 				}
 			});
 		},
+		action:function(key){
+
+		},
 		extend:function(action){
 			var _this = this;
 			require(['../../js/action/' + action], function(action){

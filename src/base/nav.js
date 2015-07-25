@@ -101,6 +101,8 @@ define(function(require){
 			var view = new ViewModel;
 			view.params = params;
 			view.url = rainbow.baseUrl + '/' + this.path.replace(/\//g, '-');
+			view.$body = $('<div class="rb-view loading"></div>');
+			rainbow.layout.$('.rb-views').empty().append(view.$body);
 			view.request(this);
 		},
 		onClick:function(e){
