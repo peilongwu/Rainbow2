@@ -1,7 +1,7 @@
 define(function(require){
 	var Base = require('./list');
 	var Modal = require('../../utility/modal');
-	var Form = require('../../elements/form/general');
+	var Form = require('../../components/form/general');
 	var Action = require('./action/action');
 	var Item = Base.Item.extend({
 		tagName:'button',

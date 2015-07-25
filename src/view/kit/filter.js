@@ -1,6 +1,6 @@
 define(function(require){
 	var Base = require('./list');
-	var Item = require('../../elements/form/item');
+	var Item = require('../../components/form/item');
 
 	var List = Base.List.extend({
 		className:'form-inline',
