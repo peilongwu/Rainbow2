@@ -89,6 +89,7 @@ define(function(require){
 		},
 		put:function(){
 			var model = this.view.getActiveModel();
+			console.log(model.idAttribute);
 			this.form(
 				new Backbone.Collection(this.view.updateSchema),
 				model
@@ -102,10 +103,10 @@ define(function(require){
 			model.urlRoot = this.view.model.url;
 			model.destroy({
 				success:function(model, response, options){
-					alert(response.content);
+					rainbow.alert(response.content);
 				},
 				error:function(model, response, options){
-					alert(response.responseJSON.content);
+					rainbow.alert(response.responseJSON.content);
 				}
 			});
 		},

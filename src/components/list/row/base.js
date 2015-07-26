@@ -10,7 +10,7 @@ define(function(require){
 			this.isHandle = options.isHandle;
 			if(this.isHandle){
 				this.model.on('change',function(model){
-					if(!model.changed._selected){
+					if(model.changed._selected === undefined){
 						this.render();
 					}
 				}, this);

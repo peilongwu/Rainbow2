@@ -20,7 +20,10 @@ define(function(require){
 					return response.data;
 				}
 			});
-			this.collection =  new Backbone.Collection([],{model:this.Model});
+			this.Collection = Backbone.Collection.extend({
+				model:this.Model
+			});
+			this.collection =  new this.Collection;
 			this.collection.on('add',function(){
 				this.update();
 			}, this);
@@ -131,7 +134,8 @@ define(function(require){
 			var widget = new Table({
 				model:model,
 				view:this,
-				isHandle:this.isHandle
+				isHandle:this.isHandle,
+				isTree:!!this.model.get('schema').parentIdName
 			});
 
 			widget.render().$el.appendTo(this.$('.rb-content-body').empty());
