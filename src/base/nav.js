@@ -87,7 +87,7 @@ define(function(require){
 				if(!this.$childs){
 					this.$childs = $('.rb-nav-' + (this.level + 1));
 					if(!this.$childs.size()){
-						this.$childs = $('<ul></ul>').appendTo(this.$el);
+						this.$childs = $('<ul class="sub"></ul>').appendTo(this.$el);
 					}
 				}
 				this.$childs.empty();

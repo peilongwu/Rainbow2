@@ -6,7 +6,7 @@
 @fontSize: 1.2em;
 @inlineMarginRight: 10px;
 @blockMarginBottom:1.2%;
-@sideWidth:160px;
+@sideWidth:180px;
 
 .block-margin{
 	margin-bottom:@blockMarginBottom;
@@ -106,6 +106,49 @@ body{
 
 .side .glyphicon{
 	margin-right:@inlineMarginRight;
+}
+
+.side li{
+	padding-left: 10px;
+	padding-right: 1px;
+	cursor: default;
+}
+
+.side .sub{
+	margin: 8px -1px -10px -14px;
+	background-color: #FFFFFF;
+	padding: 1px 1px 1px 1px;
+	display: none;
+}
+
+.side li.active .sub{
+	display: block;
+}
+
+.side .sub li.list-group-item {
+	border: 0;
+	padding-top: 6px;
+	padding-bottom: 6px;
+	margin-bottom:1px;
+}
+
+.side .sub li:hover{
+	background-color: #f0f0f0;
+}
+
+.side .sub li.list-group-item.active{
+	background-color: #f0f0f5;
+	border-right: 3px solid #428bca;
+}
+
+.side .sub li.active > a,.side .sub  li.active > a:focus {
+  color: #428bca;
+  font-weight: 500;
+  background-color: #f0f0f0;
+}
+
+.side .sub li.active:hover > a {
+	background-color: #f0f0f5;
 }
 
 .main{

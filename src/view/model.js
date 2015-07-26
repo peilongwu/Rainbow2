@@ -21,7 +21,7 @@ define(function(require){
 						alert(error.content);
 						return rainbow.route('signin', {trigger: true});
 					}
-					rainbow.alert('REQUEST_ERROR');
+					console.error('REQUEST_ERROR');
 				},
 				data:_.extend(
 					this.filter.toJSON(),
