@@ -1,4 +1,5 @@
 define(function(require){
+	var filter = require('../../utility/filter');
 	return {
 		text:{
 			base:'input',
@@ -22,16 +23,50 @@ define(function(require){
 		},
 		date:{
 			base:'input',
-			type:'date',
+			type:'text',
+			format:function(){
+				this.model.get('value') 
+				&& (this.attributes.value = filter.time(this.model.get('value'), true, true));
+			},
 			display:function(){
-
+				var _this = this;
+				setTimeout(function(){
+					_this.$el.datetimepicker({
+						language:  'zh-CN',
+						format: 'yyyy-mm-dd',
+						weekStart: 1,
+						todayBtn:  1,
+						autoclose: 1,
+						todayHighlight: 1,
+						startView: 2,
+						minView: 2,
+						forceParse: 0
+					});
+				}, 50);
 			}
 		},
 		datetime:{
 			base:'input',
-			type:'datetime',
+			type:'text',
+			format:function(){
+				this.model.get('value') 
+				&& (this.attributes.value = filter.time(this.model.get('value'), true));
+			},
 			display:function(){
-
+				var _this = this;
+				setTimeout(function(){
+					_this.$el.datetimepicker({
+						language:  'zh-CN',
+				    format: 'yyyy-mm-dd hh:ii',
+				    weekStart: 1,
+		    		todayBtn:  1,
+						autoclose: 1,
+						todayHighlight: 1,
+						startView: 2,
+						forceParse: 0,
+		    		showMeridian: 1
+					});
+				}, 50);
 			}
 		},
 		select:{
@@ -68,10 +103,10 @@ define(function(require){
 			display:function(){
 				var _this = this;
 				setTimeout(function(){
-					_this.$el.css('width','300').select2({
+					_this.$el.css('width','260').select2({
 					  theme: "classic"
 					});
-				}, 50)
+				}, 50);
 			}
 		},
 		multiple:{
@@ -83,7 +118,7 @@ define(function(require){
 					_this.$el.css('width','300').select2({
 					  theme: "classic"
 					});
-				}, 50)
+				}, 50);
 			}
 		}
 	};

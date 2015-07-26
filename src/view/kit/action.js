@@ -32,8 +32,10 @@ define(function(require){
 				collection:collection,
 				model:model
 			}).render();
+			
 			form.model.urlRoot = this.view.model.url;
 			var modal = this.modal(form.el);
+
 			modal.$('.rb-submit:not(.disabled)').on('click', function(e){
 				form.onSubmit(e);
 			});

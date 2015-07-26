@@ -21,14 +21,37 @@ define(function(require){
 			};
 			this.$el.html(_.template(tpl[this.type], this.model.toJSON()));
 			this.renderControl();
-			this.model.get('required') && this.$('label').append('<em class=""> * </em>');
+			this.model.get('required') && this.$('label').append('<em class="text-danger"> * </em>');
 			return this;
 		},
-		renderControl:function(type){
+		renderControl:function(){
 			this.list();
 			var value = this.form.model.get(this.model.get('name'));
 			value && this.model.set('value', value);
-			var control = config[this.model.get('control')];
+			var type = this.model.get('control');
+			if(!type){
+				switch(this.model.get('metaType')){
+					case 'Boolean':
+						type = 'checkbox';
+						break;
+					case 'Text':
+						type = 'textarea';
+						break;
+					case 'Object':
+						type = 'textarea';
+						break;
+					case 'Array':
+						type = 'textarea';
+						break;
+					case 'Time':
+						type = 'date';
+						break;
+					default:
+						type = 'text';
+						break;
+				}
+			}
+			var control = config[type];
 			control = control ? control : {base:'input',type:'text'};
 			control.model = this.model;
 			control.className = 'form-control';
@@ -70,14 +93,13 @@ define(function(require){
 			this.verify();
 			var attrs = {};
 			var value = this.control.getValue();
-			console.log(value);
 			var name = this.model.get('name');
 			attrs[name] = value;
 			if(this.type === 'filter'){
 				!value && value !== false && this.form.model.unset(name);
 				value && this.form.model.set(attrs);
 			}else{
-				this.form.model.set(attrs,{silent:true});
+				this.form.model.set(attrs, {silent:true});
 			}
 		},
 		onFileChange:function(e){

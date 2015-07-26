@@ -16,7 +16,7 @@ define(function(require){
 			this.display = options.display;
 		},
 		before:function(){
-			this.model.format && this.model.format.apply(this);
+			this.format && this.format.apply(this);
 			return this;
 		},
 		after:function(){

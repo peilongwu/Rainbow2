@@ -23,7 +23,7 @@ define(function(require){
 			return this;
 		},
 		toggle:function(e){
-			if(this.isHandle){
+			if(this.isHandle && !this.isHead){
 				if($(e.target).hasClass('rb-title')){
 					this.model.set({_details:true});
 				}else{
