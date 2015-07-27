@@ -14,7 +14,12 @@ define(function(require){
 			return this;
 		},
 		renderItem:function(model, i){
-			model.set(_.findWhere(this.view.model.get('schema').attributes, {name: model.get('name')}));
+			var schema = _.findWhere(
+				this.view.model.get('schema').attributes, 
+				{name: model.get('name')}
+			);
+			schema = _.defaults(model.toJSON(), schema);
+			model.set(schema);
 			var item = new Item({
 				model: model,
 				form: this,

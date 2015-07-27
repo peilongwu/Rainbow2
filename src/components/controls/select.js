@@ -18,8 +18,8 @@ define(function(require){
 		before:function(){
 			this.model.get('isNull') && this.addEmptyOption();
 			!this.model.get('required')
-			 && this.model.get('isNull') !== false
-			 && this.addEmptyOption();
+				&& this.model.get('isNull') !== true
+				&& this.addEmptyOption();
 			this.model.format && this.model.format.apply(this);
 			return this;
 		},

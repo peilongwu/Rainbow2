@@ -115,7 +115,7 @@ define(function(require){
 			display:function(){
 				var _this = this;
 				setTimeout(function(){
-					_this.$el.css('width','300').select2({
+					_this.$el.css('width','260').select2({
 					  theme: "classic"
 					});
 				}, 50);

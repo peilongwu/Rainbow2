@@ -8,6 +8,8 @@ define(function(require){
 			this.control = null;
 			this.type = options.type;
 			this.type = this.type ? this.type : 'general';
+			this.type === 'filter'
+			&& this.model.set('isNull', !this.model.get('required'))
 		},
 		events:{
 			'change input,textarea,select':'onChange',
@@ -21,7 +23,9 @@ define(function(require){
 			};
 			this.$el.html(_.template(tpl[this.type], this.model.toJSON()));
 			this.renderControl();
-			this.model.get('required') && this.$('label').append('<em class="text-danger"> * </em>');
+			this.model.get('required') 
+				&& this.type !== 'filter'
+				&& this.$('label').append('<em class="text-danger"> * </em>');
 			return this;
 		},
 		renderControl:function(){
