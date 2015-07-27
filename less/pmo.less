@@ -2,34 +2,6 @@ body {
 	background-color: #F5F5F5 !important;
 }
 
-[class^="icon-"], [class*=" icon-"] {
-  background-image: url(glyphicons-halflings-11.png);
-}
-
-#login-box h1 {
-  color: #fff;
-  text-shadow: black 0px 0px 2px;
-}
-
-#login-box {
-  background-image: url(grey_wash_wall.png);
-  background-repeat: repeat;
-}
-
-#header {
-  background-color: rgb(170,175,179);
-  background-image: linear-gradient(to bottom, rgb(189,194,199), rgb(170,175,179));
-  border-bottom: rgb(140,140,144) 1px solid;
-}
-
-#top-nav .on {
-  background-color: rgb(100,100,104);
-}
-
-#top-nav li {
-	color:#333;
-}
-
 a:visited {
   color: rgb(0,44,150);
 }
@@ -42,39 +14,61 @@ a:hover {
   color: rgb(0,22,49);
 }
 
-#user-statue {
-  color: rgb(0,0,4);
+.navbar-default .navbar-nav > li > a {
+  color: #333;
+  font-size: 15px;
+  text-shadow: 0 -1px 0 rgba(256, 256, 256, 0.5);
 }
 
-#main .aside {
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus {
+  color: #fff;
+  background-color: rgb(100,100,104);
+  text-shadow: none;
+}
+
+.side {
   border-right-color: #ccc;
+  background-color: #F5F5F5;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, .2);
+}
+
+.side .list-group-item {
+  color: #333;
+  border: 1px solid #aaaaaf;
   background-color: #F5F5F5;
 }
 
-#res-menu .on {
-  background-color: rgb(100,100,104);
-  background-image:none;
-}
-
-#res-menu li {
-	border-bottom-color: #AAAAAF;
-  color: #333;
-  background-image:none;
-}
-
-#res-menu i {
-  background-image: url(glyphicons-halflings-11.png);
-}
-
-#res-menu .sub i {
-  background-image: url(glyphicons-halflings-11.png);
-}
-
-#res-menu li .sub .on {
+.side .sub li.list-group-item.active {
   background-color: #F0F0F5;
   border-right-width: 3px;
   border-right-color: rgb(100,100,104);
+}
+
+.side .sub li.active > a, .side .sub li.active > a:focus {
   color: #333;
+}
+
+.side a:link,.side a:visited,.side a:visited,.side a:link,.side a {
+  color: #333;
+}
+
+.side .active>a:link,.side .active>a:visited,.side .active>a:visited,.side .active>a:link,.side .active>a {
+  color: #fff;
+}
+
+.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
+  z-index: 2;
+  color: #333;
+  background-color: rgb(100,100,104);
+  border-color: rgb(100,100,104);
+}
+
+li.active > a, li.active > a:hover, li.active > a:focus {
+  background-color: rgb(100,100,104);
+}
+
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+  background-color: rgb(100,100,104);
 }
 
 .nav-pills > .active > a, .nav-pills > .active > a:hover {
@@ -92,19 +86,20 @@ a:hover {
   background-color: rgb(40,40,44);
 }
 
-.btn-default>i {
-  background-image: url(glyphicons-halflings-11.png);
-}
-
 .btn-default {
   color: #333;
+  text-shadow: none;
 }
 
 .btn i {
   margin-top: -1px;
 }
 
-.table-hover tbody tr.selected {
+.table > thead > tr > td.active, .table > tbody > tr > td.active, .table > tfoot > tr > td.active, .table > thead > tr > th.active, .table > tbody > tr > th.active, .table > tfoot > tr > th.active, .table > thead > tr.active > td, .table > tbody > tr.active > td, .table > tfoot > tr.active > td, .table > thead > tr.active > th, .table > tbody > tr.active > th, .table > tfoot > tr.active > th {
   background-color: #F0F0F5;
   color: #366;
+}
+
+.table-hover > tbody > tr > td.active:hover, .table-hover > tbody > tr > th.active:hover, .table-hover > tbody > tr.active:hover > td, .table-hover > tbody > tr:hover > .active, .table-hover > tbody > tr.active:hover > th {
+  background-color: #e8e8ed;
 }
