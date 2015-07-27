@@ -187,7 +187,7 @@ define(function(require){
 			return this.selecteds.findWhere({_selected:true});
 		},
 		getSelecteds:function(){
-			
+			return this.selecteds.toJSON();
 		},
 		update:function(){
 			this.updateAction();

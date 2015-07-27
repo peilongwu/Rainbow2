@@ -89,14 +89,13 @@ define(function(require){
 		},
 		put:function(){
 			var model = this.view.getActiveModel();
-			console.log(model.idAttribute);
 			this.form(
 				new Backbone.Collection(this.view.updateSchema),
 				model
 			);
 		},
 		"delete":function(){
-			if(!confirm('确认要【' + this.model.get('name') + '】选定的' + this.view.selecteds.length + '项数据？')){
+			if(!confirm('确认要对选定的' + this.view.selecteds.length + '项数据执行【' + this.model.get('name') + '】操作？')){
 				return;
 			}
 			var model = this.view.getActiveModel();
@@ -111,7 +110,32 @@ define(function(require){
 			});
 		},
 		action:function(key){
+			if(!confirm('确认要对选定的' + this.view.selecteds.length + '项数据执行【' + this.model.get('name') + '】操作？')){
+				return;
+			}
 
+			var data = this.view.getSelecteds();
+			var idName = this.view.idName;
+			var url = this.view.model.url + '/' + key;
+
+			data = _.map(data, function(item){
+				var attr = {};
+				attr[idName] = item[idName];
+				return attr;
+			});
+			
+			$.ajax(url, {
+				data: JSON.stringify(data),
+				dataType: 'json',
+				contentType: 'application/json; charset=UTF-8',
+				type: this.model.get('method') ? this.model.get('method') : 'POST',
+			})
+			.success(function(response, options){
+				rainbow.alert(response.content);
+			})
+			.error(function(response, options){
+				rainbow.alert(response.responseJSON.content);
+			});
 		},
 		extend:function(action){
 			var _this = this;
@@ -120,9 +144,15 @@ define(function(require){
 			});
 		},
 		onClick:function(e){
+
 			if(this.model.get('extend')){
 				return this.extend(this.model.get('extend'));
 			}
+
+			if(this.model.get('key')){
+				return this.action(this.model.get('key'));
+			}
+
 			var method = this.model.get('method').toUpperCase();
 			switch(method){
 				case 'PUT':

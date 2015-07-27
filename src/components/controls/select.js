@@ -37,6 +37,9 @@ define(function(require){
 		},
 		renderOption:function(item, index){
 			this.$el.append(_.template(this.optionTpl, item));
+			if(item._childList){
+				
+			}
 			return this;
 		},
 		selected:function(value){
