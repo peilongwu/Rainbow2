@@ -23,12 +23,10 @@ define(function(require){
 			return this;
 		},
 		toggle:function(e){
-			if(this.isHandle && !this.isHead){
-				if($(e.target).hasClass('rb-title')){
-					this.model.set({_details:true});
-				}else{
-					this.active(e, !this.model.get('_selected'));
-				}
+			if($(e.target).hasClass('rb-title')){
+				this.model.set({_details:true});
+			}else if(this.isHandle && !this.isHead){
+				this.active(e, !this.model.get('_selected'));
 			}
 			return this;
 		},

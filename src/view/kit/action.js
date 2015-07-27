@@ -181,8 +181,8 @@ define(function(require){
 			this.$el.append('<div class="btn-group"></div>');
 			return this;
 		},
-		renderItem:function(model, i){
-			model.get('group') && this.addGroup();
+		renderItem:function(model, index){
+			(model.get('group') || index < 1) && this.addGroup();
 			if(!this.view.getSelectedState(model.get('selected'))){
 				return;
 			}
