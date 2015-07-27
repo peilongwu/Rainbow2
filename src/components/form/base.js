@@ -46,7 +46,6 @@ define(function(require){
 			return this.model.toJSON();
 		},
 		onSubmit:function(e){
-			console.log('On Submit');
 			e.preventDefault();
 			this.verify();
 			if(this.callBack){

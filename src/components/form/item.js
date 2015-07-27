@@ -10,6 +10,10 @@ define(function(require){
 			this.type = this.type ? this.type : 'general';
 			this.type === 'filter'
 			&& this.model.set('isNull', !this.model.get('required'))
+			var _this = this;
+			this.form.on('verify', function(){
+				_this.verify();
+			});
 		},
 		events:{
 			'change input,textarea,select':'onChange',
@@ -85,7 +89,7 @@ define(function(require){
 			return this;
 		},
 		verify:function(){
-			
+			this.setValue();
 		},
 		display:function(){
 
@@ -93,8 +97,7 @@ define(function(require){
 		filter:function(){
 
 		},
-		onChange:function(e){
-			this.verify();
+		setValue:function(){
 			var attrs = {};
 			var value = this.control.getValue();
 			var name = this.model.get('name');
@@ -105,6 +108,9 @@ define(function(require){
 			}else{
 				this.form.model.set(attrs, {silent:true});
 			}
+		},
+		onChange:function(e){
+			this.verify();
 		},
 		onFileChange:function(e){
 			this.verify();
