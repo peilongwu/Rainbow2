@@ -89,7 +89,10 @@ define(function(require){
 		},
 		file:{
 			base:'input',
-			type:'file'
+			type:'hidden',
+			display: function(){
+
+			}
 		},
 		hidden:{
 			base:'input',
@@ -113,6 +116,7 @@ define(function(require){
 			base:'select',
 			multiple:'multiple',
 			display:function(){
+				console.log('multiple');
 				var _this = this;
 				setTimeout(function(){
 					_this.$el.css('width','260').select2({

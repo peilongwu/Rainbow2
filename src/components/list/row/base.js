@@ -13,6 +13,7 @@ define(function(require){
 				this.model.on('change',function(model){
 					if(model.changed._selected === undefined){
 						this.render();
+						model.set({_selected:false});
 					}else{
 						this.selectedStyle(model.changed._selected);
 					}

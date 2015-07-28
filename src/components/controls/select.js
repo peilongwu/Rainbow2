@@ -5,12 +5,14 @@ define(function(require){
 		optionTpl:'<option value="<%=value%>"><%=title%></option>',
 		initialize:function(options){
 			Base.prototype.initialize.apply(this, arguments);
+			this.multiple = options.multiple;
 			delete this.attributes.value;
 			delete this.attributes.type;
 		},
 		render:function(){
 			this.before();
 			this.$el.attr(this.attributes);
+			this.multiple && this.$el.attr('multiple', true);
 			_.each(this.model.get('list'), this.renderOption, this)
 			this.after();
 			return this;
