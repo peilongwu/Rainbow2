@@ -58,7 +58,7 @@ define(function(require){
 			var row = new Row({
 				model:model,
 				columns:columns,
-				table:this,
+				list:this,
 				isHead:isHead,
 				isHandle:this.isHandle
 			});

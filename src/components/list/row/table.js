@@ -12,6 +12,7 @@ define(function(require){
 		},
 		render:function(){
 			this.$el.empty();
+
 			_.each(this.columns, function(item){
 				//var name = this.table.getName(item.data);
 				var name = item.name;
@@ -23,6 +24,17 @@ define(function(require){
 				}
 				this.renderCell(new Backbone.Model(item));
 			}, this);
+			this.isHandle && this.handler();
+			return this;
+		},
+		handler:function(){
+			$td = $('<' + this.cellTag + '>');
+			$td.html('<input class="rb-checkbox" type="checkbox">');
+			$td.css({
+				"width":"30px",
+				"text-align": "center"
+			});
+			this.$el.prepend($td);
 			return this;
 		},
 		renderCell:function(model){
