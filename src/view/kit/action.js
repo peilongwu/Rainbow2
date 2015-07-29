@@ -145,7 +145,7 @@ define(function(require){
 		},
 		onClick:function(e){
 
-			if(this.model.get('action').slice(0, 2) == 'e.'){
+			if(this.model.get('action') && this.model.get('action').slice(0, 2) == 'e.'){
 				return this.extend(this.model.get('action').slice(2));
 			}
 
