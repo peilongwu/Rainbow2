@@ -154,3 +154,80 @@ textarea.error, input.error[type="text"], input.error[type="password"], input.er
 .modal-backdrop{
 	background-color:#999;
 }
+
+.tree{
+	
+}
+
+.tree li{
+	/*padding-left:20px;*/
+	cursor: default;
+}
+
+.tree .open>ul{
+	margin-left:20px;
+}
+
+.tree li div{
+	line-height:18px;
+	vertical-align: baseline;
+}
+
+.tree li em{
+	width:15px;
+	height:15px;
+	margin-right:5px;
+	background: url('../img/btn_icon.gif') -45px -180px no-repeat;
+}
+
+.tree li i{
+	width:22px;
+	height:18px;
+	margin-right:5px;
+	background: url('../img/btn_icon.gif') no-repeat -1px -205px;
+}
+
+.tree li i.file{
+	
+}
+
+.tree li>ul{
+	display:none;
+}
+
+.tree li.on{
+	
+}
+
+/*.tree li div:hover{
+	background-color:#EEE;
+}*/
+
+.tree li.on>div>span{
+	background-color:#64ad84;
+	color:#fff;
+}
+
+.tree li.open{
+	
+}
+
+.tree li.open>ul{
+	display:block;
+}
+
+.tree li.open>div>em{
+	background: url('../img/btn_icon.gif') -45px -203px no-repeat;
+}
+
+.tree li.open>div>i{
+	background: url('../img/btn_icon.gif') no-repeat  -2px -227px;
+}
+
+.tree i.node{
+	background-position: -159px -107px;
+}
+
+.tree em.node{
+	background-image: none;
+}

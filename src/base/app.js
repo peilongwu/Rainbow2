@@ -1,12 +1,11 @@
-define(function(require){
+define(function(require, exports, module){
 	var app = {};
 	rainbow = app;
 	require('jquery-plus/cookie');
 	app.cookie = $.cookie;
 	app.mobile = false;
 	app.html5 = false;
-	app.baseUrl = 'http://dev.xiyouqi.cn:8080/develop';
-	
+	app.baseUrl = module.config().baseUrl;
 	var Layout = Backbone.View.extend({
 		tagName:'div',
 		render:function(){

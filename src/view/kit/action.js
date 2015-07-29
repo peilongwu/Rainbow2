@@ -139,14 +139,14 @@ define(function(require){
 		},
 		extend:function(action){
 			var _this = this;
-			require(['../../js/action/' + action], function(action){
-				action.apply(_this);
+			require(['action/' + action], function(action){
+				(typeof action === 'function') && action.apply(_this);
 			});
 		},
 		onClick:function(e){
 
-			if(this.model.get('extend')){
-				return this.extend(this.model.get('extend'));
+			if(this.model.get('action').slice(0, 2) == 'e.'){
+				return this.extend(this.model.get('action').slice(2));
 			}
 
 			if(this.model.get('key')){
