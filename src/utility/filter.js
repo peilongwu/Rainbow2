@@ -8,7 +8,11 @@ define(function(require, exports){
 			return {title:s[1] ? s[1] : s[0], value:s[0]};
 		});
 		var item = _.findWhere(list, {value:value});
-		return item ? item.title : '';
+		var value = item ? item.title : '';
+		if(this.model.get('display') && this.model.get('display') === 'title'){
+			value = '<a class="rb-title" href="javascript:void(0);">' + value + '</a>';
+		}
+		return value;
 	};
 
 	exports.wordbook = function(value){
@@ -18,7 +22,11 @@ define(function(require, exports){
 		where[idName] = value;
 		var title = _.findWhere(model.schema.attributes, {display:'title'});
 		var item = _.findWhere(model.data.collection, where);
-		return item && title ? item[title.name] : '';
+		var value = item && title ? item[title.name] : '';
+		if(this.model.get('display') && this.model.get('display') === 'title'){
+			value = '<a class="rb-title" href="javascript:void(0);">' + value + '</a>';
+		}
+		return value;
 	};
 
 	exports.time = function(value, raw, isDate){
