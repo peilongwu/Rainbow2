@@ -98,14 +98,16 @@ define(function(require){
 			}
 		},
 		loadView:function(params){
-			var view = new ViewModel;
+			var view = new ViewModel({
+				res:this
+			});
 			view.params = params;
 			view.url = rainbow.baseUrl + '/' + this.path.replace(/\//g, '-');
 			view.$body = $('<div class="rb-view view loading"></div>');
 			rainbow.layout.$('.rb-views')
 				.empty()
 				.append(view.$body);
-			view.request(this);
+			view.request();
 		},
 		onClick:function(e){
 			rainbow.route(this.path, {trigger: true});

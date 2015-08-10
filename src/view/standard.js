@@ -63,7 +63,10 @@ define(function(require){
 			this.renderKit();
 			this.setCollection();
 			this.update();
-			this.setBodyHeight();
+			var _this = this;
+			setTimeout(function(){
+				_this.setBodyHeight();
+			}, 50);
 			return this;
 		},
 		renderKit:function(){
@@ -96,7 +99,7 @@ define(function(require){
 				selected:this.selecteds.length,
 				count:count
 			}
-			this.$('.rb-status').html(_.template(stateTpl, status));
+			count && this.$('.rb-status').html(_.template(stateTpl, status));
 			return this;
 		},
 		schemaFilter:function(schema){

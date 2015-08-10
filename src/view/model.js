@@ -3,14 +3,13 @@ define(function(require){
 	var Model = Backbone.Model.extend({
 		idAttribute:'id',
 		initialize:function(options){
-			this.res = null;
+			this.res = options ? options.res : null;
 			this.view = null;
 			this.filter = new Backbone.Model;
 			this.filter.on('change', this.request, this);
 		},
 		request:function(res){
-			//this.res = res ? res : this.res;
-			if(res && 'link' === res.model.get('type')){
+			if(this.res && 'link' === this.res.model.get('type')){
 				return this.iframe(res);
 			}
 			var _this = this;
