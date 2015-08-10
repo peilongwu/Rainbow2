@@ -36,13 +36,13 @@ define(function(require){
 				var path = active.path.slice(0, this.path.length);
 				if(active === this){
 					this.$el.addClass('active');
-					this.$('ul.sub').slideDown();
+					this.$('ul.sub').slideDown('fast');
 				}else if(this.level !== active.level && this.path === path){
 					this.$el.addClass('active');
-					this.$('ul.sub').slideDown();
+					this.$('ul.sub').slideDown('fast');
 				}else{
 					this.$el.removeClass('active');
-					this.$('ul.sub').slideUp();
+					this.$('ul.sub').slideUp('fast');
 				}
 			},this);
 		},

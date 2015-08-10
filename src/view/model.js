@@ -73,7 +73,7 @@ define(function(require){
 			this.view = v;
 			this.view.$el.hide();
 			this.view.render();
-			this.view.$el.fadeIn('slow');
+			this.view.$el.fadeIn('fast');
 			return this;
 		}
 	});
