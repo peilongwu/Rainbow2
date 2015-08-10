@@ -63,7 +63,7 @@ define(function(require){
 		},
 		tab:function(){
 			var schema = _.where(this.parent.model.get('schema').attributes, {type:'collection'});
-			schema.unshift({alias:'详细内容', type:'details'});
+			schema.unshift({alias:'Details', type:'details'});
 			var tab = new Tab({
 				collection: new Backbone.Collection(schema),
 				view:this

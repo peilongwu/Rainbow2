@@ -8,9 +8,9 @@ define(function(require){
 			this.filter = new Backbone.Model;
 			this.filter.on('change', this.request, this);
 		},
-		request:function(res){
+		request:function(){
 			if(this.res && 'link' === this.res.model.get('type')){
-				return this.iframe(res);
+				return this.iframe(this.res);
 			}
 			var _this = this;
 			this.fetch({

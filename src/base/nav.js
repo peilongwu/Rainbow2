@@ -32,7 +32,11 @@ define(function(require){
 			this.collection = new Backbone.Collection(this.model.get('childs'));
 			this.$childs = null;
 			this.view.model.on('change:_active',function(e){
-				if(this.view.model.get('_active').indexOf(this.path) === 0){
+				var active = this.view.model.get('_active');
+				var path = active.path.slice(0, this.path.length);
+				if(active === this){
+					this.$el.addClass('active');
+				}else if(this.level !== active.level && this.path === path){
 					this.$el.addClass('active');
 				}else{
 					this.$el.removeClass('active');
@@ -43,7 +47,7 @@ define(function(require){
 			var name = this.path;
 			var res = this;
 			rainbow.router.route(name + '*path',function(path){
-				console.log('Route:', res.path, '- Paths:', path);
+				//console.log('Route:', res.path, '- Paths:', path);
 				path = path ? path.split('/').slice(1) : path;
 				res.onActive(path);
 			});
@@ -78,14 +82,15 @@ define(function(require){
 			}
 		},
 		onActive:function(childPath){
-			console.log('Active:', this.path,'- Childs Path:', childPath);
+			//console.log('Active:', this.path,'- Childs Path:', childPath);
 			this.childPath = childPath;
-			this.view.model.set('_active', this.path);
-			$('.rb-nav-'  + (this.level + 1)).empty();
+			this.view.model.set('_active', this);
+			var $childs = $('.rb-nav-' + (this.level + 1));
+			$childs.empty();
 			
 			if(this.collection.length > 0){
 				if(!this.$childs){
-					this.$childs = $('.rb-nav-' + (this.level + 1));
+					this.$childs = $childs;
 					if(!this.$childs.size()){
 						this.$childs = $('<ul class="sub"></ul>').appendTo(this.$el);
 					}
