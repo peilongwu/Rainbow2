@@ -10,6 +10,9 @@ define(function(require){
 		},
 		request:function(res){
 			//this.res = res ? res : this.res;
+			if(res && 'link' === res.model.get('type')){
+				return this.iframe(res);
+			}
 			var _this = this;
 			this.fetch({
 				success:function(model, response, options){
@@ -39,17 +42,22 @@ define(function(require){
 			}
 			return this;
 		},
+		iframe:function(res){
+			this.set(res.model.toJSON());
+			return this.createView('Iframe');
+		},
 		extend:function(view){
 			var _this = this;
 			require(['../../js/view/' + view], function(view){
 				view.apply(_this);
 			});
 		},
-		createView:function(){
-			var type = this.get('type');
+		createView:function(type){
+			var type = type ? type : this.get('type');
 			type = type 
-				? type.substring(0, 1).toUpperCase() + type.substring(1).toLowerCase() 
-					: 'Standard';
+				? type.substring(0, 1).toUpperCase() 
+					+ type.substring(1).toLowerCase() 
+				: 'Standard';
 			var v = new View[type]({
 				model: this,
 				res: this.res,

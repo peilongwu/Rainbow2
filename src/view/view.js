@@ -4,6 +4,7 @@ define(function(require){
 		Standard:require('./standard'),
 		Aid:require('./aid'),
 		Preview:require('./preview'),
+		Iframe:require('./iframe')
 	};
 	
 	return view;

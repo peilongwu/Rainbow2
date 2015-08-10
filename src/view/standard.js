@@ -63,6 +63,7 @@ define(function(require){
 			this.renderKit();
 			this.setCollection();
 			this.update();
+			this.setBodyHeight();
 			return this;
 		},
 		renderKit:function(){
@@ -137,8 +138,7 @@ define(function(require){
 				isHandle:this.isHandle,
 				isTree:!!this.model.get('schema').parentIdName
 			});
-
-			widget.render().$el.appendTo(this.$('.rb-content-body').empty());
+			widget.render().$el.appendTo(this.$('.rb-content-body-list').empty());
 		},
 		details:function(model){
 			var details = new Nested({

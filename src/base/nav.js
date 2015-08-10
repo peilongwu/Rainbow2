@@ -93,7 +93,7 @@ define(function(require){
 				this.$childs.empty();
 				this.collection.each(this.renderChild,this);
 				childPath || rainbow.route(this.first.path, {trigger: true});
-			}else if(this.model.get('type') === 'view'){
+			}else if(this.model.get('type') === 'view' || this.model.get('type') === 'link'){
 				this.loadView(childPath);
 			}
 		},
@@ -102,7 +102,9 @@ define(function(require){
 			view.params = params;
 			view.url = rainbow.baseUrl + '/' + this.path.replace(/\//g, '-');
 			view.$body = $('<div class="rb-view loading"></div>');
-			rainbow.layout.$('.rb-views').empty().append(view.$body);
+			rainbow.layout.$('.rb-views')
+				.empty()
+				.append(view.$body);
 			view.request(this);
 		},
 		onClick:function(e){
