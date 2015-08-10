@@ -30,7 +30,7 @@ define(function(require){
 			return this;
 		},
 		hide:function(){
-			rainbow.un('resize',this.resize,this);
+			rainbow.off('resize',this.resize,this);
 			this.$el.hide();
 			this.trigger('hide');
 			return this;
@@ -45,7 +45,7 @@ define(function(require){
 			this.trigger('error');
 		},
 		destroy:function(){
-			rainbow.un('resize',this.resize,this);
+			rainbow.off('resize',this.resize,this);
 			this.trigger('destroy');
 			this.remove();
 		}
