@@ -1,12 +1,12 @@
 define(function(require){
 	var Details = Backbone.View.extend({
-		tagName:'table',
-		className:'table table-bordered',
+		tagName:'div',
+		className:'details',
 		initialize:function(options){
 			this.schema = options.schema;
 		},
 		render:function(){
-			this.$el.append('<tbody></tbody>');
+			this.$el.append('<table class="table table-bordered"><tbody></tbody></table>');
 			this.collection.each(function(model){
 				var title = model.get('alias') ? model.get('alias') : model.get('name');
 				var value = this.model.get(model.get('name')) ? this.model.get(model.get('name')) : '';

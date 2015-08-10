@@ -109,7 +109,7 @@ define(function(require){
 					_this.$el.css('width','260').select2({
 					  theme: "classic"
 					});
-				}, 50);
+				}, 10);
 			}
 		},
 		multiple:{
@@ -122,7 +122,7 @@ define(function(require){
 					_this.$el.css('width','260').select2({
 					  theme: "classic"
 					});
-				}, 50);
+				}, 10);
 			}
 		}
 	};

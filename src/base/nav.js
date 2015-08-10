@@ -36,10 +36,13 @@ define(function(require){
 				var path = active.path.slice(0, this.path.length);
 				if(active === this){
 					this.$el.addClass('active');
+					this.$('ul.sub').slideDown();
 				}else if(this.level !== active.level && this.path === path){
 					this.$el.addClass('active');
+					this.$('ul.sub').slideDown();
 				}else{
 					this.$el.removeClass('active');
+					this.$('ul.sub').slideUp();
 				}
 			},this);
 		},
@@ -69,7 +72,7 @@ define(function(require){
 		renderChild:function(model,i){
 			var v = new Item({
 				model:model, path:this.path, view:this.view, parent:this,
-				tplId:'tpl-nav-child-item',tagName:'li',className:'list-group-item',
+				tplId:'tpl-nav-item',tagName:'li',className:'list-group-item',
 				level:this.level + 1
 			});
 			
@@ -142,7 +145,7 @@ define(function(require){
 				parent:this, 
 				level:0, 
 				tagName:'li',
-				tplId:'tpl-nav-child-item'
+				tplId:'tpl-nav-item'
 			});
 			this.$el.append(v.render().el);
 			this.first = this.first ? this.first : v;

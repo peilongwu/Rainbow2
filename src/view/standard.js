@@ -108,6 +108,8 @@ define(function(require){
 					o.format = filter['enum'];
 				}else if(o.dataType === 'wordbook'){
 					o.format = filter['wordbook'];
+				}else if(o.dataType === 'date'){
+					o.format = filter['date'];
 				}else if(o.metaType === 'Time'){
 					o.format = filter['time'];
 				}else if(o.name === this.idName){

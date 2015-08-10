@@ -22,7 +22,7 @@ define(function(require){
 		},
 		render:function(){
 			var tpl = {
-				general:'<label class="col-sm-2 control-label"><%=alias?alias:name%></label><div class="col-sm-10"></div>',
+				general:'<label class="col-sm-3 control-label"><%=alias?alias:name%></label><div class="col-sm-9"></div>',
 				filter:'<label><%=alias?alias:name%></label>'
 			};
 			this.$el.html(_.template(tpl[this.type], this.model.toJSON()));

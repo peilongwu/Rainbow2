@@ -36,16 +36,18 @@ define(function(require, exports){
 			var date = new Date(time);
 			var today = new Date();
 			var y = date.getFullYear();
-			if(true !== raw){
+			if(!raw){
 				y = y.toString().slice(2);
+			}else if(2 === raw){
+				y = '';
 			}
 			var m = date.getMonth() + 1;
 			m = m < 10 ? '0' + m : m;
 			var d = date.getDate();
 			d = d < 10 ? '0' + d : d;
-			str += y + '-';
-			str += m + '-';
-			str += d + '';
+			str += y ? y + '-' : '';
+			str += m ? m + '-' : '';
+			str += d ? d + '' : '';
 			if(true !== isDate){
 				str += ' ' + (date.getHours()<10?'0'+date.getHours():date.getHours());
 				str += ':' + (date.getMinutes()<10?'0'+date.getMinutes():date.getMinutes());
@@ -55,6 +57,10 @@ define(function(require, exports){
 		}
 		return str;
 	}
+
+	exports.date = function(value){
+		return exports.time(value, 2, true);
+	};
 
 	exports.id = function(value){
 		return value;

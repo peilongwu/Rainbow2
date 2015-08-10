@@ -49,7 +49,8 @@ define(function(require){
 		modal:function(content){
 			var modal = new Modal({
 				model: new Backbone.Model({
-					title: this.model.get('legend') ? this.model.get('legend') : this.model.get('name')
+					title: this.model.get('legend') ? this.model.get('legend') : this.model.get('name'),
+					type:'modal-sm'
 				}),
 				content:content,
 				tpl:'#tpl-modal-form'
