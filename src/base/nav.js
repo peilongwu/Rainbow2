@@ -40,7 +40,7 @@ define(function(require){
 				}else if(this.level !== active.level && this.path === path){
 					this.$el.addClass('active');
 					this.$('ul.sub').slideDown('fast');
-				}else{
+				}else if(this.$el.hasClass('active')){
 					this.$el.removeClass('active');
 					this.$('ul.sub').slideUp('fast');
 				}
