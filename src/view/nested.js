@@ -55,6 +55,10 @@ define(function(require){
 			this.parent.hide();
 			Base.prototype.render.apply(this, arguments);
 			this.tab();
+			var _this = this;
+			setTimeout(function(){
+				_this.setBodyHeight();
+			}, 50);
 			return this;
 		},
 		tab:function(){
