@@ -99,6 +99,7 @@ define(function(require){
 				selected:this.selecteds.length,
 				count:count
 			}
+			this.$('.rb-status').empty();
 			count && this.$('.rb-status').html(_.template(stateTpl, status));
 			return this;
 		},
