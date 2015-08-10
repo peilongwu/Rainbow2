@@ -7,19 +7,18 @@ define(function(require){
 			method:'POST',
 			url: rainbow.baseUrl + '/signin',
 			data:{
-				appId:'develop',
 				userId:$box.find('input[name=userId]').val(),
 				password:$box.find('input[name=password]').val()
 			},
 			async: false
 		})
-		.error(function(){
-			rainbow.alert('用户名密码错误');
+		.error(function(response){
+			rainbow.alert(response.responseJSON.content);
 		})
 		.success(function(){
 			rainbow.cookie('status',1);
-			$box.fadeOut();
 			rainbow.nav.request(rainbow.back);
+			$box.fadeOut();
 		});
 	});
 	

@@ -10,6 +10,7 @@ define(function(require){
 		Rainbow = Backbone;
 		require(['./base/app'], function(app){
 			require(['./base/nav'], function(nav){
+				app.nav = nav;
 				if(!app.sign.isIn()){
 					app.start();
 					app.route('signin', {trigger: true});
