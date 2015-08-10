@@ -81,16 +81,26 @@ define(function(require){
 		getUrl:function(){
 			
 		},
+		listFilter:function(schema){
+			var list = this.model.get('list');
+			if(list){
+				list = list.split(',');
+				schema = _.filter(schema, function(item){
+					return _.indexOf(list, item.name) >= 0;
+				});
+			}
+			return schema;
+		},
 		post:function(){
 			this.form(
-				new Backbone.Collection(this.view.createSchema),
+				new Backbone.Collection(this.listFilter(this.view.createSchema)),
 				new this.view.Model
 			);
 		},
 		put:function(){
 			var model = this.view.getActiveModel();
 			this.form(
-				new Backbone.Collection(this.view.updateSchema),
+				new Backbone.Collection(this.listFilter(this.view.updateSchema)),
 				model
 			);
 		},
