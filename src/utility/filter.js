@@ -1,6 +1,6 @@
 define(function(require, exports){
 
-	exports.enum =  function(value){
+	exports.enum =  function(value, row, ignoreTitle){
 		//var model = this.model.get('typeObject');
 		list = this.model.get('list').split(',');
 		list = _.map(list, function(item){
@@ -9,13 +9,13 @@ define(function(require, exports){
 		});
 		var item = _.findWhere(list, {value:value});
 		var value = item ? item.title : '';
-		if(this.model.get('display') && this.model.get('display') === 'title'){
+		if(!ignoreTitle && this.model.get('display') && this.model.get('display') === 'title'){
 			value = '<a class="rb-title" href="javascript:void(0);">' + value + '</a>';
 		}
 		return value;
 	};
 
-	exports.wordbook = function(value){
+	exports.wordbook = function(value, row, ignoreTitle){
 		var model = this.model.get('typeObject');
 		var idName = model.schema.idName;
 		var where = {};
@@ -23,7 +23,7 @@ define(function(require, exports){
 		var title = _.findWhere(model.schema.attributes, {display:'title'});
 		var item = _.findWhere(model.data.collection, where);
 		var value = item && title ? item[title.name] : '';
-		if(this.model.get('display') && this.model.get('display') === 'title'){
+		if(!ignoreTitle && this.model.get('display') && this.model.get('display') === 'title'){
 			value = '<a class="rb-title" href="javascript:void(0);">' + value + '</a>';
 		}
 		return value;

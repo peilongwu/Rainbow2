@@ -32,7 +32,8 @@ define(function(require){
 			return this;
 		},
 		render:function(){
-			this.$el.html(_.template('<div class="table-cell">' + this.format() + '</div>')(this.model.toJSON()));
+			var tpl = '<div class="table-cell">' + this.format() + '</div>';
+			this.$el.html(_.template(tpl)(this.model.toJSON()));
 			this.model.get('className') && this.$el.addClass(this.model.get('className'));
 			this.model.get('rowspan') && !this.isHead && this.rowspan();
 			var display = this.model.get('display');

@@ -6,6 +6,7 @@ define(function(require){
 	};
 	var Pagination = require('./kit/pagination')
 	var Table = require('../components/list/table');
+	var Schedule = require('../components/list/schedule');
 	var filter = require('../utility/filter');
 	var Nested = require('./nested');
 
@@ -138,7 +139,15 @@ define(function(require){
 				data:this.collection
 			});
 
-			var widget = new Table({
+			var Widget = {
+				Table:Table,
+				Schedule:Schedule
+			};
+
+			var type = this.model.get('mode') === 'schedule' ?
+				'Schedule' : 'Table';
+
+			var widget = new Widget[type]({
 				model:model,
 				view:this,
 				isHandle:this.isHandle,
@@ -203,6 +212,7 @@ define(function(require){
 		},
 		updateAction:function(){
 			this.renderKitItem('Action', this.kits.Action);
+			this.setBodyHeight();
 			return this;
 		},
 		error:function(){

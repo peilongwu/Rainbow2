@@ -23,6 +23,12 @@ body{
 	padding-top: 50px;
 }
 
+input.form-control[type="checkbox"] {
+	width: auto;
+	height: auto;
+	margin:10px 0;
+}
+
 /*html,body{ height:100%; overflow:hidden;}*/
 
 .navbar {
@@ -89,6 +95,10 @@ body{
 	padding-left:@sideWidth;
 	//padding-right:40%;
 	position:relative;
+}
+
+.side {
+
 }
 
 .side {
@@ -247,6 +257,69 @@ li.active > a,li.active > a:hover, li.active > a:focus {
 
 .table-hover > tbody > tr:hover > td, .table-hover > tbody > tr:hover > th {
   background-color: #FFC;
+}
+
+.schedule {
+	margin-left: -15px;
+	border: solid 1px #ddd;
+}
+
+.schedule-title {
+	float: left;
+	width:120px;
+	padding:8px;
+	height: 36px;
+	overflow: hidden;
+	border-bottom: solid 1px #ddd;
+	border-right: solid 1px #ddd;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.schedule-header .schedule-title {
+	height:72px;
+}
+
+.schedule-row {
+	position: relative;
+}
+
+.schedule-event {
+	position: absolute;
+	overflow: hidden;
+	white-space: nowrap;
+  text-overflow: ellipsis;
+	padding:8px;
+	height: 35px;
+	left:120px;
+	color:#fff;
+}
+
+.schedule-event .schedule-cell:after {
+	content: ' , '
+}
+
+.schedule-days {
+	float: left;
+}
+
+.schedule-day {
+	float: left;
+	overflow: hidden;
+	width:45px;
+	text-align: center;
+	border-right: solid 1px #ddd;
+}
+
+.schedule-day.muted {
+	background-color: #f7f7f7;
+}
+
+.schedule-day span {
+	display: block;
+	padding: 8px;
+	height: 36px;
+	border-bottom: solid 1px #ddd;
 }
 
 @import url("classic.less");

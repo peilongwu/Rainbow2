@@ -59,17 +59,17 @@
         </div>
         <ul class="nav navbar-nav navbar-right">
           <li>
-            <a href="#">
+            <a href="javascript:void(0);">
               <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="javascript:void(0);">
               <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
             </a>
           </li>
           <li>
-            <a href="#">
+            <a href="javascript:void(0);">
               <span class="glyphicon glyphicon-bell" aria-hidden="true"></span>
             </a>
           </li>
@@ -84,7 +84,7 @@
   </nav>
   <div class="container" id="container">
     <div class="side">
-    <ul class="list-group rb-nav-1"></ul>
+      <ul class="list-group rb-nav-1"></ul>
     </div>
     <div class="main">
       <div class="rb-views"></div>
@@ -116,7 +116,8 @@
     <div class="rb-view-content pull-left" style="width:100%; overflow: hidden;">
       <div class="rb-content-header"></div>
       <div class="rb-content-body content-body" style="background-color:#fff;">
-        <div class="rb-content-body-list" style="padding:0 15px"></div>
+        <div class="rb-content-body-list" style="padding:0 15px">
+        </div>
       </div>
       <div class="rb-view-footer clearfix">
         <div class="rb-status pull-left" style="padding:17px"></div>
@@ -160,6 +161,17 @@
 </script>
 <script type="text/template" id="tpl-view-preview">
   
+</script>
+<script type="text/template" id="tpl-list-schedule">
+  <div class="schedule-header"></div>
+  <div class="schedule-body">
+    <div class="schedule-list"></div>
+  </div>
+</script>
+<script type="text/template" id="tpl-list-schedule-row">
+  <div class="schedule-title"></div>
+  <div class="schedule-days"></div>
+  <div class="schedule-events"></div>
 </script>
 <script type="text/template" id="tpl-modal">
   <div class="modal-dialog">
