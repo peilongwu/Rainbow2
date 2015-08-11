@@ -32,8 +32,11 @@ define(function(require){
 				collection:collection,
 				model:model
 			}).render();
-			
-			form.model.urlRoot = this.view.model.url;
+			if(this.model.get('key')){
+				form.model.url = this.view.model.url + '/' + this.model.get('key');
+			}else{
+				form.model.urlRoot = this.view.model.url;
+			}
 			var modal = this.modal(form.el);
 
 			modal.$('.rb-submit:not(.disabled)').on('click', function(e){
@@ -92,6 +95,24 @@ define(function(require){
 			}
 			return schema;
 		},
+		one:function(){
+			this.batch(1);
+		},
+		batch:function(num){
+			var len = this.view.selecteds.length;
+			if(num && len > num){
+				return alert('Selected items can not be superfluous ' + num);
+			}
+
+			var confirmText = 'Confirm the selected ' 
+			+ len + ' items to【' + this.model.get('name') + '】operate?';
+
+			if(!confirm(confirmText)){
+				return;
+			}
+
+			this.action();
+		},
 		post:function(){
 			this.form(
 				new Backbone.Collection(this.listFilter(this.view.createSchema)),
@@ -106,7 +127,7 @@ define(function(require){
 			);
 		},
 		"delete":function(){
-			if(!confirm('确认要对选定的' + this.view.selecteds.length + '项数据执行【' + this.model.get('name') + '】操作？')){
+			if(!confirm('Confirm the selected ' + this.view.selecteds.length + ' items to【' + this.model.get('name') + '】operate?')){
 				return;
 			}
 			var model = this.view.getActiveModel();
@@ -120,14 +141,11 @@ define(function(require){
 				}
 			});
 		},
-		action:function(key){
-			if(!confirm('确认要对选定的' + this.view.selecteds.length + '项数据执行【' + this.model.get('name') + '】操作？')){
-				return;
-			}
+		action:function(){
 
 			var data = this.view.getSelecteds();
 			var idName = this.view.idName;
-			var url = this.view.model.url + '/' + key;
+			var url = this.view.model.url + '/' + this.model.get('key');
 
 			data = _.map(data, function(item){
 				var attr = {};
@@ -155,13 +173,13 @@ define(function(require){
 			});
 		},
 		onClick:function(e){
-
-			if(this.model.get('action') && this.model.get('action').slice(0, 2) == 'e.'){
-				return this.extend(this.model.get('action').slice(2));
+			var action = this.model.get('action');
+			if(action && action.slice(0, 2) == 'e.'){
+				return this.extend(action.slice(2));
 			}
 
-			if(this.model.get('key')){
-				return this.action(this.model.get('key'));
+			if(action && this[action]){
+				return this[action]();
 			}
 
 			var method = this.model.get('method').toUpperCase();
