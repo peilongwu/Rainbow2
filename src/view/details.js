@@ -1,7 +1,7 @@
 define(function(require){
 	var Details = Backbone.View.extend({
 		tagName:'div',
-		className:'details',
+		className:'details content-body',
 		initialize:function(options){
 			this.schema = options.schema;
 		},

@@ -61,6 +61,8 @@ define(function(require){
 				model: this,
 				res: this.res,
 				coms: View,
+				nestedLevel:this.nestedLevel,
+				parent:this.parent,
 				attributes:{
 					id: 'view-' + this.id
 				}

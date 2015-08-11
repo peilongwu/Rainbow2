@@ -46,7 +46,7 @@ define(function(require){
 		initialize:function(options){
 			Base.prototype.initialize.apply(this, arguments);
 			this.parent = options.parent
-			this.level = options.nestedLevel ? this.nestedLevel + 1 : 1;
+			this.nestedLevel = options.nestedLevel ? options.nestedLevel : 1;
 		},
 		events:{
 			'click .rb-back':'exit'
@@ -84,15 +84,18 @@ define(function(require){
 				collection:new Backbone.Collection(schema)
 			}).render();
 			this.$('.rb-subview').html(details.el);
+			this.setBodyHeight();
 		},
 		collection:function(model){
 			var view = new rainbow.ViewModel;
 			view.$body = this.$('.rb-subview');
+			view.nestedLevel = this.nestedLevel ? this.nestedLevel + 1 : 1;
+			view.parent = this;
 			var idName = this.parent.idName;
 			view.url = this.parent.model.url + '/' + this.model.get(idName) + '/' + model.get('name');
-			setTimeout(function(){
+			//setTimeout(function(){
 				view.request();
-			}, 100);
+			//}, 100);
 		},
 		exit:function(e){
 			this.destroy();
