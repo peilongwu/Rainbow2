@@ -129,6 +129,7 @@ define(function(require){
 				return this.idName === o.name 
 				|| (o.hidden && ['list','all'].indexOf(o.hidden) >= 0)
 				|| o.type === 'collection'
+				|| o.type === 'link'
 				|| o.type === 'model';
 			}, this);
 

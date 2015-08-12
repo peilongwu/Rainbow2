@@ -13,6 +13,9 @@ define(function(require){
 
 	var Row = Base.extend({
 		className:'schedule-event',
+		events:{
+			'click':'onClick'
+		},
 		initialize:function(options){
 			Base.prototype.initialize.apply(this, arguments);
 			this.cellTag = 'span';
@@ -44,6 +47,9 @@ define(function(require){
 				attributes:model.get('attributes')
 			});
 			cell.render().$el.appendTo(this.$el);
+		},
+		onClick:function(e){
+			
 		}
 	});
 	return Row;

@@ -1,6 +1,7 @@
 define(function(require){
 	var Base = require('./base');
 	var Details = require('./details');
+	var Iframe = require('./iframe');
 	var Item = Backbone.View.extend({
 		tagName:'li',
 		events:{
@@ -62,7 +63,9 @@ define(function(require){
 			return this;
 		},
 		tab:function(){
-			var schema = _.where(this.parent.model.get('schema').attributes, {type:'collection'});
+			var schema = _.filter(this.parent.model.get('schema').attributes, function(item){
+				return item.type === 'collection' || item.type === 'link';
+			});
 			schema.unshift({alias:'Details', type:'details'});
 			var tab = new Tab({
 				collection: new Backbone.Collection(schema),
@@ -85,6 +88,16 @@ define(function(require){
 			}).render();
 			this.$('.rb-subview').html(details.el);
 			this.setBodyHeight();
+		},
+		link:function(model){
+			var iframe = new Iframe({
+				model:new Backbone.Model({
+					url:model.get('value')
+				}),
+				parent:this,
+				nestedLevel:this.nestedLevel ? this.nestedLevel + 1 : 1
+			});
+			this.$('.rb-subview').html(iframe.render().el);
 		},
 		collection:function(model){
 			var view = new rainbow.ViewModel;

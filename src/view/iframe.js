@@ -10,9 +10,9 @@ define(function(require){
 			+ this.model.get('url') + '"'
 			+ 'height="100%" width="100%" style="visibility: visible;"></iframe>';
 			this.$el.append(this.template());
-			this.setBodyHeight();
 			//this.breadcrumb();
 			this.$('.rb-content-body').html(iframe).css('padding',0);
+			this.setBodyHeight();
 			return this;
 		},
 		breadcrumb:function(){
