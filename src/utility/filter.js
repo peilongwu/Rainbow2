@@ -8,7 +8,7 @@ define(function(require, exports){
 			return {title:s[1] ? s[1] : s[0], value:s[0]};
 		});
 		var item = _.findWhere(list, {value:value});
-		var value = item ? item.title : '';
+		var value = item ? item.title : value;
 		if(!ignoreTitle && this.model.get('display') && this.model.get('display') === 'title'){
 			value = '<a class="rb-title" href="javascript:void(0);">' + value + '</a>';
 		}

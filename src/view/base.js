@@ -23,8 +23,8 @@ define(function(require){
 			$('.rb-view').height($(window).innerHeight() - h);
 			if(this.widget && this.widget.copyHeader){
 				this.$('.rb-content-header')
-				.css('padding','0 15px')
-				.html(this.widget.copyHeader());
+				.html(this.widget.copyHeader())
+				.css('padding','0 15px');
 			}
 			return this;
 		},

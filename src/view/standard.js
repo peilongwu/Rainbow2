@@ -153,6 +153,7 @@ define(function(require){
 			});
 			widget.render().$el.appendTo(this.$('.rb-content-body-list').empty());
 			this.widget = widget;
+			this.setBodyHeight();
 		},
 		details:function(model){
 			var details = new Nested({
@@ -210,7 +211,7 @@ define(function(require){
 			var _this = this;
 			setTimeout(function(){
 				_this.setBodyHeight();
-			}, 50);
+			}, 30);
 			return this;
 		},
 		updateAction:function(){

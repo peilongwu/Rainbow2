@@ -73,9 +73,9 @@ define(function(require){
 				.append(v.el);
 			rainbow.current = v;
 			this.view = v;
-			this.view.$el.hide();
+			//this.view.$el.hide();
 			this.view.render();
-			this.view.$el.fadeIn('fast');
+			//this.view.$el.fadeIn('fast');
 			return this;
 		}
 	});
