@@ -64,10 +64,6 @@ define(function(require){
 			this.renderKit();
 			this.setCollection();
 			this.update();
-			var _this = this;
-			setTimeout(function(){
-				_this.setBodyHeight();
-			}, 50);
 			return this;
 		},
 		renderKit:function(){
@@ -89,7 +85,7 @@ define(function(require){
 				view: this
 			}).render();
 			var page = this.model.get('data').pagination;
-			var stateTpl = '当前 <%=first%>-<%=end%> 项，选中 <span class="rb-status-selected"><%=selected%></span> 项，共 <%=count%> 项';
+			var stateTpl = 'Current <%=first%> - <%=end%> items , selected <span class="rb-status-selected"> <%=selected%> </span> items , total <%=count%> items';
 			var first = page ? page.size * (page.current-1) + 1 : 1;
 			var count = this.model.get('data').count;
 			var end = page ? first + page.size - 1 : count;
@@ -101,7 +97,8 @@ define(function(require){
 				count:count
 			}
 			this.$('.rb-status').empty();
-			count && this.$('.rb-status').html(_.template(stateTpl, status));
+			stateTpl = count ? stateTpl : 'Current 0 items';
+			this.$('.rb-status').html(_.template(stateTpl, status));
 			return this;
 		},
 		schemaFilter:function(schema){
@@ -123,7 +120,7 @@ define(function(require){
 			}, this);
 			return schema;
 		},
-		widget:function(){
+		renderWidget:function(){
 
 			var schema = _.reject(this.model.get('schema').attributes, function(o){
 				return this.idName === o.name 
@@ -155,6 +152,7 @@ define(function(require){
 				isTree:!!this.model.get('schema').parentIdName
 			});
 			widget.render().$el.appendTo(this.$('.rb-content-body-list').empty());
+			this.widget = widget;
 		},
 		details:function(model){
 			var details = new Nested({
@@ -208,7 +206,11 @@ define(function(require){
 		update:function(){
 			this.updateAction();
 			this.pagination();
-			this.widget();
+			this.renderWidget();
+			var _this = this;
+			setTimeout(function(){
+				_this.setBodyHeight();
+			}, 50);
 			return this;
 		},
 		updateAction:function(){

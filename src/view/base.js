@@ -5,6 +5,7 @@ define(function(require){
 			this.coms = options ? options.coms : null;
 			this.nestedLevel = options ? options.nestedLevel : null;
 			this.parent = options ? options.parent : null;
+			this.widget = null;
 			rainbow.on('resize',this.resize,this);
 		},
 		template:function(tpl){
@@ -20,6 +21,11 @@ define(function(require){
 				$(window).innerHeight() - h - vh - vch - f
 			);
 			$('.rb-view').height($(window).innerHeight() - h);
+			if(this.widget && this.widget.copyHeader){
+				this.$('.rb-content-header')
+				.css('padding','0 15px')
+				.html(this.widget.copyHeader());
+			}
 			return this;
 		},
 		getHeaderHeight:function(){

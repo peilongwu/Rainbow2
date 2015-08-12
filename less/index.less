@@ -20,7 +20,7 @@ html,body {
 body{
 	background-color:@bgColor;
 	font:Verdana, Geneva, sans-serif @fontSize;
-	padding-top: 50px;
+	padding-top: 52px;
 }
 
 input.form-control[type="checkbox"] {
@@ -212,8 +212,28 @@ input.form-control[type="checkbox"] {
 	//position:fixed;
 }
 
+.rb-content-header {
+  border-bottom: #DDD 1px solid;
+  border-top: #DDD 1px solid;
+  background-color: whiteSmoke;
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#E6E6E6));
+  background-image: -webkit-linear-gradient(top, white, #E6E6E6);
+  background-image: -o-linear-gradient(top, white, #E6E6E6);
+  background-image: linear-gradient(to bottom, white, #E6E6E6);
+  background-image: -moz-linear-gradient(top, white, #E6E6E6);
+  background-repeat: repeat-x;
+  filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ffffff', endColorstr='#e6e6e6', GradientType=0);
+  color: #336666;
+}
+
+.rb-content-header .table > thead > tr > th {
+  vertical-align: bottom;
+  border-bottom: 0;
+}
+
 .view {
 	overflow: hidden;
+	background-color: #fff;
 }
 
 .details {

@@ -38,6 +38,20 @@ define(function(require){
 			this.$('tbody').empty();
 			return this;
 		},
+		copyHeader:function(){
+			var $table = $('<table class="table table-condensed table-hover widget-table"></table>')
+			var $thead = this.$('thead');
+			var $list = $thead.find('th');
+			var $copy = $thead.clone();
+			var $copyList = $copy.find('th');
+			$table.height($thead.height());
+			this.$el.css('margin-top', - $thead.height() - 1);
+			$copyList.each(function(index, e){
+				$(e).css('width', $list.eq(index).outerWidth());
+			});
+			$table.append($copy);
+			return $table;
+		},
 		update:function(){
 			this.empty();
 			this.header();
