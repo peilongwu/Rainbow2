@@ -44,9 +44,10 @@ define(function(require){
 			});
 
 			form.on('success',function(){
-				this.view.collection.add([form.model]);
+				//this.view.collection.add([form.model]);
+				this.view.model.request();
 				modal.close();
-			}, this)
+			}, this);
 			return this;
 		},
 		modal:function(content){
@@ -146,7 +147,8 @@ define(function(require){
 					return attr;
 				});
 			}
-			
+
+			var _this = this;
 			$.ajax(url, {
 				data: JSON.stringify(data),
 				dataType: 'json',
@@ -154,6 +156,7 @@ define(function(require){
 				type: this.model.get('method') ? this.model.get('method') : 'POST',
 			})
 			.success(function(response, options){
+				_this.view.model.request();
 				rainbow.alert(response.content);
 			})
 			.error(function(response, options){

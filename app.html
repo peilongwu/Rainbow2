@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>EAD</title>
+    <title>${appName}</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="js/vendor/modernizr-2.8.0.min.js"></script>
@@ -14,12 +14,16 @@
     <script src="js/vendor/require.js"></script>
     <script>
     (function(){
+      var EAD_APP = {
+
+      };
       var rainbow,Rainbow;        
       require.config({
         urlArgs: 'bust=' + (new Date()).getTime(),
         paths: {
           'underscore': 'js/vendor/underscore-min',
           'backbone': 'js/vendor/backbone-min',
+          'moment': 'js/vendor/moment.min',
           'select2': 'js/vendor/select2-4.0.0/js/select2.full.min',
           'jquery': 'js/vendor/jquery-1.11.0.min',
           'jquery-plus': "js/vendor/jquery",
