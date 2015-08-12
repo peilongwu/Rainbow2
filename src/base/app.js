@@ -10,6 +10,7 @@ define(function(require, exports, module){
 		tagName:'div',
 		render:function(){
 			this.$el.html($('#tpl-layout').html());
+			this.$el.height('100%');
 			return this;
 		}
 	});
