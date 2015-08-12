@@ -111,7 +111,7 @@ define(function(require){
 				return;
 			}
 
-			this.action();
+			this.action(this.view.model.url + '/' + this.model.get('key'));
 		},
 		post:function(){
 			this.form(
@@ -130,28 +130,22 @@ define(function(require){
 			if(!confirm('Confirm the selected ' + this.view.selecteds.length + ' items to【' + this.model.get('name') + '】operate?')){
 				return;
 			}
-			var model = this.view.getActiveModel();
-			model.urlRoot = this.view.model.url;
-			model.destroy({
-				success:function(model, response, options){
-					rainbow.alert(response.content);
-				},
-				error:function(model, response, options){
-					rainbow.alert(response.responseJSON.content);
-				}
-			});
+			this.action(this.view.model.url, true);
 		},
-		action:function(){
+		action:function(url, isIdArray){
 
 			var data = this.view.getSelecteds();
 			var idName = this.view.idName;
-			var url = this.view.model.url + '/' + this.model.get('key');
 
-			data = _.map(data, function(item){
-				var attr = {};
-				attr[idName] = item[idName];
-				return attr;
-			});
+			if(isIdArray){
+				data = _.pluck(data, idName);
+			}else{
+				data = _.map(data, function(item){
+					var attr = {};
+					attr[idName] = item[idName];
+					return attr;
+				});
+			}
 			
 			$.ajax(url, {
 				data: JSON.stringify(data),
