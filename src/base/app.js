@@ -73,7 +73,7 @@ define(function(require, exports, module){
 
 	//Backbone.emulateJSON = true;
 	//Backbone.emulateHTTP = true;
-	//$.support.cors = true;
+
 	//$.Ajax 跨域选项配置
 	$.ajaxPrefilter(function(options, originalOptions, jqXHR) {
     options.crossDomain = {
