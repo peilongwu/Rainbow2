@@ -9,8 +9,7 @@ define(function(require){
 			data:{
 				userId:$box.find('input[name=userId]').val(),
 				password:$box.find('input[name=password]').val()
-			},
-			async: false
+			}
 		})
 		.error(function(response){
 			rainbow.alert(response.responseJSON.content);
@@ -27,6 +26,7 @@ define(function(require){
 			$box.fadeIn();
 		},
 		'logout':function(){
+			$.post(rainbow.baseUrl + '/signout');
 			rainbow.cookie('status', '');
 			rainbow.route('signin', {trigger: true});
 		},

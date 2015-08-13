@@ -75,14 +75,16 @@ define(function(require, exports, module){
 	//Backbone.emulateHTTP = true;
 
 	//$.Ajax 跨域选项配置
-	$.ajaxPrefilter(function(options, originalOptions, jqXHR) {
-    options.crossDomain = {
-        crossDomain: true
-    };
-    options.xhrFields = {
-        withCredentials: true
-    };
-	});
+	if('dev.xiyouqi.cn' !== location.hostname){
+		$.ajaxPrefilter(function(options, originalOptions, jqXHR) {
+	    options.crossDomain = {
+	      crossDomain: true
+	    };
+	    options.xhrFields = {
+	        withCredentials: true
+	    };
+		});
+	}
 
 	return app;
 });
