@@ -171,7 +171,7 @@ define(function(require){
 				view.start();
 			},
 			error:function(collection, response, options){
-				alert(response.responseJSON.content);
+				//alert(response.responseJSON.content);
 				rainbow.start();
 				rainbow.route('signin', {trigger: true});
 			}

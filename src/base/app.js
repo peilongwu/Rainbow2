@@ -2,6 +2,7 @@ define(function(require, exports, module){
 	var app = {};
 	rainbow = app;
 	require('jquery-plus/cookie');
+	require('jquery-plus/jquery.xdomainrequest.min');
 	app.cookie = $.cookie;
 	app.mobile = false;
 	app.html5 = false;
@@ -74,7 +75,7 @@ define(function(require, exports, module){
 
 	//Backbone.emulateJSON = true;
 	//Backbone.emulateHTTP = true;
-
+	//$.support.cors = true;
 	//$.Ajax 跨域选项配置
 	$.ajaxPrefilter(function(options, originalOptions, jqXHR) {
     options.crossDomain = {

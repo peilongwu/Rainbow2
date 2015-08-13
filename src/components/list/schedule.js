@@ -128,6 +128,14 @@ define(function(require){
 				'background-color':this.colors[index]
 			});
 		},
+		copyHeader2:function(){
+			var $schedule = $('<div class="schedule"></div>')
+			var $header = this.$('.schedule-header').clone();
+			this.$el.css('margin-top', - this.$('.schedule-header').height() - 1);
+			$schedule.width(this.$el.outerWidth());
+			$schedule.append($header);
+			return $schedule;
+		},
 		renderDay:function(date, $container){
 			var day = new Day({
 				date:new Date(date)

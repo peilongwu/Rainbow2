@@ -25,6 +25,10 @@ define(function(require){
 				this.$('.rb-content-header')
 				.html(this.widget.copyHeader())
 				.css('padding','0 15px');
+				var left = 1;
+				var top = 0;
+				var preLeft = 0;
+				var _this = this;
 			}
 			return this;
 		},

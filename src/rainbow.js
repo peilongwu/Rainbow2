@@ -2,7 +2,7 @@ define(function(require){
 	require(['text!template/desktop.html', 'jquery'], function(template){
 		require('underscore');
 		require('es5');
-		//require('store');
+		require('json');
 		require('bootstrap');
 		require('backbone');
 		require('select2');
@@ -12,6 +12,7 @@ define(function(require){
 			require(['./base/nav'], function(nav){
 				app.nav = nav;
 				if(!app.sign.isIn()){
+					alert(app.sign.isIn());
 					app.start();
 					app.route('signin', {trigger: true});
 				}else{
