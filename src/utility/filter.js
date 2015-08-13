@@ -12,7 +12,7 @@ define(function(require, exports){
 		if(!ignoreTitle && this.model.get('display') && this.model.get('display') === 'title'){
 			value = '<a class="rb-title" href="javascript:void(0);">' + value + '</a>';
 		}
-		return value;
+		return value.toString();
 	};
 
 	exports.wordbook = function(value, row, ignoreTitle){
@@ -26,7 +26,7 @@ define(function(require, exports){
 		if(!ignoreTitle && this.model.get('display') && this.model.get('display') === 'title'){
 			value = '<a class="rb-title" href="javascript:void(0);">' + value + '</a>';
 		}
-		return value;
+		return value.toString();
 	};
 
 	exports.time = function(value, raw, isDate){

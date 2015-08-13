@@ -9,8 +9,7 @@ define(function(require){
 			data:{
 				userId:$box.find('input[name=userId]').val(),
 				password:$box.find('input[name=password]').val()
-			},
-			async: false
+			}
 		})
 		.error(function(response){
 			rainbow.alert(response.responseJSON.content);
@@ -31,7 +30,7 @@ define(function(require){
 			rainbow.route('signin', {trigger: true});
 		},
 		isIn:function(){
-			return rainbow.cookie('status');
+			return !!rainbow.cookie('status');
 		}
 	};
 	return sign;

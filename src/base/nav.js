@@ -85,7 +85,6 @@ define(function(require){
 			}
 		},
 		onActive:function(childPath){
-			//console.log('Active:', this.path,'- Childs Path:', childPath);
 			this.childPath = childPath;
 			this.view.model.set('_active', this);
 			var $childs = $('.rb-nav-' + (this.level + 1));
@@ -171,7 +170,7 @@ define(function(require){
 				view.start();
 			},
 			error:function(collection, response, options){
-				//alert(response.responseJSON.content);
+				alert(response.responseJSON.content);
 				rainbow.start();
 				rainbow.route('signin', {trigger: true});
 			}
