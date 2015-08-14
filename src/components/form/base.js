@@ -9,7 +9,8 @@ define(function(require){
 			'click .rb-submit:not(.disabled)':'onSubmit'
 		},
 		initialize:function(options){
-			this.model = this.model ? this.model : new Backbone.Model; 
+			this.model = this.model ? this.model : new Backbone.Model;
+			this.isUpload = options.isUpload ? options.isUpload : false;
 		},
 		renderItem:function(model, i){
 
@@ -27,6 +28,9 @@ define(function(require){
 		},
 		commit:function(){
 			this.disableSubmit();
+			if(this.isUpload){
+				return this.uploadCommit();
+			}
 			var _this = this;
 			this.model.save(null, {
 				success:function(model, response, options){
@@ -38,6 +42,33 @@ define(function(require){
 					_this.trigger('error');
 				}
 			});
+		},
+		uploadCommit:function(){
+			var fd = new FormData();
+			var _this = this;
+	    this.$('input,select,textarea').each(function(index, el){
+	    	var $el = $(el);
+	    	if($el.attr('type') == 'file'){
+	    		fd.append($el.attr('name'), $el[0].files[0]);
+	    	}else{
+	    		fd.append($el.attr('name'), $el.val());
+	    	}
+	    });
+
+	    $.ajax({
+	       url: this.model.url() + '/upload',
+	       type: "POST",
+	       data: fd,
+	       processData: false,
+	       contentType: false
+	    })
+	    .success(function(response, options) {
+	       	_this.trigger('success');
+	    })
+	    .error(function(response, options) {
+	       	alert(response.responseJSON.content);
+					_this.trigger('error');
+	    });
 		},
 		cancel:function(){
 

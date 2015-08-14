@@ -89,7 +89,7 @@ define(function(require){
 		},
 		file:{
 			base:'input',
-			type:'hidden',
+			type:'file',
 			display: function(){
 
 			}

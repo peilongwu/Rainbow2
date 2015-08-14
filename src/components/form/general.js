@@ -12,6 +12,9 @@ define(function(require){
 			return this;
 		},
 		renderItem: function(model, i){
+			if(model.get('control') == 'file'){
+				this.isUpload = true;
+			}
 			var item = new Item({
 				model: model,
 				form: this
