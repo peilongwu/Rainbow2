@@ -101,6 +101,25 @@ define(function(require){
 		textarea:{
 			base:'textarea'
 		},
+		editor:{
+			base:'textarea',
+			display: function(){
+				this.$el.hide().css('height',300).css('width',420);
+				var _this = this;
+				setTimeout(function(){
+					_this.editor = KindEditor.create('textarea[name="' + _this.model.get('name') + '"]', {
+						resizeType : 1,
+						minWidth:'450px',
+						allowPreviewEmoticons : false,
+						allowImageUpload : false,
+						items : [
+							'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline',
+							'removeformat', '|', 'justifyleft', 'justifycenter', 'justifyright', 'insertorderedlist',
+							'insertunorderedlist', '|', 'image', 'link', '|', 'fullscreen']
+					});
+				},200);
+			}
+		},
 		chosen:{
 			base:'select',
 			display:function(){
