@@ -104,7 +104,6 @@ define(function(require){
 		},
 		onNormal:function(){
 			this.$el.removeClass('has-error');
-			this.$el.tooltip('hide');
 			this.$el.tooltip('destroy');
 			//this.$('.glyphicon-remove').remove();
 			//this.$el.addClass('has-success has-feedback');
@@ -114,7 +113,7 @@ define(function(require){
 			//this.$el.removeClass('has-success');
 			//this.$('.glyphicon-ok').remove();
 			this.$el.addClass('has-error');
-			this.$el.tooltip({title:title, selector:true});
+			this.$el.tooltip({title:title, selector:true, trigger:'hover'});
 			//this.$el.append('<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>');
 		},
 		verify:function(){
