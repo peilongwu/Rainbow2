@@ -72,13 +72,6 @@ define(function(require){
 		select:{
 			base:'select'
 		},
-		"select-tree":{
-			base:'select',
-			isTree:true,
-			display:function(){
-				
-			}
-		},
 		checkbox:{
 			base:'input',
 			type:'checkbox',

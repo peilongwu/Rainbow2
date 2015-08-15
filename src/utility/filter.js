@@ -18,11 +18,25 @@ define(function(require, exports){
 	exports.wordbook = function(value, row, ignoreTitle){
 		var model = this.model.get('typeObject');
 		var idName = model.schema.idName;
-		var where = {};
-		where[idName] = value;
+		function wordbookFilter(value, list, idName, titleName){
+			var len = list.length;
+			for(var i = 0; i < len; i++){
+				if(value == list[i][idName]){
+					return list[i][titleName] ? list[i][titleName] : '';
+				}
+
+				if(list[i]['_childList']){
+					var title = wordbookFilter(value, list[i]['_childList'], idName, titleName);
+					if(title !== undefined){
+						return title;
+					}
+				}
+			}
+			return undefined;
+		}
 		var title = _.findWhere(model.schema.attributes, {display:'title'});
-		var item = _.findWhere(model.data.collection, where);
-		var value = item && title ? item[title.name] : '';
+		var item = wordbookFilter(value, model.data.collection, idName, title.name);
+		var value = item !== undefined ? item : '';
 		if(!ignoreTitle && this.model.get('display') && this.model.get('display') === 'title'){
 			value = '<a class="rb-title" href="javascript:void(0);">' + value + '</a>';
 		}

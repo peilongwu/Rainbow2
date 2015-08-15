@@ -37,6 +37,8 @@ define(function(require){
 			var value = this.form.model.get(this.model.get('name'));
 			value && this.model.set('value', value);
 			var type = this.model.get('control');
+			var isTree =  this.model.get('typeObject') 
+				&& this.model.get('typeObject').mode == 'tree' ? true : false;
 			if(!type){
 				switch(this.model.get('metaType')){
 					case 'Boolean':
@@ -62,6 +64,7 @@ define(function(require){
 			var control = config[type];
 			control = control ? control : {base:'input',type:'text'};
 			control.model = this.model;
+			control.isTree = isTree;
 			control.className = 'form-control';
 			this.control = new Control[control.base](control);
 			var $div = this.$('div').size() ? this.$('div') : this.$el;
