@@ -7,6 +7,8 @@ define(function(require){
 		initialize:function(options){
 			Base.List.prototype.initialize.apply(this, arguments);
 			this.model = this.view.model.filter;
+			this.items = {};
+			this.errors = {};
 		},
 		render:function(){
 			this.collection.each(this.renderItem, this);
