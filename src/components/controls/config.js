@@ -72,6 +72,13 @@ define(function(require){
 		select:{
 			base:'select'
 		},
+		"select-tree":{
+			base:'select',
+			isTree:true,
+			display:function(){
+				
+			}
+		},
 		checkbox:{
 			base:'input',
 			type:'checkbox',
@@ -135,7 +142,6 @@ define(function(require){
 			base:'select',
 			multiple:'multiple',
 			display:function(){
-				console.log('multiple');
 				var _this = this;
 				setTimeout(function(){
 					_this.$el.css('width','260').select2({

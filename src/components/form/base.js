@@ -11,6 +11,7 @@ define(function(require){
 		initialize:function(options){
 			this.model = this.model ? this.model : new Backbone.Model;
 			this.isUpload = options.isUpload ? options.isUpload : false;
+			this.items = {};
 		},
 		renderItem:function(model, i){
 

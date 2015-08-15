@@ -20,6 +20,7 @@ define(function(require){
 				form: this
 			});
 			item.render().$el.appendTo(this.$el);
+			this.items[model.get('name')] = item;
 		},
 		addGroup:function(){
 			

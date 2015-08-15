@@ -6,6 +6,7 @@ define(function(require){
 		initialize:function(options){
 			Base.prototype.initialize.apply(this, arguments);
 			this.multiple = options.multiple;
+			this.isTree = options.isTree;
 			delete this.attributes.value;
 			delete this.attributes.type;
 		},
@@ -37,10 +38,24 @@ define(function(require){
 		addGroup:function(){
 
 		},
-		renderOption:function(item, index){
-			this.$el.append(_.template(this.optionTpl, item));
-			if(item._childList){
-				
+		levelJoin:function(num){
+			var str = '';
+			for(var i = 0; i < num; i++){
+				str += '│';
+			}
+			return str;
+		},
+		renderOption:function(item, index, list,level){
+			level = level ? level : 0;
+			if(this.isTree){
+				var levelStr = this.levelJoin(level);
+				item.title = levelStr + '├' + item.title;
+				this.$el.append(_.template(this.optionTpl, item));
+				item._childList && _.each(item._childList, function(item){
+					this.renderOption(item, index, null, level + 1);
+				}, this);
+			}else{
+				this.$el.append(_.template(this.optionTpl, item));
 			}
 			return this;
 		},

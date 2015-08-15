@@ -71,13 +71,22 @@ define(function(require){
 			var title,value;
 			var model = this.model.get('typeObject');
 			var list = [];
+
+			function wordbookFilter(list, title, value){
+				return _.map(list, function(item){
+					var object = {title:item[title], value:item[value]};
+					if(item._childList){
+						object._childList = wordbookFilter(item._childList, title, value);
+					}
+					return object;
+				});
+			}
+
 			if(model && this.model.get('dataType') === 'wordbook'){
 				value = model.schema.idName;
 				title = _.findWhere(model.schema.attributes, {display:'title'});
 				title = title ? title.name : value;
-				list = _.map(model.data.collection, function(item){
-					return {title:item[title], value:item[value]};
-				});
+				list = wordbookFilter(model.data.collection, title, value);
 			}else if(this.model.get('list') && 'string' === typeof this.model.get('list')){
 				list = this.model.get('list').split(',');
 				list = _.map(list, function(item){
