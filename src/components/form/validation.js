@@ -118,7 +118,7 @@ define(function(require, exports){
 	}
 
 	exports.telphone = function(value){
-		var rule = /^d{3}-d{8}|d{4}-d{7}$/;
+		var rule = /^d{4}-d{8}|1d{10}$/;
 		if(exports.required(value) && !rule.test(value)){
 			return 'must be 6-18 letters or numbers';
 		}
@@ -126,7 +126,7 @@ define(function(require, exports){
 	}
 
 	exports.url = function(value){
-		var rule = /^[a-zA-z]+:\/\/[^s]*$/;
+		var rule = /^[a-zA-z]+:\/\/[^\s]*$/;
 		if(exports.required(value) && !rule.test(value)){
 			return 'must be url';
 		}
