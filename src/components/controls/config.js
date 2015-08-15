@@ -87,8 +87,8 @@ define(function(require){
 				$group.find('.btn').on('click',function(e){
 					$t = $(e.target);
 					var value = $t.data('value');
-					_this.$('option:not([value=' + value + '])').removeAttr('selected');
-					_this.$('option[value=' + value + ']').attr('selected', true);
+					_this.$('option:not([value="' + value + '"])').removeAttr('selected');
+					_this.$('option[value="' + value + '"]').attr('selected', true);
 					_this.$el.trigger('change');
 					$t.siblings().removeClass('btn-success');
 					$t.addClass('btn-success');
