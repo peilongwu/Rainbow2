@@ -27,7 +27,7 @@ define(function(require, exports){
 	}
 
 	exports.number = function(value){
-		if(!$.isNumeric(value)){
+		if(exports.required(value) && !$.isNumeric(value)){
 			return 'must be a number';
 		};
 		return true;
