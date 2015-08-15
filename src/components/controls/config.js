@@ -73,7 +73,7 @@ define(function(require){
 			base:'select',
 			display:function(){
 				var _this = this;
-				var $group = $('<div class="btn-group" role="group" style="margin-right:0;"></div>');
+				var $group = $('<div class="btn-group" role="group" style="margin:0 0 0 8px;"></div>');
 				var $options = this.$('option');
 				$options.each(function(index, el){
 					var $el = $(el);
