@@ -79,31 +79,31 @@ define(function(require, exports){
 
 	exports.alpha = function(value){
 		var rule = /^[A-Za-z]+$/;
-		if(exports.required(value) && rule.test(value)){
+		if(exports.required(value) && !rule.test(value)){
 			return 'must be letters';
 		}
 		return true;
 	}
 
 	exports.chinese = function(value){
-		var rule = /[u4e00-u9fa5]/;
-		if(exports.required(value) && rule.test(value)){
+		var rule = /^[\u4E00-\u9FFF]+$/;
+		if(exports.required(value) && !rule.test(value)){
 			return 'must be chinese';
 		}
 		return true;
 	}
 
 	exports.email = function(value){
-		var rule = /w+([-+.]w+)*@w+([-.]w+)*.w+([-.]w+)*/;
-		if(exports.required(value) && rule.test(value)){
+		var rule = /^[0-9a-zA-Z]+@[0-9a-zA-Z]+[\.]{1}[0-9a-zA-Z]+[\.]?[0-9a-zA-Z]+$/;
+		if(exports.required(value) && !rule.test(value)){
 			return 'must be email';
 		}
 		return true;
 	}
 
 	exports.password = function(value){
-		var rule = /^[a-zA-Z]w{5,17}$/;
-		if(exports.required(value) && rule.test(value)){
+		var rule = /^[a-zA-Z]\w{5,17}$/;
+		if(exports.required(value) && !rule.test(value)){
 			return 'must be 6-18 letters or numbers';
 		}
 		return true;
@@ -111,32 +111,40 @@ define(function(require, exports){
 
 	exports.zip = function(value){
 		var rule = /[1-9]d{5}(?!d)/;
-		if(exports.required(value) && rule.test(value)){
+		if(exports.required(value) && !rule.test(value)){
 			return 'must be 6-18 letters or numbers';
 		}
 		return true;
 	}
 
 	exports.telphone = function(value){
-		var rule = /d{3}-d{8}|d{4}-d{7}/;
-		if(exports.required(value) && rule.test(value)){
+		var rule = /^d{3}-d{8}|d{4}-d{7}$/;
+		if(exports.required(value) && !rule.test(value)){
 			return 'must be 6-18 letters or numbers';
 		}
 		return true;
 	}
 
 	exports.url = function(value){
-		var rule = /[a-zA-z]+:\/\/[^s]*/;
-		if(exports.required(value) && rule.test(value)){
+		var rule = /^[a-zA-z]+:\/\/[^s]*$/;
+		if(exports.required(value) && !rule.test(value)){
 			return 'must be url';
 		}
 		return true;
 	}
 
+	exports.code = function(value){
+		var rule = /^[a-zA-Z][a-zA-Z0-9-]{0,127}$/;
+		if(exports.required(value) && !rule.test(value)){
+			return 'must be less than 64 alphanumeric and dash';
+		}
+		return true;
+	}
+
 	exports.variable = function(value){
-		var rule = /^[a-zA-Z]w{63}$/;
-		if(exports.required(value) && rule.test(value)){
-			return 'must be 6-18 letters or numbers';
+		var rule = /^[a-zA-Z][a-zA-Z0-9_]{0,63}$/;
+		if(exports.required(value) && !rule.test(value)){
+			return 'must be less than 64 alphanumeric and underscore';
 		}
 		return true;
 	}
