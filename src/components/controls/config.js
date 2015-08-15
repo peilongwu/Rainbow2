@@ -69,6 +69,38 @@ define(function(require){
 				}, 50);
 			}
 		},
+		'button-group':{
+			base:'select',
+			display:function(){
+				var _this = this;
+				var $group = $('<div class="btn-group" role="group" style="margin-right:0;"></div>');
+				var $options = this.$('option');
+				$options.each(function(index, el){
+					var $el = $(el);
+					var $btn = $('<button type="button" class="btn btn-default"></button>');
+					$btn.text($el.text());
+					$btn.data('value', $el.val());
+					_this.model.get('value') == $btn.data('value') && $btn.addClass('btn-success');
+					$group.append($btn);
+				});
+
+				$group.find('.btn').on('click',function(e){
+					$t = $(e.target);
+					var value = $t.data('value');
+					_this.$('option:not([value=' + value + '])').removeAttr('selected');
+					_this.$('option[value=' + value + ']').attr('selected', true);
+					_this.$el.trigger('change');
+					$t.siblings().removeClass('btn-success');
+					$t.addClass('btn-success');
+				});
+
+				this.$el.hide();
+				setTimeout(function(){
+					_this.$el.after($group);
+					_this.$el.prev('label').hide();
+				}, 50);
+			}
+		},
 		select:{
 			base:'select'
 		},
