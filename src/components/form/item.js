@@ -1,6 +1,7 @@
 define(function(require){
 	var Control = require('../controls/control');
 	var config = require('../controls/config');
+	var validation = require('./validation');
 	var Item = Backbone.View.extend({
 		className:'form-group',
 		initialize:function(options){
@@ -101,6 +102,7 @@ define(function(require){
 			return this;
 		},
 		verify:function(){
+			
 			this.setValue();
 		},
 		display:function(){

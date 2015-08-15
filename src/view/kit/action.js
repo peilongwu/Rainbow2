@@ -32,11 +32,12 @@ define(function(require){
 				collection:collection,
 				model:model
 			}).render();
+
+			form.model.urlRoot = this.view.model.url;
 			if(this.model.get('key')){
-				form.model.url = this.view.model.url + '/' + this.model.get('key');
-			}else{
-				form.model.urlRoot = this.view.model.url;
+				form.model.urlRoot += '/' + this.model.get('key');
 			}
+
 			var modal = this.modal(form.el);
 
 			modal.$('.rb-submit:not(.disabled)').on('click', function(e){
