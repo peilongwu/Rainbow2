@@ -5,7 +5,6 @@ define(function(require){
 		className:'form-horizontal',
 		initialize:function(options){
 			Base.prototype.initialize.apply(this, arguments);
-			this.errors = [];
 		},
 		render:function(){
 			this.collection.each(this.renderItem, this);

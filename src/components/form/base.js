@@ -12,6 +12,7 @@ define(function(require){
 			this.model = this.model ? this.model : new Backbone.Model;
 			this.isUpload = options.isUpload ? options.isUpload : false;
 			this.items = {};
+			this.errors = {};
 		},
 		renderItem:function(model, i){
 
@@ -80,6 +81,10 @@ define(function(require){
 		onSubmit:function(e){
 			e.preventDefault();
 			this.verify();
+			if(!_.isEmpty(this.errors)){
+				return rainbow.alert('Form validation does not pass, correct the error term');
+			}
+
 			if(this.callBack){
 				this.callBack(this.data(), this);
 				return;

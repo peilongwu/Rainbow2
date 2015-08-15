@@ -16,11 +16,14 @@ define(function(require, exports){
 	}
 
 	exports.required = function(value){
-		return value === 0 || !!value;
+		if(value != '0' && !value){
+			return 'is required';
+		}
+		return true;
 	}
 
 	exports.number = function(value){
-		if($.isNumeric(value)){
+		if(!$.isNumeric(value)){
 			return 'must be a number';
 		};
 		return true;

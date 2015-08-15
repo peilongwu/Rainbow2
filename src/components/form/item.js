@@ -19,7 +19,8 @@ define(function(require){
 		events:{
 			'change input,textarea,select':'onChange',
 			'change input[type=file]':'onFileChange',
-			'blur input,textarea,select':'onChange'
+			'blur input,textarea,select':'onChange',
+			'focus input,textarea,select':'onFocus'
 		},
 		render:function(){
 			var tpl = {
@@ -101,9 +102,53 @@ define(function(require){
 			this.model.set('list',list);
 			return this;
 		},
+		onNormal:function(){
+			this.$el.removeClass('has-error');
+			this.$el.tooltip('hide');
+			this.$el.tooltip('destroy');
+			//this.$('.glyphicon-remove').remove();
+			//this.$el.addClass('has-success has-feedback');
+			//this.$el.append('<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>');
+		},
+		onError:function(title){
+			//this.$el.removeClass('has-success');
+			//this.$('.glyphicon-ok').remove();
+			this.$el.addClass('has-error');
+			this.$el.tooltip({title:title, selector:true});
+			//this.$el.append('<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>');
+		},
 		verify:function(){
-			
-			this.setValue();
+			var result;
+			var rules = [];
+			var value = this.control.getValue();
+			if(this.$el.hasClass('has-error')){
+				this.$el.removeClass('has-error');
+			}
+
+			this.model.get('required') && rules.push({name:'required'});
+			rules.push({name:this.model.get('dataType')});
+			this.model.get('max') && rules.push({name:'max', params:[this.model.get('max')]});
+			this.model.get('min') && rules.push({name:'min', params:[this.model.get('min')]});
+			this.model.get('maxLength') && rules.push({name:'maxLength', params:[this.model.get('maxLength')]});
+			this.model.get('minLength') && rules.push({name:'minLength', params:[this.model.get('minLength')]});			
+			for(var i = 0; i < rules.length; i++){
+				if(validation[rules[i]['name']]){
+					if(!rules[i]['params']){
+						rules[i]['params'] = [];
+					}
+					rules[i]['params'].unshift(value);
+					result = validation[rules[i]['name']].apply(null, rules[i]['params']);
+					if(true !== result){
+						this.form.errors[this.model.get('name')] = result;
+						this.onError((this.model.get('alias') ? this.model.get('alias') : this.model.get('name')) + ' ' + result);
+						return;
+					}else{
+						this.onNormal();
+						this.form.errors[this.model.get('name')] && delete this.form.errors[this.model.get('name')];
+					}
+				}
+			}
+			this.setValue(value);
 		},
 		display:function(){
 
@@ -111,9 +156,8 @@ define(function(require){
 		filter:function(){
 
 		},
-		setValue:function(){
+		setValue:function(value){
 			var attrs = {};
-			var value = this.control.getValue();
 			var name = this.model.get('name');
 			attrs[name] = value;
 			if(this.type === 'filter'){
@@ -122,6 +166,9 @@ define(function(require){
 			}else{
 				this.form.model.set(attrs, {silent:true});
 			}
+		},
+		onFocus:function(){
+			this.onNormal();
 		},
 		onChange:function(e){
 			this.verify();
