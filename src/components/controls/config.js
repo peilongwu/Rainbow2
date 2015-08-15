@@ -1,5 +1,6 @@
 define(function(require){
 	var filter = require('../../utility/filter');
+	var moment = require('moment');
 	return {
 		text:{
 			base:'input',
@@ -69,6 +70,49 @@ define(function(require){
 				}, 50);
 			}
 		},
+		monthly:{
+			base:'input',
+			type:'hidden',
+			display:function(){
+				var _this = this;
+				var $group = $($('#tpl-control-monthly').html());
+				var $prev = $group.find('.left');
+				var $next = $group.find('.right');
+				var $mid = $group.find('.mid');
+				var monthly;
+				if(this.model.get('value')){
+					monthly = moment(this.model.get('value').split(',')[0]);
+				}else{
+					monthly = moment();
+				}
+
+				$mid.text(monthly.format('MMM') + ' ' + monthly.format('YYYY'));
+
+				$group.find('.btn').on('click',function(e){
+					$t = $(this);
+					if($t.hasClass('left')){
+						monthly = monthly.add(-1, 'month');
+					}else if($t.hasClass('right')){
+						monthly = monthly.add(1, 'month');
+					}else{
+						monthly = moment(_this.model.get('value').split(',')[0]);
+					}
+					$mid.text(monthly.format('MMM') + ' ' + monthly.format('YYYY'));
+					var values = [
+						monthly.format('YYYY-MM-DD'),
+						monthly.clone().add(1, 'month').add(-1, 'day').format('YYYY-MM-DD')
+					];
+					_this.$el.val(values.join(','));
+					_this.$el.trigger('change');
+				});
+
+				this.$el.hide();
+				setTimeout(function(){
+					_this.$el.after($group);
+					//_this.$el.prev('label').hide();
+				}, 50);
+			}
+		},
 		'button-group':{
 			base:'select',
 			display:function(){
@@ -87,7 +131,7 @@ define(function(require){
 				});
 
 				$group.find('.btn').on('click',function(e){
-					$t = $(e.target);
+					$t = $(this);
 					var value = $t.data('value');
 					_this.$('option:not([value="' + value + '"])').removeAttr('selected');
 					_this.$('option[value="' + value + '"]').attr('selected', true);
