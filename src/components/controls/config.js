@@ -78,7 +78,9 @@ define(function(require){
 				$options.each(function(index, el){
 					var $el = $(el);
 					var $btn = $('<button type="button" class="btn btn-default"></button>');
-					$btn.text($el.text());
+					var title = $el.text();
+					title = title == '(Null)' ? 'All' : title;
+					$btn.text(title);
 					$btn.data('value', $el.val());
 					_this.model.get('value') == $btn.data('value') && $btn.addClass('btn-success');
 					$group.append($btn);

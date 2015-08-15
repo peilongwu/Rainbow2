@@ -20,6 +20,7 @@ define(function(require){
 				this.view.model.get('schema').attributes, 
 				{name: model.get('name')}
 			);
+			model.get('value') === undefined && model.set('value', '');
 			schema = _.defaults(model.toJSON(), schema);
 			model.set(schema);
 			var item = new Item({
