@@ -142,10 +142,9 @@ define(function(require){
 				Schedule:Schedule
 			};
 
-			var type = this.model.get('mode') === 'schedule' ?
-				'Schedule' : 'Table';
+			var type = this.model.get('mode');
 
-			if(type === 'Schedule' && !this.widgetType){
+			if(type === 'schedule' && !this.widgetType){
 				this.switchWidget();
 			}else if(!this.widgetType){
 				this.widgetType = 'Table';
@@ -158,6 +157,7 @@ define(function(require){
 				isTree:!!this.model.get('schema').parentIdName,
 				params:this.model.filter
 			});
+			this.$('.rb-content-header').empty();
 			widget.render().$el.appendTo(this.$('.rb-content-body-list').empty());
 			this.widget = widget;
 			this.setBodyHeight();
