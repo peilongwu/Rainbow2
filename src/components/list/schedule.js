@@ -57,7 +57,7 @@ define(function(require){
 			this.$days = null;
 			this.colors = ['#ff8800', '#8800cc', '#0088ff', '#008800'];
 			this._colors = [];
-			this.count = (new Date().setMonth(this.month , 1) - new Date().setDate(1))/24/60/60/1000;
+			this.count = (new Date(this.today.getTime()).setMonth(this.month , 1) - new Date(this.today.getTime()).setDate(1))/24/60/60/1000;
 		},
 		render:function(){
 			this.$el.html($('#tpl-list-schedule').html());

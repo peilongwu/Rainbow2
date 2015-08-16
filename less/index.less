@@ -6,7 +6,7 @@
 @fontSize: 1.2em;
 @inlineMarginRight: 10px;
 @blockMarginBottom:1.2%;
-@sideWidth:180px;
+@sideWidth:200px;
 
 .block-margin{
 	margin-bottom:@blockMarginBottom;
@@ -40,6 +40,10 @@ input.form-control[type="checkbox"] {
 	background-color: rgb(170,175,179);
   background-image: linear-gradient(to bottom, rgb(189,194,199), rgb(170,175,179));
   border-bottom: rgb(140,140,144) 1px solid;
+}
+
+.navbar-header{
+	min-width:@sideWidth - 16;
 }
 
 .signin-container{
@@ -322,6 +326,7 @@ li.active > a,li.active > a:hover, li.active > a:focus {
 	left:120px;
 	color:#fff;
 	cursor: pointer;
+	opacity: .7;
 }
 
 .schedule-event .schedule-cell:after {
