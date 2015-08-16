@@ -145,7 +145,13 @@ define(function(require){
 			var type = this.model.get('mode') === 'schedule' ?
 				'Schedule' : 'Table';
 
-			var widget = new Widget[type]({
+			if(type === 'Schedule' && !this.widgetType){
+				this.switchWidget();
+			}else if(!this.widgetType){
+				this.widgetType = 'Table';
+			}
+
+			var widget = new Widget[this.widgetType]({
 				model:model,
 				view:this,
 				isHandle:this.isHandle,
@@ -155,6 +161,23 @@ define(function(require){
 			widget.render().$el.appendTo(this.$('.rb-content-body-list').empty());
 			this.widget = widget;
 			this.setBodyHeight();
+		},
+		switchWidget:function(){
+			var _this = this;
+			var $switchel =  this.$('.rb-switch-widget');
+			$switchel.show();
+			this.widgetType = 'Schedule';
+			$switchel.find('.btn').on('click', function(){
+				$t = $(this);
+				$t.siblings().removeClass('btn-success');
+				$t.addClass('btn-success');
+				if('schedule' === $t.data('value')){
+					_this.widgetType = 'Schedule';
+				}else{
+					_this.widgetType = 'Table';
+				}
+				_this.renderWidget();
+			});
 		},
 		details:function(model){
 			var details = new Nested({
