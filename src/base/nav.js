@@ -50,7 +50,6 @@ define(function(require){
 			var name = this.path;
 			var res = this;
 			rainbow.router.route(name + '*path',function(path){
-				//console.log('Route:', res.path, '- Paths:', path);
 				path = path ? path.split('/').slice(1) : path;
 				res.onActive(path);
 			});
@@ -165,6 +164,7 @@ define(function(require){
 					collection:collection,
 					path:path
 				});
+				$('body').append(rainbow.layout.render().el);
 				view.render();
 				rainbow.start();
 				view.start();

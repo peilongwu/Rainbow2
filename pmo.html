@@ -31,15 +31,19 @@
           'template': 'templates/site',
           'text': 'js/vendor/requirejs/text',
           'app': './src',
-          'action': 'js/action'
+          'action': 'js/action',
+          'main':'./src/rainbow'
         },
         config:{
-          'src/base/app':{
+          'app/base/app':{
             baseUrl:'http://dev.xiyouqi.cn:8080/pmo/api'
           }
         }
       });
-      require(['./src/rainbow'],function(app){});
+      require(['text!template/desktop.html','jquery'],function(template){
+        $('body').append(template);
+        require(['main'], function(){});
+      });
     })();
     </script>
   </body>

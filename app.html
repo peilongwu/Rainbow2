@@ -7,16 +7,12 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="js/vendor/modernizr-2.8.0.min.js"></script>
-    <link data-dump-line-numbers="all" data-global-vars='{ myvar: "#ddffee", mystr: "\"quoted\"" }' rel="stylesheet/less" type="text/css" href="less/index.less">
-    <script src="js/vendor/less-1.7.0.min.js" data-poll="1000" data-relative-urls="false"></script>
+    <link rel="stylesheet" href="less/index.css">
   </head>
   <body>
     <script src="js/vendor/require.js"></script>
     <script>
     (function(){
-      var EAD_APP = {
-
-      };
       var rainbow,Rainbow;        
       require.config({
         urlArgs: 'bust=' + (new Date()).getTime(),
@@ -25,7 +21,7 @@
           'backbone': 'js/vendor/backbone-min',
           'moment': 'js/vendor/moment.min',
           'select2': 'js/vendor/select2-4.0.0/js/select2.full.min',
-          'jquery': 'js/vendor/jquery-1.11.0.min',
+          'jquery': 'js/vendor/jquery-1.11.3.min',
           'jquery-plus': "js/vendor/jquery",
           'bootstrap':'assets/bootstrap/js/bootstrap.amd',
           'es5':'js/vendor/es5-shim.min',
@@ -34,15 +30,19 @@
           'template': 'templates/site',
           'text': 'js/vendor/requirejs/text',
           'app': './src',
-          'action': 'js/action'
+          'action': 'js/action',
+          'main':'./src/rainbow'
         },
         config:{
-          'src/base/app':{
-            baseUrl:'/${app.appKey}/api'
+          'app/base/app':{
+            baseUrl:'http://dev.xiyouqi.cn:8080/{$app.appKey}/api'
           }
         }
       });
-      require(['./src/rainbow'],function(app){});
+      require(['text!template/desktop.html','jquery'],function(template){
+        $('body').append(template);
+        require(['main'], function(){});
+      });
     })();
     </script>
   </body>

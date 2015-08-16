@@ -17,7 +17,6 @@ define(function(require, exports, module){
 	
 	//初始化应用布局
 	app.layout = new Layout;
-	$('body').append(app.layout.render().el);
 	
 	//Alert & Confirm Proxy
 	app.alert = function(msg, callback, context){
@@ -44,8 +43,8 @@ define(function(require, exports, module){
 	
 	app.router = new Router();
 	app.route = function(name, options){
-		app.back = window.location.hash.slice(1);
-		app.back = app.back === 'signout' ? '' : app.back;
+		var back = window.location.hash.slice(1);
+		app.back = back == 'signout' ? app.back : back;
 		return app.router.navigate(name, options);
 	};
 	

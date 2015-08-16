@@ -45,7 +45,7 @@ define(function(require, exports){
 
 	exports.time = function(value, raw, isDate){
 		var str = '';
-		time = parseInt(value);
+		var time = parseInt(value);
 		if(time){
 			var date = new Date(time);
 			var today = new Date();

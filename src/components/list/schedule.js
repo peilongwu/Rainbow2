@@ -1,6 +1,7 @@
 define(function(require){
 	var Base = require('./base');
 	var Row = require('./row/schedule');
+	var Table = require('./table');
 	var moment = require('moment');
 	var Day = Backbone.View.extend({
 		className:'schedule-day',
@@ -64,6 +65,9 @@ define(function(require){
 			this.$el.width(this.count * 45 + 122);
 			this.update();
 			return this;
+		},
+		switchTable:function(){
+			
 		},
 		header:function(){
 			var model = this.group;
