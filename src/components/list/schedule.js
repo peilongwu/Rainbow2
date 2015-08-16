@@ -47,7 +47,8 @@ define(function(require){
 			this.isHandle = options.isHandle;
 			this.groups = {};
 			this.timeName = options.groupName ? options.groupName : ['start_time', 'end_time'];
-			this.today = new Date();
+			this.today = this.params.get(this.timeName[0]) ? moment(this.params.get(this.timeName[0]).split(',')[0]).format('x') : null;
+			this.today = this.today ? new Date(parseInt(this.today)) : new Date();
 			this.series = this.model.get('series');
 			this.collection = this.model.get('data');
 			this.group = new Backbone.Model(_.findWhere(this.series, {display:'title'}));

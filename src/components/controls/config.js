@@ -102,8 +102,7 @@ define(function(require){
 						monthly.format('YYYY-MM-DD'),
 						monthly.clone().add(1, 'month').add(-1, 'day').format('YYYY-MM-DD')
 					];
-					_this.$el.val(values.join(','));
-					_this.$el.trigger('change');
+					_this.$el.val(values.join(',')).trigger('change');
 				});
 
 				this.$el.hide();
@@ -134,8 +133,7 @@ define(function(require){
 					$t = $(this);
 					var value = $t.data('value');
 					_this.$('option:not([value="' + value + '"])').removeAttr('selected');
-					_this.$('option[value="' + value + '"]').attr('selected', true);
-					_this.$el.trigger('change');
+					_this.$('option[value="' + value + '"]').attr('selected', true).trigger('change');
 					$t.siblings().removeClass('btn-success');
 					$t.addClass('btn-success');
 				});
