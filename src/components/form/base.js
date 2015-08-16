@@ -58,7 +58,7 @@ define(function(require){
 	    });
 
 	    $.ajax({
-	       url: this.model.url() + '/upload',
+	       url: this.model.url(),
 	       type: "POST",
 	       data: fd,
 	       processData: false,

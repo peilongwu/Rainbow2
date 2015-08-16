@@ -115,6 +115,42 @@ define(function(require){
 
 			this.action(this.view.model.url + '/' + this.model.get('key'));
 		},
+		file:function(){
+			var len = this.view.selecteds.length;
+			if(len > 1){
+				return alert('Selected items can not be superfluous 1');
+			}
+			var $file = $('<input type="file">').hide();
+			var fd = new FormData();
+			var _this = this;
+			var url = this.view.model.url + '/' + this.model.get('key');
+			var model = this.view.getActiveModel();
+			var idName = this.view.idName;
+			this.$el.parent().next('input[type=file]').remove();
+			this.$el.parent().after($file);
+
+			$file.on('change', function(e){
+				fd.append('file', $file[0].files[0]);
+				model && fd.append(idName, model.get(idName));
+				$file.remove();
+		    $.ajax({
+		       url: url,
+		       type: "POST",
+		       data: fd,
+		       processData: false,
+		       contentType: false
+		    })
+		    .success(function(response, options) {
+	       	_this.trigger('success');
+		    })
+		    .error(function(response, options) {
+	       	alert(response.responseJSON.content);
+					_this.trigger('error');
+		    });
+			});
+
+			$file.click();
+		},
 		post:function(){
 			this.form(
 				new Backbone.Collection(this.listFilter(this.view.createSchema)),
