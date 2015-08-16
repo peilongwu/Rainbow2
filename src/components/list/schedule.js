@@ -47,9 +47,11 @@ define(function(require){
 			this.fixed = options.fixed;
 			this.isHandle = options.isHandle;
 			this.groups = {};
-			this.timeName = options.groupName ? options.groupName : ['start_time', 'end_time'];
-			this.today = this.params.get(this.timeName[0]) ? moment(this.params.get(this.timeName[0]).split(',')[0]).format('x') : null;
-			this.today = this.today ? new Date(parseInt(this.today)) : new Date();
+			this.colorName = 'sequence_no';
+			this.startName = 'start_time';
+			this.endName = 'end_time';
+			this.today = this.params.get(this.startName) ? moment(this.params.get(this.startName).split(',')[0]).valueOf() : null;
+			this.today = this.today ? new Date(this.today) : new Date();
 			this.series = this.model.get('series');
 			this.collection = this.model.get('data');
 			this.group = new Backbone.Model(_.findWhere(this.series, {display:'title'}));
@@ -65,9 +67,6 @@ define(function(require){
 			this.$el.width(this.count * 45 + 122);
 			this.update();
 			return this;
-		},
-		switchTable:function(){
-			
 		},
 		header:function(){
 			var model = this.group;
@@ -110,18 +109,19 @@ define(function(require){
 			this.groups[value] = group;
 		},
 		position:function(row, group){
-			var month = new Date(row.model.get(this.timeName[0])).getMonth() + 1;
+			var month = new Date(row.model.get(this.startName)).getMonth() + 1;
 			if(month !== this.month){
 				row.$el.remove();
 				return;
 			}
-			var start = new Date(row.model.get(this.timeName[0])).getDate();
-			var end = new Date(row.model.get(this.timeName[1])).getDate();
+			var start = new Date(row.model.get(this.startName)).getDate();
+			var end = new Date(row.model.get(this.endName)).getDate();
 			var left = 120 + (start - 1) * 45;
 			var width = (end - start + 1) * 45 - 1;
-			var color = row.model.get('sequence_no');
+			var color = row.model.get(this.colorName);
 			var index = _.indexOf(this._colors, color);
 			
+			//init
 			if(index < 0){
 				index = this._colors.push(color) - 1;
 			}
