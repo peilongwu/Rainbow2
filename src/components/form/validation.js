@@ -98,7 +98,7 @@ define(function(require, exports){
 	}
 
 	exports.email = function(value){
-		var rule = /^[0-9a-zA-Z]+@[0-9a-zA-Z]+[\.]{1}[0-9a-zA-Z]+[\.]?[0-9a-zA-Z]+$/;
+		var rule = /^[0-9a-zA-Z_.]+@[0-9a-zA-Z]+[\.]{1}[0-9a-zA-Z]+[\.]?[0-9a-zA-Z]+$/;
 		if(exist(value) && !rule.test(value)){
 			return 'must be email';
 		}
