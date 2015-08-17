@@ -157,7 +157,7 @@ define(function(require){
 				isTree:!!this.model.get('schema').parentIdName,
 				params:this.model.filter
 			});
-			//this.$('.rb-content-header').empty();
+			this.$('.rb-content-header').empty();
 			widget.render().$el.appendTo(this.$('.rb-content-body-list').empty());
 			this.widget = widget;
 			this.setBodyHeight();
